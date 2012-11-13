@@ -2,7 +2,7 @@
 
 int main(){
 	
-	ex2_1();
+	ex2_2();
 
 	return 0;
 }

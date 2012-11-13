@@ -3,3 +3,4 @@
 #include <float.h>
 
 void ex2_1();
+void ex2_2();

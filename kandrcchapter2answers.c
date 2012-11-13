@@ -1,5 +1,12 @@
 #include "kandrcchapter2answers.h"
 
+void ex2_2(){
+	/*
+ 	 *
+ 	 *
+ 	 */ 
+}
+
 void ex2_1(){
 	/*
  	 * Determine ranges of char, short, int, long
