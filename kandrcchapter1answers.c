@@ -10,22 +10,7 @@
  ============================================================================
  */
 
-
-#include <stdio.h>
-
-int getstringline(char[], int);
-
-int getstringlineremovetrail(char charArray[], int limit);
-
-void copyString(char[], char[]);
-
-void copyStringReverse(char to[], char from[], int len);
-
-void detab(char to[], char from[], int tabsize);
-
-void entab(char to[], char from[], int tabsize);
-
-
+#include "kandrcchapter1answers.h"
 
 void ex1_1(){
 	printf("hello, world\n");
@@ -489,7 +474,7 @@ void ex1_24(){
 	int insideString = 0;
 	int insideComment = 0;
 	 
-	char input, nextInput, lastInput;
+	char input, nextInput;
 	 
 	while((input = getchar()) != EOF){
 		
@@ -536,7 +521,6 @@ void ex1_24(){
 				if(escapeSequence == 0){
 					if(input == '\\'){
 						escapeSequence = 1;
-						lastInput = input;
 						continue;
 					}
 				} else{
@@ -593,7 +577,6 @@ void ex1_24(){
 			}			
 		}
 		
-		lastInput = input;
 		
 	}
 
@@ -623,13 +606,6 @@ void ex1_24(){
 	else
 		printf("%d Double Quotes...ERROR\n", doubleQuotes);
 
-}
-
-int main(void) {
-
-	ex1_24();
-
-	return 0;
 }
 
 int getstringline(char charArray[], int limit){

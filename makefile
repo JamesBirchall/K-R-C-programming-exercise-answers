@@ -1,7 +1,7 @@
 CFLAGS= -Wall -g
 
-all:kandrbtests
-	gcc kandrcchapter1answers.c -o kandrcchapter1answers
+all: kandrcchapter2answers.o kandrcchapter1answers.o main.o
+	gcc kandrcchapter2answers.c kandrcchapter1answers.c main.c -o kandrexercises
 
 clean:
-	rm -f kandrcchapter1answers
+	rm -f kandrexercises kandrcchapter2answers.o kandrcchapter1answers.o
