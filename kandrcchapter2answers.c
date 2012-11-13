@@ -39,7 +39,7 @@ void ex2_1(){
 	printf("Unsigned long long\tMax:%llu\n", ULLONG_MAX);
 	printf("Signed long long\tMin:%lld\tMax:%lld\n", LLONG_MIN, LLONG_MAX);
 
-	while(char1 != 0){
+	/*while(char1 != 0){
 		char1previous = char1;
 		char1++;
 	}	
@@ -123,4 +123,7 @@ void ex2_1(){
 		integer2++;
 	}
 	printf("Computed signed int MAX:%d\n", integer2previous);
+	*/
+
+	printf("Float MIN:%E\tMAX:%E\n", FLT_MIN, FLT_MAX);
 }
