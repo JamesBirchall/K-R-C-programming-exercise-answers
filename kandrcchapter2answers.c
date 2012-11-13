@@ -110,7 +110,17 @@ void ex2_1(){
 		if(integer2 < integer2previous){
 			integer2previous = integer2;
 		}
-		integer2++;
+		integer2--;
 	}
 	printf("Computed signed int MIN:%d\n", integer2previous);
+
+	integer2 = 1;
+	integer2previous = 0;
+	while(integer2 != 0){
+		if(integer2 > integer2previous){
+			integer2previous = integer2;
+		}
+		integer2++;
+	}
+	printf("Computed signed int MAX:%d\n", integer2previous);
 }
