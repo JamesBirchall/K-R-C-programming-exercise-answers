@@ -20,7 +20,7 @@ void ex2_4(char s1[], char s2[]){
 	count = 0;
 	for(i = 0; (temp2 = s1[i]) && temp2 != '\0'; i++){
 		if(temp2 != '-'){
-			s1[i] = count;
+			s1[count] = temp2;
 		} else{
 			count++;
 		}
