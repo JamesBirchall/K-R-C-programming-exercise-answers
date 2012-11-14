@@ -17,15 +17,16 @@ void ex2_4(char s1[], char s2[]){
 		}
 	}
 
+
 	count = 0;
 	for(i = 0; (temp2 = s1[i]) && temp2 != '\0'; i++){
 		if(temp2 != '-'){
 			s1[count] = temp2;
-		} else{
 			count++;
+		} else{
 		}
 	}
-	s1[++count] = '\0';
+	s1[count] = '\0';
 }
 
 void ex2_3(char myString[]){
