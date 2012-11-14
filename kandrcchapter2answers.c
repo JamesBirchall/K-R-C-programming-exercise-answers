@@ -1,5 +1,33 @@
 #include "kandrcchapter2answers.h"
 
+void ex2_4(char s1[], char s2[]){
+	/*
+ 	 * Delete any character that is in s2 in s1 	 *
+ 	 */ 
+
+	char temp, temp2;
+	int count, count2;
+
+	int i, j;
+	for(i = 0; (temp = s2[i]) && temp != '\0'; i++){
+		for(j = 0; (temp2 = s1[j]) && temp2 != '\0'; j++){
+			if(temp == temp2){
+				s1[j] = '-';
+			}
+		}
+	}
+
+	count = 0;
+	for(i = 0; (temp2 = s1[i]) && temp2 != '\0'; i++){
+		if(temp2 != '-'){
+			s1[i] = count;
+		} else{
+			count++;
+		}
+	}
+	s1[++count] = '\0';
+}
+
 void ex2_3(char myString[]){
 
 	/*
