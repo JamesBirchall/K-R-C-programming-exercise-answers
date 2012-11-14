@@ -1,10 +1,80 @@
 #include "kandrcchapter2answers.h"
 
+void ex2_3(char myString[]){
+
+	/*
+ 	 *	Write a function htoi(s) which converts a string of hex values including
+ 	 *	a leading 0x or 0X into its integer equivalent.  
+ 	 *	Allow upper case and lowercase values to be used (0-9,a-f,A-F)
+ 	 *	For sake of ease I am going to accept '\0' as end of string
+ 	 */ 
+	
+	char hexDigits[] = "0123456789ABCDEF";
+	float result = 0.0f;
+	
+	int counter = 0;
+	while(myString[counter++] != '\0'){}
+	counter--;
+	
+	int i;
+	for(i = 0; counter-- > 0; i++){
+		int j;
+		//check for 0X or 0x - well in a basic way...lets just find an x if used and break early
+		if(myString[counter] == 'x' || myString[counter] == 'X')
+			break;
+
+		for(j = 0; j <= 16; j++){			
+			if(tolower(hexDigits[j]) == tolower(myString[counter])){
+				float base = pow(16, i);
+				if(base)
+					result += base*j;
+				else
+					result += j;		
+			}
+		}
+	}
+	printf("Result: %f\n", result);
+}
+
 void ex2_2(){
 	/*
+ 	 * re-write this:
+ 	 * 	int i;
+ 	 * 	char c;
+ 	 * 	int lim = 10;
+ 	 * 	for(i = 0; i < lim-1 && (c = getchar()) != '\n' && c!= EOF; ++i)
+ 	 * 		s[i] = c;
  	 *
+ 	 * 	without using && or ||
+ 	 *
+ 	 * 	So we have a loop, each iteration getting increased by 1
+ 	 * 	we are checking each loop that we have 1 space left in the limit variable
+ 	 * 	we are also getting a character each loop and making sure its not a newline or EOF
  	 *
  	 */ 
+
+	int lim = 10;
+	char myString[lim];
+	int i;
+	char c;
+
+	for(i = 0; i < lim; i++)
+		myString[i] = '\0';	//zero out alements in the string
+
+	//new loop
+	for(i = 0; i < lim-1; ++i){
+		if((c = getchar()) != '\n'){
+			if(c != EOF)
+				myString[i] = c;
+		}
+	}
+	//end new loop without 
+
+	for(i = 0; i < lim; i++)
+		printf("%c",myString[i]);
+
+	printf("\n");
+
 }
 
 void ex2_1(){
