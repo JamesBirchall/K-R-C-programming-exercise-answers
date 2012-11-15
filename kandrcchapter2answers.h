@@ -9,3 +9,4 @@ void ex2_1();
 void ex2_2();
 void ex2_3(char[]);
 void ex2_4(char[], char[]);
+int ex2_5(char[], char[]);

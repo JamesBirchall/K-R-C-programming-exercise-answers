@@ -1,12 +1,31 @@
 #include "kandrcchapter2answers.h"
 
+int ex2_5(char s1[], char s2[]){
+	/*
+ 	 * Match any character in s2 in s1, return position
+ 	 */ 	
+	int position = -1;
+
+	char temp, temp2;
+	int i, j;
+
+	for(i = 0; (temp = s1[i]) && temp != '\0'; i++){
+		for(j = 0; (temp2 = s2[j]) && temp2 != '\0'; j++){
+			if(temp == temp2)
+				return position = i;
+		}
+	}
+	
+	return position;	
+}
+
 void ex2_4(char s1[], char s2[]){
 	/*
  	 * Delete any character that is in s2 in s1 	 *
  	 */ 
 
 	char temp, temp2;
-	int count, count2;
+	int count;
 
 	int i, j;
 	for(i = 0; (temp = s2[i]) && temp != '\0'; i++){
