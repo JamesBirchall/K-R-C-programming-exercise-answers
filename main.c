@@ -4,9 +4,7 @@
 
 int main(){
 
-	unsigned int three = 8;
-
-	printBinary(three);
+	ex2_6();
 
 	return 0;
 }

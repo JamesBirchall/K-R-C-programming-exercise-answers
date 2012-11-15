@@ -1,5 +1,21 @@
 #include "kandrcchapter2answers.h"
 
+void ex2_6(){
+	/*
+ 	 * Function will call setbits function defined below	
+ 	 */ 
+	
+	unsigned int number = 12;
+	printBinary(number);
+
+	number = getBits(number, 2, 1);
+	printf("%d\n", number);
+}
+
+unsigned int getBits(unsigned int x, int position, int number){
+	return (x >> (position + 1 - number)) & ~( ~0 << number);
+}
+
 void printBinary(unsigned int input){
 	/*
  	 *	Used for binary function exercises so we can see start / end values
