@@ -4,15 +4,9 @@
 
 int main(){
 
-	int position = 0;
+	unsigned int three = 8;
 
-	char s1[] = "James";
-	char s2[] = "s";
-
-	position = ex2_5(s1, s2);
-
-	printf("Position = %d\n", position);
-
+	printBinary(three);
 
 	return 0;
 }

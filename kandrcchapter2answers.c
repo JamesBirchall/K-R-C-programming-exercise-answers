@@ -1,5 +1,35 @@
 #include "kandrcchapter2answers.h"
 
+void printBinary(unsigned int input){
+	/*
+ 	 *	Used for binary function exercises so we can see start / end values
+ 	 */ 
+	int MAXLENGTH = 256;
+	char binaryString[MAXLENGTH];
+	int i;
+	//zero out string array
+	for(i = 0; i < MAXLENGTH; i++)
+		binaryString[i] = '\0';
+	//tests bits and shifts inpur right 1
+	i = 0;
+	while(input){
+		binaryString[i] = '0' + (input & 1);
+		input >>= 1;
+		i++;
+	}
+	//find end of binary string
+	i = 0;
+	while(binaryString[i] != '\0'){
+		i++;
+	}
+	//prints in reverse order the binary representation - so high order first
+	while(--i >= 0){
+		printf("%c", binaryString[i]);
+	}
+	printf("\n");
+}
+
+
 int ex2_5(char s1[], char s2[]){
 	/*
  	 * Match any character in s2 in s1, return position
