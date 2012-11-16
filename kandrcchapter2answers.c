@@ -5,15 +5,21 @@ void ex2_6(){
  	 * Function will call setbits function defined below	
  	 */ 
 	
-	unsigned int number = 12;
+	unsigned int number = 4;
 	printBinary(number);
 
-	number = getBits(number, 2, 1);
-	printf("%d\n", number);
+	number = getBits(number, 2, 2);
+	printBinary(number);
 }
 
 unsigned int getBits(unsigned int x, int position, int number){
 	return (x >> (position + 1 - number)) & ~( ~0 << number);
+
+	//return (x >> (position + 1 - number));
+	//return (x >> 2);
+
+	//right shift the number to set the bits on the low potition first
+	
 }
 
 void printBinary(unsigned int input){
