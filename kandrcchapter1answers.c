@@ -84,7 +84,7 @@ void ex1_6and1_7(){
 	//verifies EOF is 0 or 1 and prints it's value
 	int a;
 
-	while(a = (getchar() != EOF)){
+	while((a = getchar()) != EOF){
 		if(a == 1)
 			putchar('1');
 

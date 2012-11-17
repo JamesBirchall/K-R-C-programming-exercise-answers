@@ -1,5 +1,32 @@
 #include "kandrcchapter2answers.h"
 
+void ex2_9(){
+	unsigned int first = bitCountOriginal(0xFFFFFFF);
+	unsigned int second = bitCountOriginal(0xFFFFFFF);
+	printf("First value %d, Second value %d\n", first, second);
+}
+
+int bitCountOriginal(unsigned x){
+	int b;
+	for(b = 0; x != 0; x >>= 1)
+		if(x & 01)
+			b++;
+	return b;
+}
+
+int bitCountNew(unsigned x){
+	/*
+	 *	x &= (x-1) - Say x = 1111 -1 = 1110, anding
+	 *	produces 1110
+	 */
+
+	int b;
+	for(b = 0; x != 0; x &= (x-1))
+		b++;
+	
+	return b;
+}
+
 void ex2_8(){
 	/*
 	 * Function will call rightRotate function defined below
@@ -40,7 +67,7 @@ unsigned int invertBits(unsigned int x, int position, int number){
 	x = x | ~(~0 << (position - number)); //mask lower bits with 1's
 
 	xValue = (~xValue & ~(~0 << number));
-	xValue = xValue << position - number;
+	xValue = xValue << (position - number);
 	//the negation does the job!
 
 	return x | xValue;
@@ -67,7 +94,7 @@ unsigned int setBits(unsigned int x, int position, int number, unsigned int valu
 	x = x | ~(~0 << (position - number)); //mask lower bits with 1's
 
 	value = value & ~(~0 << number); //set value up
-	value = value << position - number;	//set value to position
+	value = value << (position - number);	//set value to position
 	
 	return x | value;
 }
@@ -241,6 +268,7 @@ void ex2_1(){
  	 * Do same for floating point types
  	 */ 	
 
+	/*
 	unsigned char char1 = 1;
 	unsigned char char1previous = 0;
 	signed char char2 = 1;
@@ -260,6 +288,7 @@ void ex2_1(){
 	unsigned long long1previous = 0;
 	signed long long2 = 1;
 	signed long long2previous = 0;
+	*/
 
 	printf("Unsigned char\tMax:%hhu\n",UCHAR_MAX);
 	printf("Signed char\tMin:%hhd\tMax:%hhd\n", CHAR_MIN, CHAR_MAX);

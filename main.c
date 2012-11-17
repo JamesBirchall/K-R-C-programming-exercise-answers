@@ -4,7 +4,6 @@
 
 int main(){
 
-	ex2_8();
 
 	return 0;
 }
