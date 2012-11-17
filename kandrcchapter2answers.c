@@ -1,5 +1,21 @@
 #include "kandrcchapter2answers.h"
 
+void ex2_8(){
+	/*
+	 * Function will call rightRotate function defined below
+	 */
+	unsigned int value = 8;
+	printBinary(value);
+	value = rightRotate(value, 2);
+	printBinary(value);
+}
+
+
+unsigned int rightRotate(unsigned int x, int number){
+	return x >> number;
+}
+
+
 void ex2_7(){
 	/*
 	 * Function will call inverBits funtion defined below
