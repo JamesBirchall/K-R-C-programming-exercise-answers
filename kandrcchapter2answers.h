@@ -13,5 +13,5 @@ int ex2_5(char[], char[]);
 void ex2_6();
 
 unsigned int getBits(unsigned int, int, int);
-unsigned int setBits(unsigned int x, int position, int number, int y);
+unsigned int setBits(unsigned int, int, int,unsigned  int);
 void printBinary(unsigned int);

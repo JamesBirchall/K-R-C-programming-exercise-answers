@@ -4,12 +4,26 @@ void ex2_6(){
 	/*
  	 * Function will call setbits function defined below	
  	 */ 
-	
+	unsigned int value = 0xF;
+	unsigned int value2 = 2;
+	printBinary(value);
+	value = setBits(value, 4, 2, value2);
+	printBinary(value);
 }
 
-unsigned int setBits(unsigned int x, int position, int number, int y){
+unsigned int setBits(unsigned int x, int position, int number, unsigned int value){
+	/*
+	 * To set bits, take bits from 'number' of lowest bits
+	 * 
+	 */
 
-	return 0;
+	x = x & (~0 << position);	// mask upper bits with 1's
+	x = x | ~(~0 << (position - number)); //mask lower bits with 1's
+
+	value = value & ~(~0 << number); //set value up
+	value = value << position - number;	//set value to position
+	
+	return x | value;
 }
 
 unsigned int getBits(unsigned int x, int position, int number){
