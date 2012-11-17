@@ -1,5 +1,35 @@
 #include "kandrcchapter2answers.h"
 
+void ex2_7(){
+	/*
+	 * Function will call inverBits funtion defined below
+	 */
+	unsigned int value = 0xF;
+
+	printBinary(value);
+	value =	invertBits(value, 3, 2);
+	printBinary(value);
+
+}
+
+unsigned int invertBits(unsigned int x, int position, int number){
+
+	// this function will act similar to setbits but just invert
+	// the set bits and actually use copy of x as values
+
+	unsigned int xValue = x;
+
+
+	x = x & (~0 << position);	// mask upper bits with 1's
+	x = x | ~(~0 << (position - number)); //mask lower bits with 1's
+
+	xValue = (~xValue & ~(~0 << number));
+	xValue = xValue << position - number;
+	//the negation does the job!
+
+	return x | xValue;
+}
+
 void ex2_6(){
 	/*
  	 * Function will call setbits function defined below	
