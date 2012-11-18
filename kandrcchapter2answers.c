@@ -1,5 +1,20 @@
 #include "kandrcchapter2answers.h"
 
+void ex2_10(){
+	char word[] = "JAMES IN UPPERCASE\n";
+	printf("%s", word);
+	lowerString(word);
+	printf("%s", word);
+}
+
+void lowerString(char word[]){
+	int i = 0;
+	while(word[i] != '\0'){
+		word[i] = (word[i] >= 'A' && word[i] <= 'Z') ? word[i] + 'a'-'A' : word[i];
+		i++;
+	}
+}
+
 void ex2_9(){
 	unsigned int first = bitCountOriginal(0xFFFFFFF);
 	unsigned int second = bitCountOriginal(0xFFFFFFF);
