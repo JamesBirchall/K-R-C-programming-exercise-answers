@@ -24,4 +24,3 @@ int bitCountOriginal(unsigned x);
 int bitCountNew(unsigned x);
 void lowerString(char[]);
 void printBinary(unsigned int);
-int binsearch(int, int[], int);
