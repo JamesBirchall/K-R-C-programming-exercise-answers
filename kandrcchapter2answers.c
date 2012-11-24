@@ -1,5 +1,25 @@
 #include "kandrcchapter2answers.h"
 
+int binsearch(int tofind, int values[], int max){
+  int low, mid, high;
+
+  low = 0;
+  high = max-1;
+
+  while(low <= high){
+    mid = (low+high) / 2; // get mid point
+
+    if(tofind < values[mid])
+      high = mid - 1;
+    else if(tofind > values[mid])
+      low = mid + 1;
+    else
+      return mid;      
+  }
+
+  return -1;
+}
+
 void ex2_10(){
 	char word[] = "JAMES IN UPPERCASE\n";
 	printf("%s", word);
