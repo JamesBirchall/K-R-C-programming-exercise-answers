@@ -1,0 +1,13 @@
+syntax on
+set number
+set ruler
+set autoindent
+set smarttab
+set shiftwidth=2
+set softtabstop=2
+set expandtab
+set confirm
+set showcmd
+set nocompatible
+set foldmethod=marker
+set mouse=a
