@@ -1,5 +1,22 @@
 #include "kandrcchapter3answers.h"
 
+int atoi2(char string[]){
+  int i, n, sign;
+
+  for(i = 0; isspace(string[i]); i++)
+    ; //skip whitespaces
+  sign = (string[i] == '-') ? -1 : 1;
+
+  if(string[i] == '+' || string[i] == '-')  //skip sign
+    i++;
+
+  for(n = 0; isdigit(string[i]); i++)
+    n = 10 * n + (string[i] - '0');
+  
+  return sign * n;
+}
+
+
 void ex3_1(){
   int array[] = {1,2,3,4,5,6,7,8,9,10};
 
