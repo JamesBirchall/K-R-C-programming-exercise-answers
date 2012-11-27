@@ -1,5 +1,15 @@
 #include "kandrcchapter3answers.h"
 
+void reverseString(char s[]){
+  int c, i, j;
+
+  for(i = 0, j = strlen(s)-1; i < j; i++, j--){
+    c = s[i];
+    s[i] = s[j];
+    s[j] = c;
+  }
+}
+
 void shellsort(int values[], int count){
 
   int gap, i, j, temp;

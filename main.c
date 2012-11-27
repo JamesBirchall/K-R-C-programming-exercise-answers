@@ -5,22 +5,13 @@
 
 int main(){
 
-  int values[] = {10,6,3,7,6,5,4,5,6,2,3,7,8,9};
+  char mystring[] = "olleH, semaJ";
 
-  int i;
+  printf("%s\n", mystring);
 
-  for(i = 0; i < 14; i++){
-    printf("%d ", values[i]);
-  }
-  printf("\n");
+  reverseString(mystring);
 
-  shellsort(values, 14);
-
-
-  for(i = 0; i < 14; i++){
-    printf("%d ", values[i]);
-  }
-  printf("\n");
+  printf("%s\n", mystring);
 
   return 0;
 }
