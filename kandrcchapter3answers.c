@@ -1,5 +1,20 @@
 #include "kandrcchapter3answers.h"
 
+void shellsort(int values[], int count){
+
+  int gap, i, j, temp;
+
+  for(gap = count/2; gap > 0; gap /= 2){
+    for(i = gap; i < count; i++){
+      for(j = i-gap; j >= 0 && values[j] > values[j+gap]; j -= gap){
+        temp = values[j];
+        values[j] = values[j+gap];
+        values[j+gap] = temp;
+      }
+    }
+  }
+}
+
 int atoi2(char string[]){
   int i, n, sign;
 

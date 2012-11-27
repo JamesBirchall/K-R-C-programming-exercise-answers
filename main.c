@@ -5,11 +5,22 @@
 
 int main(){
 
-  char string[] = "1234";
+  int values[] = {10,6,3,7,6,5,4,5,6,2,3,7,8,9};
 
-  int value = atoi2(string);
+  int i;
 
-  printf("String is:%s, converted makes the integer:%d\n", string, value);
+  for(i = 0; i < 14; i++){
+    printf("%d ", values[i]);
+  }
+  printf("\n");
+
+  shellsort(values, 14);
+
+
+  for(i = 0; i < 14; i++){
+    printf("%d ", values[i]);
+  }
+  printf("\n");
 
   return 0;
 }
