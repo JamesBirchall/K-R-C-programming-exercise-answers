@@ -5,13 +5,6 @@
 
 int main(){
 
-  char mystring[] = "olleH, semaJ";
-
-  printf("%s\n", mystring);
-
-  reverseString(mystring);
-
-  printf("%s\n", mystring);
 
   return 0;
 }

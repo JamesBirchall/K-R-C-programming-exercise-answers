@@ -9,3 +9,4 @@ int newbinsearch(int, int[], int);
 int atoi2(char []);
 void shellsort(int[], int);
 void reverseString(char[]);
+void expandString(char[], char[]);

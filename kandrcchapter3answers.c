@@ -1,5 +1,16 @@
 #include "kandrcchapter3answers.h"
 
+void expandString(char s1[], char s2[]){
+  /*
+   *  Expands shorthand notation like a-z in s1 into the complete 
+   *  list of characters e.g abcdefghijklmnopqrstuvwxy
+   *  Allows for any case and digits, a-b-c, a-z0-9 and -a-z
+   *  taking leading - literally
+   */
+
+
+}
+
 void reverseString(char s[]){
   int c, i, j;
 
