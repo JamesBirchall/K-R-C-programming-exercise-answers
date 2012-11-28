@@ -7,8 +7,15 @@ void expandString(char s1[], char s2[]){
    *  Allows for any case and digits, a-b-c, a-z0-9 and -a-z
    *  taking leading - literally
    */
-
-
+  
+  //tasks:
+  //  determine starting value from s1
+  //  if leading values, take them litterally (copy directly across to s2
+  //  determine ending value - loop to end of string looking for repeating end
+  //  characters e.g a-n-p
+  //  set look starting at starting value
+  //  place characters into s2 after literals until hit end value
+  //  rely on the calling program to allocate enough space for s2
 }
 
 void reverseString(char s[]){
