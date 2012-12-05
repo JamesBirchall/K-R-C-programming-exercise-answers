@@ -5,7 +5,14 @@
 
 int main(){
 
-  ex3_3();
+  char myString[100];
+  int i;
+  for(i = 0; i < 100; i++)
+    myString[i] = '\0';
+
+  itoa(-1234, myString);
+
+  printf("%s\n", myString);
 
   return 0;
 }

@@ -6,6 +6,7 @@
 void ex3_1();
 void ex3_2();
 void ex3_3();
+void ex3_4();
 
 int binsearch(int, int[], int);
 int newbinsearch(int, int[], int);
@@ -15,3 +16,4 @@ void reverseString(char[]);
 void escape(char[], char[]);
 void unescape(char[], char[]);
 void expandString(char[], char[]);
+void itoa(int, char[]);

@@ -1,5 +1,25 @@
 #include "kandrcchapter3answers.h"
 
+void ex3_4(){
+
+}
+
+void itoa(int number, char newString[]){
+  int i, sign;
+
+  if((sign = number) < 0)
+    number = -number;
+
+  i = 0;
+  do{
+    newString[i++] = number % 10 + '0';
+  } while((number /= 10) > 0);
+
+  if(sign < 0)
+    newString[i++] = '-';
+  newString[i++] = '\0';
+  reverseString(newString);
+}
 
 void ex3_2(){
   char myString[] = "James\tis\nCool\\beyond\"awesome\'just right";
@@ -157,7 +177,7 @@ void ex3_3(){
   char myString2[] = "A-z";
   char myString3[] = "a-b-c-";
   char myString4[] = "a-z0-9"; //add 0-9 after
-  char myString5[] = "-a-zA-F4-9";
+  char myString5[] = "-a-zA-F4-9c";
 
   char myString6[100];
   char myString7[100];
