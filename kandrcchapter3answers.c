@@ -152,6 +152,47 @@ void unescape(char s[], char t[]){
   }
 }
 
+void ex3_3(){
+  char myString[] = "a-z";
+  char myString2[] = "A-z";
+  char myString3[] = "a-b-c-";
+  char myString4[] = "a-z0-9"; //add 0-9 after
+  char myString5[] = "-a-z";
+
+  char myString6[100];
+  char myString7[100];
+  char myString8[100];
+  char myString9[100];
+  char myString10[100];
+
+  int i;
+  for(i = 0; i < 100; i++){
+    myString6[i] = '\0';
+    myString7[i] = '\0';
+    myString8[i] = '\0';
+    myString9[i] = '\0';
+    myString10[i] = '\0';
+  }
+
+  printf("String1:%s\n", myString);
+  printf("String2:%s\n", myString2);
+  printf("String3:%s\n", myString3);
+  printf("String4:%s\n", myString4);
+  printf("String5:%s\n", myString5);
+
+  expandString(myString, myString6);
+  expandString(myString2, myString7);
+  expandString(myString3, myString8);
+  expandString(myString4, myString9);
+  expandString(myString5, myString10);
+
+  printf("String6:%s\n", myString6);
+  printf("String7:%s\n", myString7);
+  printf("String8:%s\n", myString8);
+  printf("String9:%s\n", myString9);
+  printf("String10:%s\n", myString10);
+}
+
 void expandString(char s1[], char s2[]){
   /*
    *  Expands shorthand notation like a-z in s1 into the complete 
@@ -171,13 +212,49 @@ void expandString(char s1[], char s2[]){
 
   //  start processing, if a leading - is found copy it
 
-  int i;
-  for(i = 0; s1[i] != '\0'; i++){
-    printf("%c", s1[i]); 
+  int i = 0;
+  int j = 0;
+  int min = 0;
+  int max = 0;
+
+  while(s1[i]){
+    if((s1[i] == '-' && min == 0) || ((s1[i] == '-') && (s1[i+1] == '\0') && (max != 0))){
+      s2[j++] = s1[i++];
+      continue;
+    }
+
+
+    //get min & max value!
+    if(isalnum(s1[i])){
+      if(min == 0){
+        min = s1[i++];
+      }
+      else{
+        max = s1[i++];
+      }
+    }else{
+      if(s1[i] == '-'){
+        i++;
+      } else{
+        printf("Error value not valid range: %s\n", s1);
+        exit(0);
+      }
+    }
+
+    //printf("Min: %c, Max: %c\n", min, max);
+    if((min != 0 && max != 0) && (min <= max)){
+      while(min != max+1){
+        //printf("%c ", min);
+        if(isalnum(min))
+          s2[j++] = min++;
+        else
+          min++;
+      }
+
+      min = 0;
+      max = 0;
+    }
   }
-
-  printf("\n");
-
 }
 
 void reverseString(char s[]){
