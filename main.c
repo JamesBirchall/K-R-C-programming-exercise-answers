@@ -5,6 +5,9 @@
 
 int main(){
 
+  char myString[] = "Hello, Person";
+
+  expandString(myString, myString);
 
   return 0;
 }

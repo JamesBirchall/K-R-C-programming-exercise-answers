@@ -16,6 +16,16 @@ void expandString(char s1[], char s2[]){
   //  set look starting at starting value
   //  place characters into s2 after literals until hit end value
   //  rely on the calling program to allocate enough space for s2
+
+  //  start processing, if a leading - is found copy it
+
+  int i;
+  for(i = 0; s1[i] != '\0'; i++){
+    printf("%c", s1[i]); 
+  }
+
+  printf("\n");
+
 }
 
 void reverseString(char s[]){
