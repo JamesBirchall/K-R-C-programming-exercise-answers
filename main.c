@@ -10,7 +10,7 @@ int main(){
   for(i = 0; i < 100; i++)
     myString[i] = '\0';
 
-  itoa(-1234, myString);
+  itoa(-1235, myString);
 
   printf("%s\n", myString);
 
