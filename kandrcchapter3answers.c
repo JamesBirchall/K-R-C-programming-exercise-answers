@@ -157,7 +157,7 @@ void ex3_3(){
   char myString2[] = "A-z";
   char myString3[] = "a-b-c-";
   char myString4[] = "a-z0-9"; //add 0-9 after
-  char myString5[] = "-a-z";
+  char myString5[] = "-a-zA-F4-9";
 
   char myString6[100];
   char myString7[100];
@@ -218,9 +218,33 @@ void expandString(char s1[], char s2[]){
   int max = 0;
 
   while(s1[i]){
-    if((s1[i] == '-' && min == 0) || ((s1[i] == '-') && (s1[i+1] == '\0') && (max != 0))){
+    /*if((s1[i] == '-' && min == 0) || ((s1[i] == '-') && (s1[i+1] == '\0') && (max != 0))){
+      
+      if((min != 0 && max == 0) && s[i] == '-' ){
+        max = min;
+        continue;
+      }      
+      
       s2[j++] = s1[i++];
       continue;
+    }*/
+
+    if(s1[i] == '-' && min == 0){
+      if(i == 0){
+        s2[j++] = s1[i++];
+        continue;
+      }
+    }
+
+    if(s1[i] == '-' && s1[i+1] == '\0'){
+      if(max == 0){
+        max = min;
+        s2[j++] = max;
+        continue;
+      } else{
+        s2[j++] = s1[i++];
+        continue;
+      }
     }
 
 
