@@ -5,7 +5,7 @@
 
 int main(){
 
-  char myString[] = "Hello, Person";
+  char myString[] = "Hello, Jim";
 
   expandString(myString, myString);
 
