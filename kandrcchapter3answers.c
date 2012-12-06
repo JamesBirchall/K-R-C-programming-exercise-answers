@@ -24,7 +24,10 @@ void itoafixedversion(int number, char newString[]){
 
   i = 0;
   do{
+    int absValue = abs(number%10)+'0';
+    printf("...Processing absolute value of %d %% 10 + 0 = %c\n",number, absValue);
     newString[i++] = abs(number % 10) + '0'; //fix to get correct character
+    printf("Divide by 10...original value: %d\n", number/10);
   } while(number /= 10);  // fixed part as we will end up with negative in two's complement
 
   if(sign < 0)
