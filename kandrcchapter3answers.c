@@ -1,7 +1,36 @@
 #include "kandrcchapter3answers.h"
 
 void ex3_4(){
+  int myNumber = INT_MIN;
+  char myString[100] = "";
 
+  int i;
+  for(i = 0; i < 100; i++){
+    myString[i] = '\0';
+  }
+
+  printf("Integer: %d\n", myNumber);
+
+  itoafixedversion(myNumber, myString);
+
+  printf("Converted to String: %s\n", myString);
+}
+
+void itoafixedversion(int number, char newString[]){
+  int i, sign;
+
+  if((sign = number) < 0)
+    number = -number;
+
+  i = 0;
+  do{
+    newString[i++] = abs(number % 10) + '0'; //fix to get correct character
+  } while(number /= 10);  // fixed part as we will end up with negative in two's complement
+
+  if(sign < 0)
+    newString[i++] = '-';
+  newString[i++] = '\0';
+  reverseString(newString);
 }
 
 void itoa(int number, char newString[]){

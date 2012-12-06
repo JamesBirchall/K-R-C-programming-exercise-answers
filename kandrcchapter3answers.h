@@ -2,6 +2,7 @@
 #include <ctype.h>
 #include <string.h>
 #include <stdlib.h>
+#include <limits.h>
 
 void ex3_1();
 void ex3_2();
@@ -17,3 +18,4 @@ void escape(char[], char[]);
 void unescape(char[], char[]);
 void expandString(char[], char[]);
 void itoa(int, char[]);
+void itoafixedversion(int, char[]);
