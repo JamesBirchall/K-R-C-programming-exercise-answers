@@ -8,6 +8,7 @@ void ex3_1();
 void ex3_2();
 void ex3_3();
 void ex3_4();
+void ex3_5();
 
 int binsearch(int, int[], int);
 int newbinsearch(int, int[], int);
@@ -19,3 +20,4 @@ void unescape(char[], char[]);
 void expandString(char[], char[]);
 void itoa(int, char[]);
 void itoafixedversion(int, char[]);
+void itobase(int, char[], int);

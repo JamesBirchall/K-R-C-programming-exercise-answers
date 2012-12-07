@@ -1,5 +1,65 @@
 #include "kandrcchapter3answers.h"
 
+void ex3_5(){
+
+  int myNumber = INT_MIN;
+  char myString[100] = "";
+
+  int i;
+  for(i = 0; i < 100; i++){
+    myString[i] = '\0';
+  }
+
+  printf("Integer: %d\n", myNumber);
+
+  itobase(myNumber, myString, 8);
+
+  printf("Converted to String: %s\n", myString);
+}
+
+void itobase(int number, char newString[], int numberBase){
+  /*
+   *  Similar to itoafixedversion but allows any bases to be printed to the string
+   *  Currently only allows Binary, Octal, Hexidecimal and if no limit is given defaults to
+   *  base 10.
+   */
+
+  int i, sign;
+  char base16[] = "0123456789ABCDEF";
+  char base2[] = "01";
+  char base8[] = "01234567";
+
+  if((sign = number) < 0)
+    number = -number;
+
+  i = 0;
+
+  do{
+    int absValue = abs(number%numberBase)+'0';
+    printf("...Processing absolute value of %d %% 10 + 0 = %c\n",number, absValue);
+    if(numberBase == 16)
+    {
+      newString[i++] = base16[abs(number % numberBase)];
+      printf("Divide by 16...original value: %d\n", number/numberBase);
+    } else if(numberBase == 2){
+      newString[i++] = base2[abs(number % numberBase)];
+      printf("Divide by 2...original value: %d\n", number/numberBase);
+    } else if(numberBase == 8){
+      newString[i++] = base8[abs(number % numberBase)];
+      printf("Divide by 8...original value: %d\n", number/numberBase);
+    } else {
+      newString[i++] = abs(number % numberBase) + '0'; //fix to get correct character
+      printf("Divide by 10...original value: %d\n", number/10);
+    }
+  } while(number /= numberBase);  // fixed part as we will end up with negative in two's complement
+
+  if(sign < 0)
+    newString[i++] = '-';
+  newString[i++] = '\0';
+  reverseString(newString);
+
+}
+
 void ex3_4(){
   int myNumber = INT_MIN;
   char myString[100] = "";

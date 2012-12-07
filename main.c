@@ -4,8 +4,8 @@
 #include "kandrcchapter3answers.h"
 
 int main(){
-
-  ex3_4();
+  
+  ex3_5();
 
   return 0;
 }
