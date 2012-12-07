@@ -1,5 +1,48 @@
 #include "kandrcchapter3answers.h"
 
+void ex3_6(){
+  int myNumber = INT_MIN;
+  char myString[100] = "";
+
+  int i;
+  for(i = 0; i < 100; i++){
+    myString[i] = '\0';
+  }
+
+  printf("Integer: %d\n", myNumber);
+
+  itoafixedversionminwidth(myNumber, myString, 50);
+
+  printf("Converted to String: %s\n", myString);
+}
+
+void itoafixedversionminwidth(int number, char newString[], int minwidth){
+
+  int i, sign;
+
+  if((sign = number) < 0)
+    number = -number;
+
+  i = 0;
+  do{
+    int absValue = abs(number%10)+'0';
+    printf("...Processing absolute value of %d %% 10 + 0 = %c\n",number, absValue);
+    if(minwidth)
+      --minwidth;
+    newString[i++] = abs(number % 10) + '0'; //fix to get correct character
+    printf("Divide by 10...original value: %d\n", number/10);
+  } while(number /= 10);  // fixed part as we will end up with negative in two's complement
+
+  if(sign < 0)
+    newString[i++] = '-', --minwidth;
+
+  if(minwidth)
+    while(minwidth--)
+      newString[i++] = ' ';
+  newString[i++] = '\0';
+  reverseString(newString);
+}
+
 void ex3_5(){
 
   int myNumber = INT_MIN;
