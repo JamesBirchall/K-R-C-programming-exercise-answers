@@ -5,7 +5,14 @@
 
 int main(){
   
-  ex3_6();
+  char myString[] = "James Birchall \t\n";
+
+  printf("%s",myString);
+
+  trim(myString);
+
+  printf("%s",myString);
+  printf("%s",myString);
 
   return 0;
 }

@@ -23,3 +23,4 @@ void itoa(int, char[]);
 void itoafixedversion(int, char[]);
 void itobase(int, char[], int);
 void itoafixedversionminwidth(int, char[], int);
+int trim(char[]);
