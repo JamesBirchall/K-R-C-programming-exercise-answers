@@ -5,6 +5,10 @@
 #include "kandrcchapter4answers.h"
 
 int main(){
-  
-  return 0;
+
+  int value;
+
+  value = ex4_1();
+
+  return value;
 }
