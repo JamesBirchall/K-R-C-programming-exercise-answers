@@ -1,5 +1,29 @@
 #include "kandrcchapter4answers.h"
 
+double stringtodouble(char myString[]){
+  double val, power;
+  int i, sign;
+
+  for(i = 0; isspace(myString[i]); i++); /* Skips whitespace */
+
+  sign = (myString[i] == '-') ? -1 : 1; 
+
+  if(myString[i] == '+' || myString[i] == '-')
+    i++;
+
+  for(val = 0.0; isdigit(myString[i]); i++)
+    val = 10.0 * val + (myString[i] - '0');
+
+  if(myString[i] == '.')
+    i++;
+  
+  for(power = 1.0; isdigit(myString[i]); i++){
+    val = 10.0 * val + (myString[i] - '0');
+    power *= 10;
+  }
+  return sign * val / power;
+}
+
 int ex4_1(){
   int MAXLINE = 1000;
 

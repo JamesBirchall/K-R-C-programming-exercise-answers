@@ -6,9 +6,13 @@
 
 int main(){
 
-  int value;
+  char myString[] = "1234.5678";
 
-  value = ex4_1();
+  double myDouble = 0.0;
+  printf("My String: %s\n", myString);
 
-  return value;
+  myDouble = stringtodouble(myString);
+  printf("My Double: %.4f\n", myDouble);
+
+  return 0;
 }
