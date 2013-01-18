@@ -6,13 +6,13 @@
 
 int main(){
 
-  char myString[] = "12344.5678";
+  char myString[] = "12345";
 
-  double myDouble = 0.0;
+  int myInt = 0;
   printf("My String: %s\n", myString);
 
-  myDouble = stringtodouble(myString);
-  printf("My Double: %.4f\n", myDouble);
+  myInt = stringtointeger(myString);
+  printf("My Int: %d\n", myInt);
 
   return 0;
 }

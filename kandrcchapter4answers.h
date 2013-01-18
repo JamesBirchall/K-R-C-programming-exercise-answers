@@ -7,3 +7,4 @@ int getLineByString(char[], int);
 int stringIndex(char[], char[]);
 int stringIndexRight(char[], char[]);
 double stringtodouble(char[]);
+int stringtointeger(char[]);

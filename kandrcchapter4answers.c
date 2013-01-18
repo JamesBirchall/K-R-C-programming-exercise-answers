@@ -1,5 +1,9 @@
 #include "kandrcchapter4answers.h"
 
+int stringtointeger(char myString[]){
+  return (int) stringtodouble(myString);
+}
+
 double stringtodouble(char myString[]){
   double val, power;
   int i, sign;
