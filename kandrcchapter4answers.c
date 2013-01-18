@@ -1,5 +1,15 @@
 #include "kandrcchapter4answers.h"
 
+double stringwithexponenttodouble(char myString[]){
+  double value, power, exponent;
+  int i, sign;
+
+  for(i = 0; isspace(myString[i]); i++);
+
+
+  return -1.0;
+}
+
 int stringtointeger(char myString[]){
   return (int) stringtodouble(myString);
 }
