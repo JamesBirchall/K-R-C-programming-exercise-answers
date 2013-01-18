@@ -6,6 +6,11 @@ double stringwithexponenttodouble(char myString[]){
 
   for(i = 0; isspace(myString[i]); i++);
 
+  //remove whitespace to start, then process values in ones, tens, hundres etc
+  //then process decimal place if exists
+  //then process values after exists
+  //then process 'e' or 'E' - if doesn't exist treat as standard double and ignore anything not a number after
+  //if E was found process sign '-' if exists, based on this set sign to -1 or 1 and use to decide whether to divide or multiply (exponent*10) on value
 
   return -1.0;
 }
