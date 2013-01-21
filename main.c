@@ -12,6 +12,7 @@ int main(){
   printf("My String: %s\n", myString);
 
   //myInt = stringtointeger(myString);
+  myDouble = stringwithexponenttodouble(myString);
   printf("My Double: %.4f\n", myDouble);
 
   return 0;
