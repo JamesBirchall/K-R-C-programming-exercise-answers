@@ -6,7 +6,7 @@
 
 int main(){
 
-  char myString[] = "12e-4";
+  char myString[] = "1.2e-4";
 
   double myDouble = 0.0;
   printf("My String: %s\n", myString);
