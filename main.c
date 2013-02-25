@@ -6,14 +6,14 @@
 
 int main(){
 
-  char myString[] = "1.1e-5";
+  char myString[] = "123.25E5";
 
   double myDouble = 0.0;
   printf("My String: %s\n", myString);
 
   //myInt = stringtointeger(myString);
   myDouble = stringwithexponenttodouble(myString);
-  printf("My Double: %.4f\n", myDouble);
+  printf("My Double: %.7f\n", myDouble);
 
   return 0;
 }

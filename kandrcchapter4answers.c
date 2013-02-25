@@ -4,15 +4,62 @@ double stringwithexponenttodouble(char myString[]){
   double value, power, exponent;
   int i, sign;
 
+  sign = 1;
+
   for(i = 0; isspace(myString[i]); i++);
 
-  //remove whitespace to start, then process values in ones, tens, hundres etc
-  //then process decimal place if exists
-  //then process values after exists
-  //then process 'e' or 'E' - if doesn't exist treat as standard double and ignore anything not a number after
-  //if E was found process sign '-' if exists, based on this set sign to -1 or 1 and use to decide whether to divide or multiply (exponent*10) on value
+  // remove space in front of word
+  //take all numbers same as before and store in value
 
-  return -1.0;
+  for(value = 0.0; isdigit(myString[i]); i++)
+    value = 10.0 * value + (myString[i] - '0');
+
+  //skip over decimal point
+  if(myString[i] == '.')
+    i++;
+
+  //take parts afterwards in same way
+  for(power = 1.0; isdigit(myString[i]); i++){
+    value = 10.0 * value + (myString[i] - '0');
+    power *= 10;
+  }
+
+  //look for upper/lowercase E, if not here then quit with error message
+  if(tolower(myString[i]) == 'e')
+    i++;
+  else
+    printf("\nError - Not valid scientific notation x.xxx[E|e][-]x\n");    
+
+  //check for minus sign - if exists make sign
+  if(myString[i] == '-'){
+    sign  = -1;
+    i++;
+  }
+
+  //finally process exponent figure either multiply by 10 or divide by 10 depending on sign
+  if(isdigit(myString[i])){
+    for(exponent = 0.0; isdigit(myString[i]); i++){
+      //exponent is then - value and flipped by sign
+      exponent = 10.0 * exponent + (myString[i] - '0');
+    }
+  }
+
+  printf("\nExponent is %f\n", exponent);
+
+  //now we take exponent and come up with multiplier figure
+  float multiplier = 1.0;
+   
+
+  //loop through exponent until it reach zero, multiplying multipler by 10 each time
+  while(exponent != 0){
+    if(sign == 1)
+      multiplier *= 10;
+    else
+      multiplier /= 10;
+    exponent--;
+  }
+
+  return (value/power)*multiplier;
 }
 
 int stringtointeger(char myString[]){
