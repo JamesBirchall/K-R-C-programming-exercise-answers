@@ -1,6 +1,10 @@
 #include "kandrcchapter4answers.h"
 
-int ex4_3(){
+void polishcalc(){
+
+}
+
+int ex4_2_2(){
   
   char myString1[] = "123.3E5";
   char myString2[] = "1.5E-5";
