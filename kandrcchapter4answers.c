@@ -1,5 +1,30 @@
 #include "kandrcchapter4answers.h"
 
+int ex4_3(){
+  
+  char myString1[] = "123.3E5";
+  char myString2[] = "1.5E-5";
+  char myString3[] = "451.5E-9";
+
+  double myDouble = 0.0;
+  printf("My String: %s\n", myString1);
+  myDouble = stringwithexponenttodouble(myString1);
+  printf("My Double: %.15f\n", myDouble);
+
+
+  myDouble = 0.0;
+  printf("My String: %s\n", myString2);
+  myDouble = stringwithexponenttodouble(myString2);
+  printf("My Double: %.15f\n", myDouble);
+
+  myDouble = 0.0;
+  printf("My String: %s\n", myString2);
+  myDouble = stringwithexponenttodouble(myString2);
+  printf("My Double: %.15f\n", myDouble);
+  
+  return -1;
+}
+
 double stringwithexponenttodouble(char myString[]){
   double value, power, exponent;
   int i, sign;
@@ -44,12 +69,9 @@ double stringwithexponenttodouble(char myString[]){
     }
   }
 
-  printf("\nExponent is %f\n", exponent);
-
   //now we take exponent and come up with multiplier figure
   float multiplier = 1.0;
    
-
   //loop through exponent until it reach zero, multiplying multipler by 10 each time
   while(exponent != 0){
     if(sign == 1)

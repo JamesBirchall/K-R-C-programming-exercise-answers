@@ -3,6 +3,7 @@
 
 int ex4_1();
 int ex4_2();
+int ex4_3();
 
 int getLineByString(char[], int);
 int stringIndex(char[], char[]);
