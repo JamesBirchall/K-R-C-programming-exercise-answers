@@ -2,6 +2,8 @@
 
 void polishcalc(){
 
+//add calc code here, then seperate files for extra methods just for fun ;-)
+
 }
 
 int ex4_2_2(){
