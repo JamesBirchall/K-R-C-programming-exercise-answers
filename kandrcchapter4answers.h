@@ -11,4 +11,4 @@ int stringIndexRight(char[], char[]);
 double stringtodouble(char[]);
 int stringtointeger(char[]);
 double stringwithexponenttodouble(char[]);
-void polishcalc();
+int polishcalc();

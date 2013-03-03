@@ -1,9 +1,29 @@
 #include "kandrcchapter4answers.h"
+#include "polishcalc.h"
 
-void polishcalc(){
+int polishcalc(){
 
-//add calc code here, then seperate files for extra methods just for fun ;-)
+  int type;
+  double op2;
+  char myString[100];
 
+  while(( type= getop(myString)) != EOF){
+    switch (type){
+      case '0':
+        push(atof(myString));
+        break;
+      case '+':
+        push(pop() + pop());
+        break;
+      case '\n':
+        printf("\n\t%.8g\n", pop());
+        break;
+      default:
+        printf("error: unknown command %s\n", myString);
+        break;
+    }
+  }
+  return 0;
 }
 
 int ex4_2_2(){
@@ -24,8 +44,8 @@ int ex4_2_2(){
   printf("My Double: %.15f\n", myDouble);
 
   myDouble = 0.0;
-  printf("My String: %s\n", myString2);
-  myDouble = stringwithexponenttodouble(myString2);
+  printf("My String: %s\n", myString3);
+  myDouble = stringwithexponenttodouble(myString3);
   printf("My Double: %.15f\n", myDouble);
   
   return -1;
