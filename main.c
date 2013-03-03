@@ -6,8 +6,8 @@
 
 int main(){
 
-  //works!
-  polishcalc();
+  //polishcalc();
+  ex4_2_2();
 
   return 0;
 }
