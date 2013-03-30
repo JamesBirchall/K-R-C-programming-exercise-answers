@@ -6,6 +6,44 @@ double value[MAXVAL];
 char buffer[100];
 int bufferfreeposition = 0;
 
+double variables[26];
+
+void clearVariables(char s[]){
+  int i;
+  for(i = 0; i < 26; i++)
+    variables[i] = 0.0f;
+}
+
+void storeVariable(char s[]){
+  
+  //store if empty, recall if not!
+  int value = s[0] - 'A';
+  if(variables[value] == 0.0f){
+    float temp = pop();
+    printf("\nPopping stack & setting %c, with %f\n", s[0], temp);
+    variables[value] = temp;
+  }
+  else{
+    printf("\nPushing variable onto stack\n");
+    push(variables[value]);
+  }
+}
+
+void printAllVariables(){
+  int i;
+  for(i = 0; i < 26; i++)
+    printf("\nVariable [%c]: %f", i+'A', variables[i]);
+
+  printf("\n");
+}
+
+void initVariables(){
+  int i;
+  for(i = 0; i < 26; i++){
+    variables[i] = 0.0f;
+  }
+}
+
 void functionUsed(char s[]){
   if(0 == strcmp(s, "exp"))
     push(exp(pop()));
@@ -111,6 +149,10 @@ int getopandminus(char s[]){
   while((s[0] = c = getch()) == ' ' || c == '\t');  //skip whitespace
 
   s[1] = '\0'; 
+
+  if(isalpha(c) && isupper(c)){
+    return VARIABLE;
+  }
 
   //check for digit, decimal or minus symbol
   if(!isdigit(c) && c != '.' && c != '-'){

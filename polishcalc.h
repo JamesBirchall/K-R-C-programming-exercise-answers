@@ -18,8 +18,13 @@ void swap();
 void clear();
 void printstack();
 void functionUsed(char[]);
+void initVariables();
+void printAllVariables();
+void storeVariable(char[]);
+void clearVariables(char[]);
 
 #define MAXOP 100
 #define NUMBER '0'
 #define MAXVAL 100
 #define FUNCTION '1'
+#define VARIABLE '2'
