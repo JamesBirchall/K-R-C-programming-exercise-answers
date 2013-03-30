@@ -6,6 +6,35 @@ double value[MAXVAL];
 char buffer[100];
 int bufferfreeposition = 0;
 
+void functionUsed(char s[]){
+  if(0 == strcmp(s, "exp"))
+    push(exp(pop()));
+  else if(0 == strcmp(s, "pow")){
+    if(stackPointer > 1){
+      // take last item off and store temp as power is not commutitive
+      float op2 = pop();
+      push(pow(pop(), op2));
+    }
+    else{
+      printf("\nerror: not enough values in stack\n");
+    }
+  }
+  else if(0 == strcmp(s, "sin")){
+    if(stackPointer > 0)
+      push(sin(pop()));
+    else
+      printf("\nerror: no values on stack");
+  }
+  else if(0 == strcmp(s, "cos")){
+    if(stackPointer > 0)
+      push(cos(pop()));
+    else
+      printf("\nerror: no values on stack");
+  }
+  else
+    printf("\nerror: function unknown");
+}
+
 void printstack(){
   if(stackPointer > 0){
     int count = stackPointer;
@@ -14,6 +43,8 @@ void printstack(){
   }
   else
     printf("\nerror: stack empty");
+
+  printf("\n");
 }
 
 void printTop(){
@@ -73,10 +104,6 @@ double pop(void){
 
 int getopandminus(char s[]){
 
-  //need to deal with minus symbol in here
-  //to do this lets check for minus and if so get the rest of the
-  //number and then sign it up
-
   int i, c, nextValue;
   i = 0;
 
@@ -87,6 +114,21 @@ int getopandminus(char s[]){
 
   //check for digit, decimal or minus symbol
   if(!isdigit(c) && c != '.' && c != '-'){
+    if(isalpha(c)){
+      int nextValue = getch();
+      if(isalpha(nextValue)){
+        s[0] = c;
+        s[1] = nextValue;
+        i = 1;
+        while(isalpha(s[++i] = c = getch()));
+        s[i] = '\0';
+        if(c != EOF)
+          ungetch(c);
+
+        return FUNCTION;
+      }
+    }
+
     return c; //likely an operand
   }
 

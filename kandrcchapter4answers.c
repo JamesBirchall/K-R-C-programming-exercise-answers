@@ -1,6 +1,89 @@
 #include "kandrcchapter4answers.h"
 #include "polishcalc.h"
 
+int ex4_5(){
+
+  //adds in % operator and ability to deal with negative numbers entered
+  int type;
+  double op2;
+  char myString[100];
+
+  while(( type= getopandminus(myString)) != EOF){
+    switch (type){
+      case '0':
+        printf("\nPushing number: %f \n", atof(myString));
+        push(atof(myString));
+        break;
+      case '+':
+        printf("\nAdding...\n");
+        push(pop() + pop());
+        break;
+      case '*':
+        printf("\nMultiplying...\n");
+        push(pop() * pop());
+        break;
+      case '-':
+        printf("\nSubtracting...\n");
+        op2 = pop();
+        push(pop() - op2);
+        break;
+      case '/':
+        printf("\nDividing...\n");
+        op2= pop();
+        if(op2 != 0.0)
+          push(pop() / op2);
+        else
+          printf("\nerror: divide by zero\n");
+        break;
+      case '%':
+        printf("\nTaking modulus...\n");
+        op2 = pop();
+        push((int) pop() % (int) op2);
+        break;
+      case 'e':
+        printf("\nPopping off top result: %.8g\n", pop());
+        break;
+      case 't':
+        printf("\nPrinting top of stack...\n");
+        printTop();
+        break;
+      case 'd':
+        printf("\nDuplicating item on top of stack...\n");
+        duplicate();
+        break;
+      case 's':
+        printf("\nSwapping top 2 items on stack...\n");
+        swap();
+        break;
+      case 'c':
+        printf("\nClearing whole stack...\n");
+        clear();
+        break;
+      case 'a':
+        printf("\nPrinting all of the stack...\n");
+        printstack();
+        break;
+      case 'q':
+        printf("\n Quitting...\n");
+        exit(0);
+        break;
+      case '1':
+        printf("\nTrying to run function on values...\n");
+        functionUsed(myString);
+        break;
+      case '\n':
+        printf("\n");
+        break;
+      default:
+        printf("\nerror: unknown command %s\n", myString);
+        break;
+    }
+  }
+
+
+  return 0;
+}
+
 
 int ex4_4(){
 
