@@ -6,7 +6,7 @@
 
 int main(){
 
-  polishcalc();
+  ex4_3();
 
   return 0;
 }

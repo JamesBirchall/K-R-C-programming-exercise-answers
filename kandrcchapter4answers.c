@@ -1,6 +1,58 @@
 #include "kandrcchapter4answers.h"
 #include "polishcalc.h"
 
+int ex4_3(){
+
+  //adds in % operator and ability to deal with negative numbers entered
+  int type;
+  double op2;
+  char myString[100];
+
+  while(( type= getopandminus(myString)) != EOF){
+    switch (type){
+      case '0':
+        printf("\nPushing number: %f ", atof(myString));
+        push(atof(myString));
+        break;
+      case '+':
+        printf("\nAdding...");
+        push(pop() + pop());
+        break;
+      case '*':
+        push(pop() * pop());
+        break;
+      case '-':
+        op2 = pop();
+        push(pop() - op2);
+        break;
+      case '/':
+        op2= pop();
+        if(op2 != 0.0)
+          push(pop() / op2);
+        else
+          printf("error: divide by zero\n");
+        break;
+      case '%':
+        op2 = pop();
+        push((int) pop() % (int) op2);
+        break;
+      case '\n':
+        printf("\n\t%.8g\n", pop());
+        break;
+      case 'q':
+        printf("\n Quitting...\n");
+        exit(0);
+        break;
+      default:
+        printf("error: unknown command %s\n", myString);
+        break;
+    }
+  }
+
+
+  return 0;
+}
+
 int polishcalc(){
 
   int type;
