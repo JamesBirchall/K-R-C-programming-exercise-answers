@@ -11,6 +11,11 @@ int getop(char[]);
 int getch(void);
 void ungetch(int);
 int getopandminus(char[]);
+void printTop();
+void duplicate();
+void swap();
+void clear();
+void printstack();
 
 #define MAXOP 100
 #define NUMBER '0'

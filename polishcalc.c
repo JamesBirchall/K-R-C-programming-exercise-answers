@@ -6,11 +6,59 @@ double value[MAXVAL];
 char buffer[100];
 int bufferfreeposition = 0;
 
+void printstack(){
+  if(stackPointer > 0){
+    int count = stackPointer;
+    while(--count >= 0)
+      printf("\nStack position [%3d] : %f", count, value[count]);
+  }
+  else
+    printf("\nerror: stack empty");
+}
+
+void printTop(){
+  if(stackPointer > 0)
+    printf("\nTop of stack: %f", value[stackPointer-1]);
+  else
+    printf("\nerror: nothing in stack");
+}
+
+void duplicate(){
+  if(stackPointer > 0){
+    double f = pop();
+    push(f);
+    push(f);
+  }
+  else
+    printf("\nerror: cannot duplicate as stack empty");
+}
+
+void swap(){
+  if(stackPointer > 1){
+    float f = pop();
+    float g = pop();
+    push(f);
+    push(g);
+  }
+  else
+    printf("\nerror: stack doesn't hold 2 values to swap");
+}
+
+void clear(){
+  if(stackPointer > 0){
+    stackPointer = 0;
+    printf("\nstack cleared");
+  }
+  else
+    printf("\nerror: stack already empty");
+}
+
+
 void push(double f){
   if(stackPointer < MAXVAL)
     value[stackPointer++] = f;
   else
-    printf("error: stack full, can't push %g\n", f);
+    printf("\nerror: stack full, can't push %g\n", f);
 }
 
 double pop(void){
@@ -18,7 +66,7 @@ double pop(void){
   if(stackPointer > 0)
     return value[--stackPointer];
   else{
-    printf("error: stack empty\n");
+    printf("\nerror: stack empty\n");
     return 0.0f;
   }
 }
@@ -39,7 +87,6 @@ int getopandminus(char s[]){
 
   //check for digit, decimal or minus symbol
   if(!isdigit(c) && c != '.' && c != '-'){
-    printf("\nReturning: %c", c);
     return c; //likely an operand
   }
 
@@ -52,26 +99,24 @@ int getopandminus(char s[]){
     //check for digit or decimal point
     if(!isdigit(nextValue) &&  nextValue != '.'){
       //is there isn't  valid number or decimal point return as its likely a minus symbol
-      printf("\nReturning after minus symbol...: %c", c);
       return c;
     }
     //else get next Value
     c = nextValue;
-    printf("\nSetting c to next value: %c", c);
     i++;
     s[i] = c;
   }
 
   if(isdigit(c)){
       while(isdigit(s[++i] = c = getch())){
-        printf("\nGetting next digit...: %c", c);
+        ;
       }
   }
 
 
   if(c == '.'){
     while(isdigit(s[++i] = c = getch())){
-      printf("\nGetting next digit...: %c", c);
+      ;
     }
 
   }
@@ -80,13 +125,6 @@ int getopandminus(char s[]){
 
   if(c != EOF)
     ungetch(c);
-
-  int j;
-  for(j = 0; j < strlen(s); j++){
-    printf("\nSymbol: %c", s[j]);
-  }
-
-  printf("\nReturning end of function NUMBER: %f", atof(s));
 
   return NUMBER;  //returns '0' in integer form to signify its an operand vs operator
 }
@@ -125,7 +163,7 @@ int getch(void){
 
 void ungetch(int c){
   if(bufferfreeposition >= 100)
-    printf("ungetch: too many characters\n");
+    printf("\nungetch: too many characters\n");
   else
     buffer[bufferfreeposition++] = c;
 }
