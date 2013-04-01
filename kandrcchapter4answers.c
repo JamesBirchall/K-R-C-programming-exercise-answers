@@ -1,6 +1,15 @@
 #include "kandrcchapter4answers.h"
 #include "polishcalc.h"
 
+int ex4_8(){
+  //do not see the point in this exercise.  Essentially
+  //its taking the buffer and making it a single value
+  //size only.  Not 100 which its set to by defauly in
+  //polish.c.  The checks then simply look for the single
+  //placeholder to contain something not an identifier for
+  //holding nothing. If it does its full!
+}
+
 int ex4_7(){
 
   char myString[] = "String of somthing I have.\n";
