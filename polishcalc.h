@@ -14,6 +14,7 @@ void ungetch(int);
 //ungets - push back an entire string onto the input ex 4_7
 void ungets(char[]);
 int getopandminus(char[]);
+int getopandminus2(char[]);
 void printTop();
 void duplicate();
 void swap();

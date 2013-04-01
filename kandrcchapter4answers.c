@@ -1,8 +1,10 @@
 #include "kandrcchapter4answers.h"
 #include "polishcalc.h"
 
-int ex4_10(){
+char lines[1000];
+int linesCounter;
 
+int ex4_10(){
 
   //adds in % operator and ability to deal with negative numbers entered
   int type;
@@ -11,9 +13,11 @@ int ex4_10(){
 
   initVariables();
 
+while(getLineByString(lines, 1000) != 0){
+
   //added in v's, so can say A and if empty value gets popped into it
   //also provide a mecanism for clearing the variable to 0 again
-  while(( type= getopandminus(myString)) != EOF){
+  while(( type= getopandminus2(myString)) != EOF){
     switch (type){
       case '0':
         printf("\nPushing number: %f \n", atof(myString));
@@ -76,24 +80,25 @@ int ex4_10(){
         printf("\n Quitting...\n");
         exit(0);
         break;
-      case '1':
-        printf("\nTrying to run function on values...\n");
-        functionUsed(myString);
-        break;
-      case '2':
-        printf("\nVariable...\n");
-        storeVariable(myString);
-        break;
-      case '$':
-        printf("\nClearing variables list...\n");
-        clearVariables(myString);
-        break;
-      case '\n':
-        printf("\n");
-        break;
-      default:
-        printf("\nerror: unknown command %s\n", myString);
-        break;
+        case '1':
+          printf("\nTrying to run function on values...\n");
+         functionUsed(myString);
+         break;
+        case '2':
+          printf("\nVariable...\n");
+          storeVariable(myString);
+          break;
+       case '$':
+          printf("\nClearing variables list...\n");
+          clearVariables(myString);
+         break;
+       case '\n':
+         printf("\n");
+          break;
+        default:
+          printf("\nerror: unknown command %s\n", myString);
+          break;
+      }
     }
   }
 

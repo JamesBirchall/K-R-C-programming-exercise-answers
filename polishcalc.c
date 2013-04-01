@@ -1,5 +1,8 @@
 #include "polishcalc.h"
 
+extern char lines[1000];
+extern int linesCounter;
+
 int stackPointer = 0;
 double value[MAXVAL];
 
@@ -7,6 +10,27 @@ char buffer[100];
 int bufferfreeposition = 0;
 
 double variables[26];
+
+int getopandminus2(char s[]){
+    int i, c;
+
+    while ((s[0] = c = lines[linesCounter++]) == ' ' || c == '\t')
+        ;
+    s[1] = '\0';
+    if (!isdigit(c) && c != '.')
+        return c;      /* not a number */
+    i = 0;
+    if (isdigit(c))    /* collect integer part */
+        while (isdigit(s[++i] = c = lines[linesCounter++]))
+            ;
+    if (c == '.')      /* collect fraction part */
+        while (isdigit(s[++i] = c = lines[linesCounter++]))
+              ;
+    s[i] = '\0';
+    linesCounter--;
+
+    return NUMBER;
+}
 
 void ungets(char s[]){
   int len = strlen(s);
