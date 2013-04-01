@@ -11,6 +11,8 @@ double pop(void);
 int getop(char[]);
 int getch(void);
 void ungetch(int);
+//ungets - push back an entire string onto the input ex 4_7
+void ungets(char[]);
 int getopandminus(char[]);
 void printTop();
 void duplicate();

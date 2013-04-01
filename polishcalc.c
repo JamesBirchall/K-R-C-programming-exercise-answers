@@ -8,6 +8,14 @@ int bufferfreeposition = 0;
 
 double variables[26];
 
+void ungets(char s[]){
+  int len = strlen(s);
+
+  while(len > 0){
+    ungetch(s[--len]);
+  }
+}
+
 void clearVariables(char s[]){
   int i;
   for(i = 0; i < 26; i++)

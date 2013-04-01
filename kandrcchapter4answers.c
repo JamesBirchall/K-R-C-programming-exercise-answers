@@ -1,6 +1,24 @@
 #include "kandrcchapter4answers.h"
 #include "polishcalc.h"
 
+int ex4_7(){
+
+  char myString[] = "String of somthing I have.\n";
+  int characterValue;
+
+  ungets(myString);
+  
+  printf("\n");
+
+  while((characterValue = getch()) != '\n'){
+    putchar(characterValue);
+  }
+
+  printf("\n");
+
+  return 0;
+}
+
 int ex4_6(){
 
   //adds in % operator and ability to deal with negative numbers entered
