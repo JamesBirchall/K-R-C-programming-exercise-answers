@@ -1,6 +1,19 @@
 #include "kandrcchapter4answers.h"
 #include "polishcalc.h"
 
+int ex4_9(){
+
+  char ch;
+
+  ungetch(EOF);
+
+  while((ch = getch()) != EOF){
+    putchar(ch);
+  }
+
+  return 0;
+}
+
 int ex4_8(){
   //do not see the point in this exercise.  Essentially
   //its taking the buffer and making it a single value
@@ -8,18 +21,22 @@ int ex4_8(){
   //polish.c.  The checks then simply look for the single
   //placeholder to contain something not an identifier for
   //holding nothing. If it does its full!
+
+  return 0;
 }
 
 int ex4_7(){
 
-  char myString[] = "String of somthing I have.\n";
+  char myString[] = "String of something I have.";
   int characterValue;
+
+  myString[26] = EOF;
 
   ungets(myString);
   
   printf("\n");
 
-  while((characterValue = getch()) != '\n'){
+  while((characterValue = getch()) != EOF){
     putchar(characterValue);
   }
 

@@ -256,6 +256,9 @@ int getch(void){
 void ungetch(int c){
   if(bufferfreeposition >= 100)
     printf("\nungetch: too many characters\n");
-  else
-    buffer[bufferfreeposition++] = c;
+  else{
+    //check for EOF pushback and ignore if it is
+    if(c != EOF)
+      buffer[bufferfreeposition++] = c;
+  }
 }
