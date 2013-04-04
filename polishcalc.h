@@ -8,6 +8,7 @@
 
 void push(double);
 double pop(void);
+int getop2(char[]);
 int getop(char[]);
 int getch(void);
 void ungetch(int);

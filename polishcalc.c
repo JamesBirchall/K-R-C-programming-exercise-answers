@@ -11,6 +11,39 @@ int bufferfreeposition = 0;
 
 double variables[26];
 
+
+int getop2(char s[]){
+
+
+  //uses static variable instead of ungetch
+  static int ungetc = EOF;
+
+  int i, c;
+  
+  while((s[0] = c = getch()) == ' ' || c == '\t');  //skip whitespace
+
+  s[1] = '\0';
+
+  if(!isdigit(c) && c != '.')
+    return c; //likely an operand
+
+  i = 0;
+
+  if(isdigit(c))
+    while(isdigit(s[++i] = c = getch()));
+
+  if(c == '.')
+    while(isdigit(s[++i] = c = getch()));
+
+  s[i] = '\0';
+
+  if(c != EOF)
+    ungetch(c);
+
+  return NUMBER;  //returns '0' in integer form to signify its an operand vs operator
+}
+
+
 int getopandminus2(char s[]){
     int i, c;
 

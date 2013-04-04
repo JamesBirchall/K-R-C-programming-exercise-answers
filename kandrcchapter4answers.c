@@ -4,6 +4,13 @@
 char lines[1000];
 int linesCounter;
 
+int ex4_12(){
+
+  //call getop2() here and return
+
+  return 0;
+}
+
 int ex4_11(){
 
   //adds in % operator and ability to deal with negative numbers entered
