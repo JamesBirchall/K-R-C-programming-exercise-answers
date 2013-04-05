@@ -6,7 +6,9 @@ int linesCounter;
 
 int ex4_12(){
 
-  //call getop2() here and return
+  char stringed[] = "2345";
+
+  printf("%c", getop2(stringed));
 
   return 0;
 }

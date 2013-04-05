@@ -14,31 +14,42 @@ double variables[26];
 
 int getop2(char s[]){
 
+  static int pushback = EOF;  //variable use for pushed back character
 
-  //uses static variable instead of ungetch
-  static int ungetc = EOF;
+  int c, i;
 
-  int i, c;
+  i = 0;
+
+  if(pushback != EOF && pushback != ' ' && pushback != '\t'){
+    c = pushback; //store pushedback character into c
+    pushback = EOF; //reset to EOF as we will be returning it to calling function
+    return c;
+  }
   
-  while((s[0] = c = getch()) == ' ' || c == '\t');  //skip whitespace
+  if(pushback == EOF || pushback == ' ' || pushback == '\t'){
+    //if pushedback character is empty then find the next character for it
+    while((s[0] = c = getch()) == ' ' || c == '\t');
+  }
+  else{
+    s[0] = c = pushback;
+  }
+
+  pushback = EOF;
 
   s[1] = '\0';
 
-  if(!isdigit(c) && c != '.')
-    return c; //likely an operand
-
-  i = 0;
+  if(!isdigit(c))
+    return c;
 
   if(isdigit(c))
     while(isdigit(s[++i] = c = getch()));
 
   if(c == '.')
     while(isdigit(s[++i] = c = getch()));
+  
+  s[++i] = '\0';
 
-  s[i] = '\0';
-
-  if(c != EOF)
-    ungetch(c);
+  pushback = c;
 
   return NUMBER;  //returns '0' in integer form to signify its an operand vs operator
 }
