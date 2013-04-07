@@ -4,10 +4,56 @@
 char lines[1000];
 int linesCounter;
 
+int ex4_13(){
+  char values[] = {"\nHello, James\n"};
+
+  printf("%s", values);
+
+  recursiveReverseString(values);
+
+  printf("%s", values);
+  
+  return 0;
+}
+
 int ex4_12(){
 
+  int number = 1234;
+  
+  printf("\n");
+
+  itoach4(number);
+
+  printf("\n");
 
   return 0;
+}
+
+void itoach4(int number){
+
+  if((number / 10) != 0)
+    itoach4(number/10);
+
+  printf("%c", abs(number%10)+'0');
+}
+
+void recursiveReverseString(char s[]){
+
+  static int i = 0;
+  static int n = 0;
+
+  int c = s[i];
+
+  if(c){
+    ++i;
+    recursiveReverseString(s);
+    s[n-i] = c;
+    --i;
+  }
+  else {
+    n = i;
+  }
+
 }
 
 void qsort2(int values[], int left, int right){
