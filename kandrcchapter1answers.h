@@ -1,3 +1,6 @@
+#if !defined(_KANDREX_H1)
+#define _KANDREX_H1
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
@@ -13,3 +16,5 @@ void copyStringReverse(char to[], char from[], int len);
 void detab(char to[], char from[], int tabsize);
 
 void entab(char to[], char from[], int tabsize);
+
+#endif

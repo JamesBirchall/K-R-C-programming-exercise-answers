@@ -7,13 +7,5 @@
 int main(){
 
 
-  int i = 1;
-  int j = 2;
-  printf("%d %d\n", i, j);
-
-  swapper(int, i, j);
-
-  printf("%d %d\n", i, j);
-
   return 0;
 }

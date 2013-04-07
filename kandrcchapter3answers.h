@@ -1,3 +1,6 @@
+#if !defined(_KANDREX_H3)
+#define _KANDREX_H3
+
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
@@ -24,3 +27,5 @@ void itoafixedversion(int, char[]);
 void itobase(int, char[], int);
 void itoafixedversionminwidth(int, char[], int);
 int trim(char[]);
+
+#endif

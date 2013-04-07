@@ -1,3 +1,6 @@
+#if !defined(_KANDREX_H2)
+#define _KANDREX_H2
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
@@ -24,3 +27,5 @@ int bitCountOriginal(unsigned x);
 int bitCountNew(unsigned x);
 void lowerString(char[]);
 void printBinary(unsigned int);
+
+#endif

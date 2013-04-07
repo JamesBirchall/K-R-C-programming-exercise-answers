@@ -1,3 +1,6 @@
+#if !defined(_KANDREX_H4)
+#define _KANDREX_H4
+
 #include <stdio.h>
 #include <ctype.h>
 
@@ -30,3 +33,5 @@ void recursiveReverseString(char[]);
 void itoach4(int);
 
 #define swapper(t,x,y) t z = x; x = y; y = z;
+
+#endif
