@@ -28,3 +28,5 @@ void qsort2(int[], int, int);
 void swap2(int[], int, int);
 void recursiveReverseString(char[]);
 void itoach4(int);
+
+#define swapper(t,x,y) t z = x; x = y; y = z;
