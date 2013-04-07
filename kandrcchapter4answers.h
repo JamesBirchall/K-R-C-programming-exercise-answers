@@ -14,6 +14,7 @@ int ex4_9();
 int ex4_10();
 int ex4_11();
 int ex4_12();
+int ex4_13();
 
 int getLineByString(char[], int);
 int stringIndex(char[], char[]);
@@ -22,3 +23,4 @@ double stringtodouble(char[]);
 int stringtointeger(char[]);
 double stringwithexponenttodouble(char[]);
 int polishcalc();
+void printd410(int);
