@@ -10,6 +10,39 @@ int ex4_12(){
   return 0;
 }
 
+void qsort2(int values[], int left, int right){
+
+  int i, last;
+  
+  if(left >= right)
+    return;
+
+  swap2(values, left, (left+right)/2);
+
+  last = left;
+
+  for(i= left+1; i <= right; i++){
+    if(values[i] < values[left]){
+      swap2(values, ++last, i);
+    }
+  }
+  
+  swap2(values, left, last);
+
+  qsort2(values, left, last-1);
+
+  qsort2(values, last+1, right);
+
+}
+
+void swap2(int values[], int i, int j){
+  int temp;
+
+  temp = values[i];
+  values[i] = values[j];
+  values[j] = temp;
+}
+
 void printd410(int number){
   if (number < 0){
     putchar('-');

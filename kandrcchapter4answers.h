@@ -24,3 +24,5 @@ int stringtointeger(char[]);
 double stringwithexponenttodouble(char[]);
 int polishcalc();
 void printd410(int);
+void qsort2(int[], int, int);
+void swap2(int[], int, int);
