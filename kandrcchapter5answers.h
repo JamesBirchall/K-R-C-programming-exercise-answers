@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <ctype.h>
+#include <math.h>
 
 int ex5_1();
 int ex5_2();

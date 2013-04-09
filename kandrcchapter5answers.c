@@ -16,7 +16,9 @@ int ex5_2(){
 }
 
 int getfloatch5(float *pointer){
-  int c, sign;
+  float c;
+  int sign;
+  float decVal = 0.0f;
 
   while(isspace(c = getch5()));  //skip whitespace
 
@@ -37,6 +39,23 @@ int getfloatch5(float *pointer){
 
   for( *pointer = 0; isdigit(c); c = getch5()){
     *pointer = 10 * *pointer + (c - '0');
+  }
+
+  if(c == '.'){
+    if(isdigit(c = getch5())){
+      int i;
+      // its floating point version so process part after and then add to floats
+      for(decVal = 0.0, i = 1; isdigit(c); c = getch5(), i++){
+          if(i != 0){
+            int val = (c - '0');
+            decVal += val * pow(0.1,i);
+          }
+          else{
+            decVal = (c - '0')*0.1;  
+          }
+      }
+      *pointer += decVal;
+    }
   }
 
   *pointer *= sign;
