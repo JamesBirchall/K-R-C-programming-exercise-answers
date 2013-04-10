@@ -9,7 +9,9 @@ int ex5_5(){
   char string2[] = "Jimbo";
 
   strncopych5(string1, string2, 4);
+  printf("\n%s\n",string1);
 
+  strncatch5(string1, string2, 3);
   printf("\n%s\n",string1);
 
   return 0;
@@ -30,9 +32,18 @@ int strncopych5(char *s, char *t, int n){
 
 int strncatch5(char *s, char *t, int n){
 
-  int status = 0;
+  int counter = 0;
 
-  return status;
+  while(*s)
+    s++;
+
+  while(counter++ < n){
+    *s++ = *t++;
+  }
+
+  *s = '\0';
+
+  return 0;
 }
 
 int strncmpch5(char *s, char *t, int n){
