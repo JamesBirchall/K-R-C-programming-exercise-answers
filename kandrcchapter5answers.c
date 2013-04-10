@@ -7,12 +7,18 @@ int ex5_5(){
 
   char string1[12];
   char string2[] = "Jimbo";
+  char string3[] = "Jimb";
+  char string4[] = "Ji";
 
   strncopych5(string1, string2, 4);
   printf("\n%s\n",string1);
 
   strncatch5(string1, string2, 3);
   printf("\n%s\n",string1);
+
+  int compared = strncmpch5(string3, string4, 2);
+  printf("\n%d\n", compared);
+
 
   return 0;
 }
@@ -48,9 +54,17 @@ int strncatch5(char *s, char *t, int n){
 
 int strncmpch5(char *s, char *t, int n){
 
-  int status = 0;
+  int counter = 0;
 
-  return status;
+  for( ; *s++ == *t++ && counter++ < n ;){
+    if(*s == '\0')
+      return 0;
+  }
+
+  if(counter >= n)
+    return 0;
+
+  return *s - *t;
 }
 
 int ex5_4(){
