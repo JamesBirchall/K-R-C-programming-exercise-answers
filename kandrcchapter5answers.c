@@ -3,6 +3,45 @@
 static char buffer[100];
 static int bufferfreeposition = 0;
 
+int ex5_5(){
+
+  char string1[12];
+  char string2[] = "Jimbo";
+
+  strncopych5(string1, string2, 4);
+
+  printf("\n%s\n",string1);
+
+  return 0;
+}
+
+int strncopych5(char *s, char *t, int n){
+
+  int counter = 0;
+
+  while(counter++ < n){
+    *s++ = *t++;
+  }
+
+  *s = '\0';
+
+  return 1;
+}
+
+int strncatch5(char *s, char *t, int n){
+
+  int status = 0;
+
+  return status;
+}
+
+int strncmpch5(char *s, char *t, int n){
+
+  int status = 0;
+
+  return status;
+}
+
 int ex5_4(){
 
   char string1[] = "James";
