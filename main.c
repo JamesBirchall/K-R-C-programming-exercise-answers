@@ -7,7 +7,7 @@
 
 int main(){
 
-  ex5_2();
+  ex5_3();
 
   return 0;
 }

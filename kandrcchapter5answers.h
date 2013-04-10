@@ -7,10 +7,12 @@
 
 int ex5_1();
 int ex5_2();
+int ex5_3();
 
 int getintch5(int*);
 int getfloatch5(float*);
 void ungetch5(int);
 int getch5(void);
+int strcatch5(char *, char *);
 
 #endif

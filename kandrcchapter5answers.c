@@ -3,6 +3,39 @@
 static char buffer[100];
 static int bufferfreeposition = 0;
 
+int ex5_3(){
+
+  char string1[20] = {'H','e','l','l','o',',',' ','\0'};
+  char string2[] = "James.";
+
+  printf("\n%s", string1);
+  printf("\n%s", string2);
+
+  strcatch5(string1, string2);
+
+  printf("\n%s", string1);
+  printf("\n%s", string2);
+
+  return 0;
+}
+
+int strcatch5(char *s, char *t){
+
+  //copies string t onto the end of string s using pointers
+
+  int status = 0;
+
+  //get to the part signifying null character \0 in string 1
+  while(*s)
+    s++;
+
+  //simple append in new string
+  while(*s++ = *t++);
+    
+
+  return status;
+}
+
 int ex5_2(){
 
   int i;
