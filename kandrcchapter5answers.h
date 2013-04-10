@@ -11,6 +11,7 @@ int ex5_2();
 int ex5_3();
 int ex5_4();
 int ex5_5();
+int ex5_6();
 
 int getintch5(int*);
 int getfloatch5(float*);
@@ -21,5 +22,11 @@ int strendch5(char *, char *);
 int strncopych5(char *, char *, int);
 int strncatch5(char *, char *, int);
 int strncmpch5(char *, char *, int);
+int getlinech5(char *, char*);
+int atoich5(char *);
+void itoach5(int, char *);
+void reversech5(char *);
+int strindexch5(char *, char *);
+int getopch5(char *);
 
 #endif

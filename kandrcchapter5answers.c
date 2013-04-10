@@ -3,6 +3,37 @@
 static char buffer[100];
 static int bufferfreeposition = 0;
 
+int ex5_6(){
+
+  return 0;
+}
+
+int getlinech5(char *s, char *t){
+
+  return 0;
+}
+
+int atoich5(char *s){
+
+  return 0;
+}
+void itoach5(int n, char *s){
+
+}
+
+void reversech5(char *s){
+
+}
+
+int strindexch5(char *s, char *t){
+
+  return 0;
+}
+int getopch5(char *s){
+
+  return 0;
+}
+
 int ex5_5(){
 
   char string1[12];
