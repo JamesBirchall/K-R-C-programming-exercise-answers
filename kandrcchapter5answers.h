@@ -4,15 +4,18 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <math.h>
+#include <string.h> 
 
 int ex5_1();
 int ex5_2();
 int ex5_3();
+int ex5_4();
 
 int getintch5(int*);
 int getfloatch5(float*);
 void ungetch5(int);
 int getch5(void);
 int strcatch5(char *, char *);
+int strendch5(char *, char *);
 
 #endif

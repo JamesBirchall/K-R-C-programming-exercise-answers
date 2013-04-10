@@ -3,6 +3,54 @@
 static char buffer[100];
 static int bufferfreeposition = 0;
 
+int ex5_4(){
+
+  char string1[] = "James";
+  char string2[] = "mes";
+
+  int response = strendch5(string1, string2);
+
+  if(response)
+    printf("\nYes\n");
+  else
+    printf("\nNo\n");
+  
+  
+  return 0;
+}
+
+int strendch5(char *s, char *t){
+
+  //returns 1 if the string t occurs at the end of string s
+
+  int status = 0;
+
+  //get length of both strings as we need to retain starting value for later
+  int slength = strlen(s);
+  int tlength = strlen(t);
+
+  char *q = s+slength;
+  char *r = t+tlength;
+
+  //now start from end of s and match against t while not less than start of t
+  //if we reach the end return 1, otherwise fall through to end of function
+  if(tlength <= slength){
+    //start from end point in s and t, compare each element, decrementing by 1 each time
+  //while the decreaser is >= 0
+  while(tlength >= 0){
+      if(*q-- != *r--){
+        return 0;
+      }
+      else
+        tlength--;
+    }
+    if(tlength < 0)
+      status = 1;
+  }
+  
+  return status;
+}
+
 int ex5_3(){
 
   char string1[20] = {'H','e','l','l','o',',',' ','\0'};
@@ -30,7 +78,7 @@ int strcatch5(char *s, char *t){
     s++;
 
   //simple append in new string
-  while(*s++ = *t++);
+  while((*s++ = *t++));
     
 
   return status;
