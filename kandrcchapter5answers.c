@@ -29,6 +29,15 @@ int ex5_6(){
   value = strindexch5(myString4, myString5);
   printf("\nValue is: %s\n", (value > 0) ? "Yes a match" : "No match");
 
+  char myString6[100];
+
+  int type;
+
+  while((type = getopch5(myString6)) != EOF){
+    printf("\nType = %d", type);
+    printf("\tString is: %s\n", myString6);
+  }
+
   return 0;
 }
 
@@ -130,6 +139,31 @@ int strindexch5(char *s, char *t){
 }
 
 int getopch5(char *s){
+
+  int c;
+  char *t = s;
+
+  while((*s = c = getch5()) == ' ' || c == '\t');
+  
+  s++;
+
+  *s = '\0';
+
+  if(!isdigit(c) && c != '.')
+    return c;
+
+  s = t;
+
+  if(isdigit(c))
+    while(isdigit(*s++ = c = getch5()));
+
+  if(c == '.')
+    while(isdigit(*s++ = c = getch5()));
+
+  *s = '\0';
+
+  if(c != EOF)
+    ungetch5(c);
 
   return 0;
 }
