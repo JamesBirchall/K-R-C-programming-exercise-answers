@@ -3,6 +3,111 @@
 static char buffer[100];
 static int bufferfreeposition = 0;
 
+#define MAXLINES 5000
+
+static char *lineptr[MAXLINES];
+
+int part5_6program(){
+
+  int nlines;
+
+  if((nlines = readlinesch5(lineptr, MAXLINES)) >= 0){
+    printf("Processing lines...\n");
+    qsortch5(lineptr, 0, nlines-1);
+    printf("Writting lines...\n");
+    writelinesch5(lineptr, nlines);
+    return 0;
+  } else{
+    printf("\nerror: input too big to sort\n");
+    return 1;
+  }
+
+  int i;
+  char c;
+  for(i = 0; (c = *lineptr[i]) && (c != '\n') && (c != EOF); i++){
+    printf("%c", c);
+  }
+  printf("\n");
+
+  return 0;
+}
+
+int getstringlinech5(char charArray[], int limit){
+	/*
+	 * Read a line of characters into string with limit as max values
+	 */
+	int character;
+	int i;
+
+	for(i = 0; i < limit-1 && (character = getchar()) != EOF && character !='\n'; i++)
+		charArray[i] = character;
+	if(character == '\n'){
+		charArray[i] = character;
+		++i;
+	}
+	charArray[i] = '\0';
+	return i;	//returns length of read line
+}
+
+#define MAXLENCH5 1000
+
+int readlinesch5(char **lineptr, int maxlines){
+
+  int len, nlines;
+  char *p, line[MAXLENCH5];
+
+  nlines = 0;
+  
+  while((len = getstringlinech5(line, MAXLENCH5)) > 0){
+    if(nlines >= maxlines || (p = malloc(len)) == NULL){
+      printf("\nerror: setting up memory\n");
+      return -1;
+    }
+    else{
+      line[len-1] = '\0';
+      strcpy(p, line);
+      lineptr[nlines++] = p;
+    }
+  }
+  
+  
+  return nlines;
+}
+
+void writelinesch5(char **lineptr, int nlines){
+  int i;
+
+  for(i = 0; i < nlines; i++)
+    printf("%s\n", lineptr[i]);
+}
+
+void qsortch5(char **v, int left, int right){
+  int i, last;
+
+  if(left >= right)
+    return;
+
+  swapch5(v, left, (left + right) / 2);
+  last = left;
+  
+  for(i = left+1; i <= right; i++){
+    if(strcmp(v[i], v[left]) < 0){
+      swapch5(v, ++last, i);
+    }
+  }
+  swapch5(v, left, last);
+  qsortch5(v, left, last-1);
+  qsortch5(v, last+1, right);
+}
+
+void swapch5(char **v, int i, int j){
+  char *temp;
+
+  temp = v[i];
+  v[i] = v[j];
+  v[j] = temp;
+}
+
 int ex5_6(){
 
   char myString[20];

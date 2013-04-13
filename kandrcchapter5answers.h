@@ -4,7 +4,8 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <math.h>
-#include <string.h> 
+#include <string.h>
+#include <stdlib.h>
 
 int ex5_1();
 int ex5_2();
@@ -12,6 +13,7 @@ int ex5_3();
 int ex5_4();
 int ex5_5();
 int ex5_6();
+int part5_6program();
 
 int getintch5(int*);
 int getfloatch5(float*);
@@ -28,5 +30,10 @@ void itoach5(int, char *);
 void reversech5(char *);
 int strindexch5(char *, char *);
 int getopch5(char *);
+int readlinesch5(char **, int);
+void writelinesch5(char **, int);
+void qsortch5(char **, int, int);
+void swapch5(char **, int, int);
+int getstringlinech5(char [], int);
 
 #endif
