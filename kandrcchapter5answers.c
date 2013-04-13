@@ -5,10 +5,27 @@ static int bufferfreeposition = 0;
 
 int ex5_6(){
 
+  char myString[20];
+
+  getlinech5(myString, 20);
+
+  printf("\n%s\n", myString);
+
   return 0;
 }
 
-int getlinech5(char *s, char *t){
+int getlinech5(char *s, int lim){
+
+  int c;
+
+  while(--lim > 0 && (c = getchar()) != EOF && c != '\n'){
+    *s++ = c;
+  }
+  
+  if(c == '\n')
+    *s++ = c;
+
+  *s = '\0';
 
   return 0;
 }
@@ -17,6 +34,7 @@ int atoich5(char *s){
 
   return 0;
 }
+
 void itoach5(int n, char *s){
 
 }
@@ -29,6 +47,7 @@ int strindexch5(char *s, char *t){
 
   return 0;
 }
+
 int getopch5(char *s){
 
   return 0;

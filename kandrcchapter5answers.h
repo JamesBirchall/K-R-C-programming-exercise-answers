@@ -22,7 +22,7 @@ int strendch5(char *, char *);
 int strncopych5(char *, char *, int);
 int strncatch5(char *, char *, int);
 int strncmpch5(char *, char *, int);
-int getlinech5(char *, char*);
+int getlinech5(char *, int);
 int atoich5(char *);
 void itoach5(int, char *);
 void reversech5(char *);
