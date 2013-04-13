@@ -11,11 +11,17 @@ int ex5_6(){
 
   printf("\n%s\n", myString);
 
-  char myString2[] = "1243";
+  char myString2[] = "1234567";
 
   int value = atoich5(myString2);
 
   printf("\n%d\n", value);
+
+  char myString3[20];
+
+  itoach5(value, myString3);
+
+  printf("\n%s\n", myString3);
 
   return 0;
 }
@@ -53,16 +59,53 @@ int atoich5(char *s){
   return sign * n;
 }
 
-void itoach5(int n, char *s){
+void itoach5(int number, char *s){
+  
+  int sign;
+  char *t = s; //to retain original pointer as s will get changed
 
+  if((sign = number) < 0)
+    number = -number;
+
+  do{
+    *s++ = number % 10 + '0';
+  } while((number /= 10) > 0);
+
+  if(sign < 0)
+    *s++ = '-';
+  *s++ = '\0';
+  s = t;
+  printf("\nBefore swapping: %s\n", s);
+  reversech5(s);
 }
 
 void reversech5(char *s){
+  
+  char c;
 
+  char *t = s;
+
+  int j = (strlen(s)-1);
+
+  while(j >= (strlen(t)/2)){
+
+    //set temp value to counter s[0], s[1] etc etc
+    c = *s;
+
+    //set s[0], s[1] etc to end[0], end[1] value
+    *s = *(t+j); 
+    //set end[0], end[1] to temp value effectively swapping the numbers
+    *(t+j) = c;
+
+    s++;
+    j--;
+  }
+
+  s = t;
 }
 
 int strindexch5(char *s, char *t){
-
+  
   return 0;
 }
 
