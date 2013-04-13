@@ -23,6 +23,12 @@ int ex5_6(){
 
   printf("\n%s\n", myString3);
 
+  char myString4[] = "James";
+  char myString5[] = "James";
+
+  value = strindexch5(myString4, myString5);
+  printf("\nValue is: %s\n", (value > 0) ? "Yes a match" : "No match");
+
   return 0;
 }
 
@@ -105,8 +111,22 @@ void reversech5(char *s){
 }
 
 int strindexch5(char *s, char *t){
-  
-  return 0;
+
+  //while s is not \0
+  int k = 0;
+
+  while(s){
+    while(s == t && *t != '\0'){
+      k++;
+      s++;
+      t++;
+    }
+    if(k > 0 && *t == '\0')
+      return 1;
+    s++;
+  }
+ 
+  return -1;
 }
 
 int getopch5(char *s){
