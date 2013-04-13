@@ -11,6 +11,12 @@ int ex5_6(){
 
   printf("\n%s\n", myString);
 
+  char myString2[] = "1243";
+
+  int value = atoich5(myString2);
+
+  printf("\n%d\n", value);
+
   return 0;
 }
 
@@ -32,7 +38,19 @@ int getlinech5(char *s, int lim){
 
 int atoich5(char *s){
 
-  return 0;
+  int n, sign;
+
+  for( ; isspace(*s); s++);
+
+  sign = (*s == '-') ? -1 : 1;
+
+  if(*s == '+' || *s == '-')
+    s++;
+
+  for(n = 0; isdigit(*s); s++)
+    n = 10 * n + (*s - '0');
+
+  return sign * n;
 }
 
 void itoach5(int n, char *s){
