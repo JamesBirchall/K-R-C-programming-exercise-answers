@@ -7,8 +7,7 @@
 
 int main(){
 
-  //part5_6program_2();
-  part5_6program();
+  ex5_8();
 
   return 0;
 }

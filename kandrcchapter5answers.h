@@ -16,8 +16,11 @@ int ex5_4();
 int ex5_5();
 int ex5_6();
 int part5_6program();
-int part5_6program_2();
+int part5_6program_2(); //ex 5_7 actually -.-
+int ex5_8();
 
+int dayofyear(int, int, int);
+int monthday(int, int, int *, int *);
 int getintch5(int*);
 int getfloatch5(float*);
 void ungetch5(int);
