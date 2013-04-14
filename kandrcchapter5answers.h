@@ -6,6 +6,8 @@
 #include <math.h>
 #include <string.h>
 #include <stdlib.h>
+#include <time.h>
+
 
 int ex5_1();
 int ex5_2();
@@ -14,6 +16,7 @@ int ex5_4();
 int ex5_5();
 int ex5_6();
 int part5_6program();
+int part5_6program_2();
 
 int getintch5(int*);
 int getfloatch5(float*);
@@ -35,5 +38,6 @@ void writelinesch5(char **, int);
 void qsortch5(char **, int, int);
 void swapch5(char **, int, int);
 int getstringlinech5(char [], int);
+int readlinesch5_2(char **, int, char *);
 
 #endif

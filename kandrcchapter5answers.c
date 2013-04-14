@@ -4,8 +4,26 @@ static char buffer[100];
 static int bufferfreeposition = 0;
 
 #define MAXLINES 5000
+#define MAXSTORE 10000
 
 static char *lineptr[MAXLINES];
+
+int part5_6program_2(){
+
+  int nlines;
+  char linestorage[MAXSTORE]; //use for all storage over allocating memory needed
+
+  if((nlines = readlinesch5_2(lineptr, MAXLINES, linestorage)) >= 0){
+    printf("Processing lines...\n");
+    qsortch5(lineptr, 0, nlines-1);
+    printf("Writting lines...\n");
+    writelinesch5(lineptr, nlines);
+    return 0;
+  } else{
+    printf("\nerror: input too big to sort\n");
+    return 1;
+  }
+}
 
 int part5_6program(){
 
@@ -21,15 +39,6 @@ int part5_6program(){
     printf("\nerror: input too big to sort\n");
     return 1;
   }
-
-  int i;
-  char c;
-  for(i = 0; (c = *lineptr[i]) && (c != '\n') && (c != EOF); i++){
-    printf("%c", c);
-  }
-  printf("\n");
-
-  return 0;
 }
 
 int getstringlinech5(char charArray[], int limit){
@@ -51,6 +60,30 @@ int getstringlinech5(char charArray[], int limit){
 
 #define MAXLENCH5 1000
 
+int readlinesch5_2(char **lineptr, int maxlines, char *linestore){
+
+  int len, nlines;
+  char *p, line[MAXLENCH5];
+
+  nlines = 0;
+  p = linestore + strlen(linestore);
+  
+  while((len = getstringlinech5(line, MAXLENCH5)) > 0){
+    if(nlines >= maxlines || strlen(linestore) > MAXSTORE){
+      printf("\nerror: no space left in fixed memory\n");
+      return -1;
+    }
+    else{
+      line[len-1] = '\0';
+      strcpy(p, line);
+      lineptr[nlines++] = p;
+      p += len;
+    }
+  }
+  
+  return nlines;
+}
+
 int readlinesch5(char **lineptr, int maxlines){
 
   int len, nlines;
@@ -69,7 +102,6 @@ int readlinesch5(char **lineptr, int maxlines){
       lineptr[nlines++] = p;
     }
   }
-  
   
   return nlines;
 }
