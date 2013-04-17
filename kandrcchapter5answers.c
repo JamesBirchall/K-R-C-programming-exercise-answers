@@ -5,6 +5,93 @@ static char daytab[2][13] = {
   {0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}
 };
 
+int ex5_9(){
+
+  int year, month, day;
+  year = 2013;
+  month = 4;
+  day = 14;
+
+  int numberofdays = dayofyear_p(year, month, day);
+  if(numberofdays > 0){
+    printf("\nThere have been %d days since the start of the year.\n", numberofdays);
+
+    int monthforp = 0;
+    int dayforp = 0;
+
+    monthday_p(year, numberofdays, &monthforp, &dayforp);
+
+    printf("\nYou gave me the year %d, so that means its the %d month and %d day.\n", year, monthforp, dayforp);
+  }
+
+  return 0;
+}
+
+int dayofyear_p(int year, int month, int day){
+  
+  int i, leap;
+  char *charpointer;
+
+  if(year < 1800 || month < 1 || month > 12 || day < 1 || day > 31){
+    printf("\nerror: invalid input, check year > 1800, month is valid and day not greater than 31\n");
+    return -1;
+  }
+  
+  leap = year%4 == 0 && year%100 != 0 && year%4 == 0;
+
+  //now check for day again but more specific this time e.g days expected of the month!
+  if(day > daytab[leap][month]){
+    printf("\nerror: invalid day, please check you have the right number corresponding to the month\n");
+    return -1;
+  }
+
+  charpointer = &daytab[leap][1]; //point to correct row dpenedent on leapyear or not
+
+  for(i = 1; i < month; i++){
+    day += *charpointer++;
+  }
+   
+  return day;
+}
+
+int monthday_p(int year, int yearday, int *pmonth, int *pday){
+
+  int i, leap;
+  char *charpointer;
+
+  if(year < 1800 && yearday < 0){
+    printf("\nerror: invalid input, check year > 1800, and yeardays is greater than 0\n");
+    return -1;
+  }
+
+  leap = year%4 == 0 && year%100 != 0 && year%4 == 0;
+
+  if((leap && yearday > 366) || (!leap && yearday > 365)){
+    printf("\nerror: check you have the right number of days in your year!\n");
+    return -1;
+  }
+
+  /*for(i = 1; yearday > daytab[leap][i]; i++){
+    yearday-= daytab[leap][i];
+  }
+  *pmonth = i;
+  *pday = yearday;*/
+
+  charpointer = &daytab[leap][1]; //point to correct row dependent on leap year or not
+
+  //need to extract the month and day from the yearday variable, we know the year
+  //go through each month and knock off x days to end up with actual days left and
+  //each time loop through get a count of the months made up
+  for(i = 1; yearday > *charpointer; i++){
+    yearday -= *charpointer++;
+  }
+
+  *pmonth = i;
+  *pday = yearday;
+
+  return 0;
+}
+
 int ex5_8(){
 
   int year, month, day;
