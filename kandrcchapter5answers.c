@@ -19,7 +19,7 @@ int ex5_11(int argc, char *argv[]){
 
   printf("\n%s\n", myString1);
 
-  entabch5(myString1, myString2, tabs);
+  entabch5(myString2, myString1, tabs);
 
   printf("\n%s\n", myString2);
 
@@ -56,11 +56,6 @@ void detabch5(char to[], char from[], int tabsize){
 }
 
 void entabch5(char to[], char from[], int tabsize){
-
-	/*
- 	 *	Function was supposed to take a string with whitespace,
- 	 *	then for spaces mix in tabs as appropriate to make string smaller
- 	 */
 
 	int i = 0;
 	while(from[i] != '\0'){
