@@ -8,7 +8,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-
 int ex5_1();
 int ex5_2();
 int ex5_3();
@@ -19,6 +18,7 @@ int part5_6program();
 int part5_6program_2(); //ex 5_7 actually -.-
 int ex5_8();
 int ex5_9();
+int ex5_10(int, char *[]);
 
 int dayofyear(int, int, int);
 int monthday(int, int, int *, int *);

@@ -5,9 +5,9 @@
 #include "kandrcchapter4answers.h"
 #include "kandrcchapter5answers.h"
 
-int main(){
+int main(int argc, char *argv[]){
 
-  ex5_9();
+  ex5_10(argc, argv);
 
   return 0;
 }

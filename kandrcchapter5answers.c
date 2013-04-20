@@ -1,4 +1,63 @@
 #include "kandrcchapter5answers.h"
+#include "polishcalc.h"
+
+int ex5_10(int argc, char *argv[]){
+
+  double op2;
+  int i;
+
+  if(argc < 2){
+    printf("\nerror: usage is %s POLISH NOTATION EXPRESSION\n", *argv);
+    return -1;
+  }
+
+  for(i = 1; i < argc; i++){
+    switch (argv[i][0]){
+      case '0':
+      case '1':
+      case '2':
+      case '3':
+      case '4':
+      case '5':
+      case '6':
+      case '7':
+      case '8':
+      case '9':
+        push(atof(argv[i]));
+        break;
+      case '+':
+        push(pop() + pop());
+        break;
+      case '*':
+        push(pop() * pop());
+        break;
+      case '-':
+        op2 = pop();
+        push(pop() - op2);
+        break;
+      case '/':
+        op2= pop();
+        if(op2 != 0.0)
+          push(pop() / op2);
+        else
+          printf("error: divide by zero\n");
+        break;
+      case '\n':
+        printf("\n\t%.8g\n", pop());
+        break;
+      case 'q':
+        printf("\n Quitting...\n");
+        exit(0);
+        break;
+      default:
+        printf("error: unknown command %s\n", argv[i]);
+        break;
+    }
+  }
+
+  printf("\n\t%.8g\n", pop());
+  return 0;
+}
 
 static char daytab[2][13] = {
   {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31},
