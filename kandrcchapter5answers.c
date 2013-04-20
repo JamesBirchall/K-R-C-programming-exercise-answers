@@ -1,6 +1,95 @@
 #include "kandrcchapter5answers.h"
 #include "polishcalc.h"
 
+int ex5_11(int argc, char *argv[]){
+
+  char myString1[] = "Hello Jimbo";
+  char myString2[25];
+
+  int i;
+  for(i = 0; i < 25; i++)
+    myString2[i] = '\0';
+
+  if(argc < 2){
+    printf("\nerror: usage is %s ENTAB VALUE\n", *argv);
+    return -1;
+  }
+
+  int tabs = atoi(argv[1]);
+
+  printf("\n%s\n", myString1);
+
+  entabch5(myString1, myString2, tabs);
+
+  printf("\n%s\n", myString2);
+
+  return 0;
+}
+
+void detabch5(char to[], char from[], int tabsize){
+
+	int i = 0;
+	while(from[i] != '\0'){
+		i++;
+	}
+
+	if(i > 0){
+		int j = 0;
+		int newj = 0;
+
+		while(j < i){
+			if(from[j] == '\t'){
+				int remainder = tabsize - (newj % tabsize);
+				while(remainder > 0){
+					to[newj] = ' ';
+					remainder--;
+					newj++;
+				}
+				j++;
+			} else {
+				to[newj] = from[j];
+				j++;
+				newj++;
+			}
+		}
+	}
+}
+
+void entabch5(char to[], char from[], int tabsize){
+
+	/*
+ 	 *	Function was supposed to take a string with whitespace,
+ 	 *	then for spaces mix in tabs as appropriate to make string smaller
+ 	 */
+
+	int i = 0;
+	while(from[i] != '\0'){
+		i++;
+	}
+
+	if(i > 0){
+		int j = 0;
+		int newj = 0;
+
+		while(j < i){
+			if(from[j] == ' '){
+
+				int remainder = tabsize - (newj % tabsize);
+				if(remainder > 0){
+					to[newj] = '\t';
+					newj++;
+				}
+				j++;
+			}
+			else {
+				to[newj] = from[j];
+				j++;
+				newj++;
+			}
+		}
+	}
+}
+
 int ex5_10(int argc, char *argv[]){
 
   double op2;

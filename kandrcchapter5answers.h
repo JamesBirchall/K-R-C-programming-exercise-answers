@@ -19,7 +19,10 @@ int part5_6program_2(); //ex 5_7 actually -.-
 int ex5_8();
 int ex5_9();
 int ex5_10(int, char *[]);
+int ex5_11(int, char *[]);
 
+void entabch5(char*, char*, int);
+void detabch5(char*, char*, int);
 int dayofyear(int, int, int);
 int monthday(int, int, int *, int *);
 int dayofyear_p(int, int, int);
