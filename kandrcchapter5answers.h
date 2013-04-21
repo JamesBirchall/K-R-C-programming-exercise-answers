@@ -20,6 +20,7 @@ int ex5_8();
 int ex5_9();
 int ex5_10(int, char *[]);
 int ex5_11(int, char *[]);
+int ex5_12(int, char *[]);
 
 void entabch5(char*, char*, int);
 void detabch5(char*, char*, int);

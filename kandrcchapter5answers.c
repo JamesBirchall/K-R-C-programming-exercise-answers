@@ -1,27 +1,77 @@
 #include "kandrcchapter5answers.h"
 #include "polishcalc.h"
 
-int ex5_11(int argc, char *argv[]){
-
-  char myString1[] = "Hello Jimbo";
-  char myString2[25];
-
-  int i;
-  for(i = 0; i < 25; i++)
-    myString2[i] = '\0';
+int ex5_12(int argc, char *argv[]){
 
   if(argc < 2){
-    printf("\nerror: usage is %s ENTAB VALUE\n", *argv);
+    printf("\nerror: usage is %s -number\n", *argv);
     return -1;
   }
 
-  int tabs = atoi(argv[1]);
+  //get value after the -bit as a number isolate the values and minus '0'
 
-  printf("\n%s\n", myString1);
+  return 0;
+}
 
-  entabch5(myString2, myString1, tabs);
+int ex5_11(int argc, char *argv[]){
 
-  printf("\n%s\n", myString2);
+  char myString1[] = "abcde get value after the -bit as a number isolate the values and minus";
+  char myString2[100];
+  char myString3[] = "a\tb\tc\td\td\t";
+  char myString4[100];
+
+  int i;
+  for(i = 0; i < 100; i++){
+    myString2[i] = '\0';
+    myString4[i] = '\0';
+  }
+
+  if(argc < 3){
+    printf("\nerror: usage is %s (-e or -d) ENTAB VALUE\n", *argv);
+    return -1;
+  }
+
+  char enorde[3];
+  int entabordetab = 0; // 0 is entab by default
+
+  enorde[2] = '\0';
+  enorde[0] = argv[1][0];
+  enorde[1] = argv[1][1];
+
+  printf("\nargv 2nd var value: %s\n", enorde);
+
+  if(enorde[1] == 'd'){
+    printf("\nYou selected detabbing...\n");
+    entabordetab = 1;
+  }
+  else if(enorde[1] == 'e'){
+    printf("\nYou selected entabbing...\n");
+  }
+  else{
+    printf("\nerror, invalid (-argument): usage is %s (-e or -d) ENTAB VALUE\n", *argv);
+    return -1;
+  }
+
+  if(entabordetab == 0){
+    int tabs = atoi(argv[2]);
+    printf("\nentabbing by %d\n", tabs);
+
+    printf("\n%s\n", myString1);
+
+    entabch5(myString2, myString1, tabs);
+    
+    printf("\n%s\n", myString2);
+
+  } else{
+    int tabs = atoi(argv[2]);
+    printf("\ndetabbing by %d\n", tabs);
+
+    printf("\n%s\n", myString3);
+
+    detabch5(myString4, myString3, tabs);
+
+    printf("\n%s\n", myString4);
+  }
 
   return 0;
 }
@@ -67,8 +117,9 @@ void entabch5(char to[], char from[], int tabsize){
 		int newj = 0;
 
 		while(j < i){
+                        //if characvter is empty
 			if(from[j] == ' '){
-
+                                // remainder is tabsize - remainder of new counter and tabsize
 				int remainder = tabsize - (newj % tabsize);
 				if(remainder > 0){
 					to[newj] = '\t';
