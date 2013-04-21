@@ -1,6 +1,57 @@
 #include "kandrcchapter5answers.h"
 #include "polishcalc.h"
 
+#define MAXPOINTERSEX5_13 1000
+#define MAXINPUTEX5_13 10000
+
+static char actualstrings[MAXINPUTEX5_13];
+static char *linepointersex5_13[MAXPOINTERSEX5_13];
+static int linesasked = 10; //set as default to 10 lines if user doesn't enter
+
+int ex5_13(int argc, char *argv[]){
+
+  if(argc > 1){
+    linesasked = atoi(argv[1]+1);
+  }
+
+  *linepointersex5_13 = actualstrings;
+
+  int lines = getlines5_13(actualstrings);
+
+  int linestoprint = lines < linesasked ? lines : linesasked;
+
+  printf("\nPrinting %d lines...\n", linestoprint);
+
+  int i;
+  char c;
+  for(i = lines; i > 0; i--){
+    while((c = *linepointersex5_13[0]++) != '\n'){
+      if(i <= linestoprint){
+        printf("%c", c);
+      }
+    }
+    if(c == '\n' && i <= linestoprint){
+      printf("\n");
+    }
+  }
+
+  return 0;
+}
+
+int getlines5_13(char *buffer){
+  int i, count = 0;
+  char c;
+
+  for(i = 0; (c = getchar()) != EOF && i < MAXINPUTEX5_13; i++){
+    *buffer++ = c;
+    if(c == '\n'){
+      linepointersex5_13[++count] = buffer;
+    }
+  }
+
+  return count;
+}
+
 int ex5_12(int argc, char *argv[]){
 
   char myString1[] = "abcde get value after the -bit as a number isolate the values and minus";

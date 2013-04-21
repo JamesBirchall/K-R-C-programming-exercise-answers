@@ -21,7 +21,9 @@ int ex5_9();
 int ex5_10(int, char *[]);
 int ex5_11(int, char *[]);
 int ex5_12(int, char *[]);
+int ex5_13(int, char *[]);
 
+int getlines5_13(char*);
 void entabch5(char*, char*, int);
 void detabch5(char*, char*, int);
 void entabch5_2(char*, char*, int, int);
