@@ -24,6 +24,8 @@ int ex5_12(int, char *[]);
 
 void entabch5(char*, char*, int);
 void detabch5(char*, char*, int);
+void entabch5_2(char*, char*, int, int);
+void detabch5_2(char*, char*, int, int);
 int dayofyear(int, int, int);
 int monthday(int, int, int *, int *);
 int dayofyear_p(int, int, int);

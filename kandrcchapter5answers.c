@@ -3,14 +3,118 @@
 
 int ex5_12(int argc, char *argv[]){
 
-  if(argc < 2){
-    printf("\nerror: usage is %s -number\n", *argv);
+  char myString1[] = "abcde get value after the -bit as a number isolate the values and minus";
+  char myString2[100];
+  char myString3[] = "a\tb\tc\td\td\t";
+  char myString4[100];
+
+  int i;
+  for(i = 0; i < 100; i++){
+    myString2[i] = '\0';
+    myString4[i] = '\0';
+  }
+  
+  //example = programname -e -m +n
+  if(argc < 4){
+    printf("\nerror: usage is %s -d or -e -m +n (m = starting column, n = n columns)\n", *argv);
     return -1;
   }
 
-  //get value after the -bit as a number isolate the values and minus '0'
+  int starting = atoi(argv[2]+1);
+  int tabstops = atoi(argv[3]+1);
+
+  if(argv[1][1] == 'd'){
+     //run detab
+    printf("\n%s\n", myString3);
+    detabch5_2(myString4, myString3, tabstops, starting);  
+    printf("\n%s\n", myString4);
+  } else {
+    //run entab
+    printf("\n%s\n", myString1);
+    entabch5_2(myString4, myString3, tabstops, starting);  
+    printf("\n%s\n", myString2);
+  }
 
   return 0;
+}
+void detabch5_2(char to[], char from[], int tabsize, int starting){
+
+
+        //this version using starting value to determine where to start detabbing
+        printf("\nStarting point = %d\n", starting);
+
+	int i = 0;
+	while(from[i] != '\0'){
+		i++;
+	}
+
+	if(i > 0){
+		int j = 0;
+		int newj = 0;
+
+		while(j < i){
+                  //while j less than end of file
+                  //before starting processing tabs count to starting position by cycling
+			if(from[j] == '\t'){
+                          if(starting == 0){
+				int remainder = tabsize - (newj % tabsize);
+				while(remainder > 0){
+					to[newj] = ' ';
+					remainder--;
+					newj++;
+				}
+				j++;
+                          }
+                          else{
+                            starting--;
+			    to[newj] = from[j];
+			    j++;
+			    newj++;
+                          }
+			} else {
+				to[newj] = from[j];
+				j++;
+				newj++;
+			}
+		}
+	}
+}
+
+void entabch5_2(char to[], char from[], int tabsize, int starting){
+
+	int i = 0;
+	while(from[i] != '\0'){
+		i++;
+	}
+
+	if(i > 0){
+		int j = 0;
+		int newj = 0;
+
+		while(j < i){
+                        //if characvter is empty
+			if(from[j] == ' '){
+                                // remainder is tabsize - remainder of new counter and tabsize
+				int remainder = tabsize - (newj % tabsize);
+				if(remainder > 0){
+                                  if(starting == 0){
+					to[newj] = '\t';
+					newj++;
+                                  }else{
+                                      starting--;
+				      to[newj] = from[j];
+				      newj++;
+                                  }
+				}
+				j++;
+			}
+			else {
+				to[newj] = from[j];
+				j++;
+				newj++;
+			}
+		}
+	}
 }
 
 int ex5_11(int argc, char *argv[]){
