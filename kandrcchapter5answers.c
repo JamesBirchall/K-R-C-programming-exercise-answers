@@ -1,6 +1,82 @@
 #include "kandrcchapter5answers.h"
 #include "polishcalc.h"
 
+#define MAXLINESCH5_11 5000
+static char *linePointerch5_11[MAXLINESCH5_11];
+static int nlines;
+
+int sortBasedOnInput(int argc, char *argv[]){
+  
+  int numeric = 0;
+
+  if(argc > 1 && strcmp(argv[1], "-n") == 0){
+    numeric = 1;
+  }
+
+    if((nlines = readlinesch5(linePointerch5_11, MAXLINESCH5_11)) >= 0){
+      writelinesch5(linePointerch5_11, nlines);
+      printf("\n");
+      qsortch5_11((void **) linePointerch5_11, 0, nlines-1, 
+             (int (*)(void *, void *))((numeric) ? (int) numcmpch5 : (int) strcmp)); //function passing 
+      writelinesch5(linePointerch5_11, nlines);
+      printf("\n");
+      return 0;
+    }
+    else{
+      printf("\nerror: input too big to sort.\n");
+      return 1;
+    }
+
+  return 0;
+}
+
+void swapch5void(void *v[], int i, int j){
+  void *temp;
+
+  temp = v[i];
+  v[i] = v[j];
+  v[j] = temp;
+
+}
+
+void qsortch5_11(void *v[], int left, int right, int (*passedCompareFunction)(void *, void *)){
+  int i, last;
+
+  writelinesch5(linePointerch5_11, nlines);
+  printf("\n");
+  if(left >= right){
+    return;
+  }
+
+  swapch5void(v, left, (left + right) / 2);
+  last = left;
+
+  for(i = left+1; i <= right; i++){
+    if((*passedCompareFunction)(v[i], v[left]) < 0){
+      swapch5void(v, ++last, i);
+    }
+  }
+
+  swapch5void(v, left, last);
+  qsortch5_11(v, left, last-1, passedCompareFunction);
+  qsortch5_11(v, last+1, right, passedCompareFunction);
+}
+
+int numcmpch5(char *myString1, char *myString2){
+
+  double v1, v2;
+
+  v1 = atof(myString1);
+  v2 = atof(myString2);
+  if(v1 < v2){
+    return -1;
+  } else if(v1 > v2){
+    return 1;
+  } else{
+    return 0;
+  }
+}
+
 #define MAXPOINTERSEX5_13 1000
 #define MAXINPUTEX5_13 10000
 
@@ -621,7 +697,7 @@ void writelinesch5(char **lineptr, int nlines){
   int i;
 
   for(i = 0; i < nlines; i++)
-    printf("%s\n", lineptr[i]);
+    printf("%s\t", lineptr[i]);
 }
 
 void qsortch5(char **v, int left, int right){
@@ -645,6 +721,14 @@ void qsortch5(char **v, int left, int right){
 
 void swapch5(char **v, int i, int j){
   char *temp;
+
+  temp = v[i];
+  v[i] = v[j];
+  v[j] = temp;
+}
+
+void swapch5ints(int **v, int i, int j){
+  int *temp;
 
   temp = v[i];
   v[i] = v[j];
