@@ -7,7 +7,7 @@
 
 int main(int argc, char *argv[]){
 
-  sortBasedOnInput(argc, argv);
+  ex5_14(argc, argv);
 
   return 0;
 }

@@ -4,6 +4,33 @@
 #define MAXLINESCH5_11 5000
 static char *linePointerch5_11[MAXLINESCH5_11];
 static int nlines;
+static int reversed;
+
+int ex5_14(int argc, char *argv[]){
+  
+  int numeric = 0;
+  reversed = 1;
+
+  if(argc > 1 && strcmp(argv[1], "-n") == 0){
+    numeric = 1;
+  }
+
+    if((nlines = readlinesch5(linePointerch5_11, MAXLINESCH5_11)) >= 0){
+      writelinesch5(linePointerch5_11, nlines);
+      printf("\n");
+      qsortch5_11((void **) linePointerch5_11, 0, nlines-1, 
+           (int (*)(void *, void *))((numeric) ? (int) numcmpch5 : (int) strcmp)); //function passing 
+      writelinesch5(linePointerch5_11, nlines);
+      printf("\n");
+      return 0;
+    }
+    else{
+      printf("\nerror: input too big to sort.\n");
+      return 1;
+    }
+
+  return 0;
+}
 
 int sortBasedOnInput(int argc, char *argv[]){
   
@@ -16,8 +43,13 @@ int sortBasedOnInput(int argc, char *argv[]){
     if((nlines = readlinesch5(linePointerch5_11, MAXLINESCH5_11)) >= 0){
       writelinesch5(linePointerch5_11, nlines);
       printf("\n");
-      qsortch5_11((void **) linePointerch5_11, 0, nlines-1, 
+      if(reversed){
+        qsortch5_11((void **) linePointerch5_11, nlines-1, 0, 
              (int (*)(void *, void *))((numeric) ? (int) numcmpch5 : (int) strcmp)); //function passing 
+      } else{
+        qsortch5_11((void **) linePointerch5_11, 0, nlines-1, 
+             (int (*)(void *, void *))((numeric) ? (int) numcmpch5 : (int) strcmp)); //function passing 
+      }
       writelinesch5(linePointerch5_11, nlines);
       printf("\n");
       return 0;
@@ -52,8 +84,14 @@ void qsortch5_11(void *v[], int left, int right, int (*passedCompareFunction)(vo
   last = left;
 
   for(i = left+1; i <= right; i++){
-    if((*passedCompareFunction)(v[i], v[left]) < 0){
-      swapch5void(v, ++last, i);
+    if(reversed){
+      if((*passedCompareFunction)(v[i], v[left]) < 0){
+       swapch5void(v, i, ++last);
+      }
+    } else{
+      if((*passedCompareFunction)(v[i], v[left]) < 0){
+       swapch5void(v, ++last, i);
+      }
     }
   }
 
@@ -65,9 +103,15 @@ void qsortch5_11(void *v[], int left, int right, int (*passedCompareFunction)(vo
 int numcmpch5(char *myString1, char *myString2){
 
   double v1, v2;
+  
+  if(reversed){
+    v2 = atof(myString1);
+    v1 = atof(myString2);
+  } else{
+    v1 = atof(myString1);
+    v2 = atof(myString2);
+  }
 
-  v1 = atof(myString1);
-  v2 = atof(myString2);
   if(v1 < v2){
     return -1;
   } else if(v1 > v2){
