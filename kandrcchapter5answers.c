@@ -86,7 +86,7 @@ void qsortch5_11(void *v[], int left, int right, int (*passedCompareFunction)(vo
   for(i = left+1; i <= right; i++){
     if(reversed){
       if((*passedCompareFunction)(v[i], v[left]) < 0){
-       swapch5void(v, i, ++last);
+       swapch5void(v, ++last, i);
       }
     } else{
       if((*passedCompareFunction)(v[i], v[left]) < 0){
