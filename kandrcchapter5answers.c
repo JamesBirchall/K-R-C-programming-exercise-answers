@@ -19,7 +19,7 @@ int ex5_14(int argc, char *argv[]){
       writelinesch5(linePointerch5_11, nlines);
       printf("\n");
       qsortch5_11((void **) linePointerch5_11, 0, nlines-1, 
-           (int (*)(void *, void *))((numeric) ? (int) numcmpch5 : (int) strcmp)); //function passing 
+           (int (*)(void *, void *))((numeric) ? (int) numcmpch5 : (int) strcmpch5r)); //function passing 
       writelinesch5(linePointerch5_11, nlines);
       printf("\n");
       return 0;
@@ -43,13 +43,8 @@ int sortBasedOnInput(int argc, char *argv[]){
     if((nlines = readlinesch5(linePointerch5_11, MAXLINESCH5_11)) >= 0){
       writelinesch5(linePointerch5_11, nlines);
       printf("\n");
-      if(reversed){
-        qsortch5_11((void **) linePointerch5_11, nlines-1, 0, 
-             (int (*)(void *, void *))((numeric) ? (int) numcmpch5 : (int) strcmp)); //function passing 
-      } else{
         qsortch5_11((void **) linePointerch5_11, 0, nlines-1, 
-             (int (*)(void *, void *))((numeric) ? (int) numcmpch5 : (int) strcmp)); //function passing 
-      }
+             (int (*)(void *, void *))((numeric) ? (int) numcmpch5 : (int) strcmpch5r)); //function passing 
       writelinesch5(linePointerch5_11, nlines);
       printf("\n");
       return 0;
@@ -60,6 +55,19 @@ int sortBasedOnInput(int argc, char *argv[]){
     }
 
   return 0;
+}
+
+int strcmpch5r(char *first, char *second){
+
+  int value;
+
+  if(reversed){
+    value = strcmp(second, first);
+  } else{
+    value = strcmp(first, second);
+  }
+
+  return value;
 }
 
 void swapch5void(void *v[], int i, int j){

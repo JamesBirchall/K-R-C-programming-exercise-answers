@@ -27,6 +27,7 @@ int sortBasedOnInput(int, char *[]);
 void qsortch5_11(void *[], int, int, int (*)(void *, void *));
 int numcmpch5(char *, char *);
 void swapch5void(void *[], int, int);
+int strcmpch5r(char *first, char *second);
 
 int getlines5_13(char*);
 void entabch5(char*, char*, int);
