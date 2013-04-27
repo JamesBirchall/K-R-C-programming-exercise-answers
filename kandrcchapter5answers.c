@@ -5,6 +5,80 @@
 static char *linePointerch5_11[MAXLINESCH5_11];
 static int nlines;
 static int reversed;
+static int fold;
+
+int ex5_15(int argc, char *argv[]){
+  //adds in -f fold option
+
+  int numeric = 0;
+  reversed = 0;
+  fold = 0;
+
+  //go through argv and pick out flags and set accordingly
+  if(argc > 1){
+    if(strcmp(argv[1], "-n") == 0){
+      numeric = 1;
+    } else if(strcmp(argv[1], "-r") == 0){
+      reversed = 1;
+    } else if(strcmp(argv[1], "-f") == 0){
+      fold = 1;
+    }
+  } else if (argc > 2){
+    if(strcmp(argv[2], "-n") == 0){
+      numeric = 1;
+    } else if(strcmp(argv[2], "-r") == 0){
+      reversed = 1;
+    } else if(strcmp(argv[2], "-f") == 0){
+      fold = 1;
+    }
+  } else if (argc > 3){
+    if(strcmp(argv[3], "-n") == 0){
+      numeric = 1;
+    } else if(strcmp(argv[3], "-r") == 0){
+      reversed = 1;
+    } else if(strcmp(argv[3], "-f") == 0){
+      fold = 1;
+    }
+  }
+
+
+    if((nlines = readlinesch5(linePointerch5_11, MAXLINESCH5_11)) >= 0){
+      writelinesch5(linePointerch5_11, nlines);
+      printf("\n");
+      qsortch5_11((void **) linePointerch5_11, 0, nlines-1, 
+           (int (*)(void *, void *))((numeric) ? (int) numcmpch5 : (int) strcmpch5r)); //function passing 
+      writelinesch5(linePointerch5_11, nlines);
+      printf("\n");
+      return 0;
+    }
+    else{
+      printf("\nerror: input too big to sort.\n");
+      return 1;
+    }
+
+  return 0;
+}
+
+int strcmpch5_15(char *s, char *t){
+
+  char c1, c2;
+
+  do{
+    if(fold){
+      c1 = tolower(*s);
+      c2 = tolower(*t);
+    } else{
+      c1 = *s;
+      c2 = *t;
+    }
+    s++;
+    t++;
+    if(c1 == '\0')
+      return c1 - c2;
+  } while( c1 == c2);
+
+  return c1 - c2;
+}
 
 int ex5_14(int argc, char *argv[]){
   
@@ -70,10 +144,21 @@ int strcmpch5r(char *first, char *second){
   int value;
 
   if(reversed){
+    value = strcmpch5_15(second, first);
+    printf("\nComparing %c with %c", (char) second[0], (char) first[0]);
+  } else{
+    printf("\nComparing %c with %c", (char) first[0], (char) second[0]);
+    value = strcmpch5_15(first, second);
+  }
+  /*if(reversed){
     value = strcmp(second, first);
+    printf("\nComparing %c with %c", (char) second[0], (char) first[0]);
   } else{
     value = strcmp(first, second);
-  }
+    printf("\nComparing %c with %c", (char) first[0], (char) second[0]);
+  }*/
+
+  printf("\nReturning value from compare...%d\n", value);
 
   return value;
 }
