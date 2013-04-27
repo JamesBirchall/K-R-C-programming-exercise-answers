@@ -9,6 +9,43 @@ static int fold;
 static int directory;
 static int field;
 
+void setFields(int *start, int *end){
+
+  int counter = field-1;  //correct as if 0 then we mean start part so go through to find end point
+  int i;
+  char c;
+   
+  for(i = 0; i <= *end && counter > 0; i++){
+    c = linePointerch5_11[0][i];  //set character
+    printf("-%c-", c);
+    //if we find space then we need to decrement counter - we will leave a rule that sees only 1 space between each field fixed!
+    if(c == '\n' || c == ' ' ){
+      printf("\nFound a newspace\n");
+      counter--;
+      i++;  //to get to first character after
+      return;
+    }
+  }
+  i++;
+  printf("\n");
+
+  int j;  //now we look for final part to compare against
+
+  printf("--End is %d", *end);
+
+  for(j = i; j <= *end; j++){
+     c = linePointerch5_11[0][j];  //set character
+     printf("--%c--", c);
+     if(c == '\n' || c == ' '){
+      printf("\nFound a newspace\n");
+      j--;
+      return;
+     }
+  }
+  *start = i;
+  *end = j;
+}
+
 int ex5_17(int argc, char *argv[]){
 
   //this function adds ability to sort by field e.g Line: FIELD1 FIELD2 FIELD 3
@@ -20,6 +57,8 @@ int ex5_17(int argc, char *argv[]){
   directory = 0;
   field = 0; 
   char *fieldPointer;
+  int startingField;
+  int endingField;
 
   //go through argv and pick out flags and set accordingly
   if(argc > 1){
@@ -94,16 +133,34 @@ int ex5_17(int argc, char *argv[]){
   }
 
   if(field){
-    int fieldValue = atoi(fieldPointer);
-    printf("\nField is set to: %d\n", fieldValue);
+    field = atoi(fieldPointer);
+    printf("\nField is set to: %d\n", field);
   }
 
   printf("\nSetup: Directory: %d, Numeric: %d, Fold:%d, Reverse: %d\n", directory, numeric, fold, reversed);
 
     if((nlines = readlinesch5(linePointerch5_11, MAXLINESCH5_11)) >= 0){
+      //use function tp set start & end values
+      startingField = 0;
+     
+      int decount = nlines-1;
+      char c;
+      int i = 0;
+
+      while((c = linePointerch5_11[decount][i]) && c != '\0'){
+        i++;
+      }
+      --i;
+      endingField = i;
+
+      if(field > 0){
+        setFields(&startingField, &endingField);
+        printf("\nStart is now: %d, End is now: %d\n", startingField, nlines-1);
+      }
+
       writelinesch5(linePointerch5_11, nlines);
       printf("\n");
-      qsortch5_11((void **) linePointerch5_11, 0, nlines-1, 
+      qsortch5_11((void **) linePointerch5_11, startingField, endingField, 
            (int (*)(void *, void *))((numeric) ? (int) numcmpch5 : (int) strcmpch5r)); //function passing 
       writelinesch5(linePointerch5_11, nlines);
       printf("\n");
@@ -375,6 +432,7 @@ void swapch5void(void *v[], int i, int j){
 }
 
 void qsortch5_11(void *v[], int left, int right, int (*passedCompareFunction)(void *, void *)){
+  
   int i, last;
 
   writelinesch5(linePointerch5_11, nlines);
