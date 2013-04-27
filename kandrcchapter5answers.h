@@ -24,6 +24,7 @@ int ex5_12(int, char *[]);
 int ex5_13(int, char *[]);
 int ex5_14(int, char *[]);
 int ex5_15(int, char *[]);
+int ex5_16(int, char *[]);
 int strcmpch5_15(char *s, char *t);
 int sortBasedOnInput(int, char *[]);
 void qsortch5_11(void *[], int, int, int (*)(void *, void *));

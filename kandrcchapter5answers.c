@@ -6,6 +6,80 @@ static char *linePointerch5_11[MAXLINESCH5_11];
 static int nlines;
 static int reversed;
 static int fold;
+static int directory;
+
+int ex5_16(int argc, char *argv[]){
+  //adds in -f fold option
+
+  int numeric = 0;
+  reversed = 0;
+  fold = 0;
+  directory = 0;
+
+  //go through argv and pick out flags and set accordingly
+  if(argc > 1){
+    if(strcmp(argv[1], "-n") == 0){
+      numeric = 1;
+    } else if(strcmp(argv[1], "-r") == 0){
+      reversed = 1;
+    } else if(strcmp(argv[1], "-f") == 0){
+      fold = 1;
+    } else if(strcmp(argv[1], "-d") == 0){
+      directory = 1;
+    }
+  } 
+  if (argc > 2){
+    if(strcmp(argv[2], "-n") == 0){
+      numeric = 1;
+    } else if(strcmp(argv[2], "-r") == 0){
+      reversed = 1;
+    } else if(strcmp(argv[2], "-f") == 0){
+      fold = 1;
+    } else if(strcmp(argv[2], "-d") == 0){
+      directory = 1;
+    }
+  } 
+  if (argc > 3){
+    if(strcmp(argv[3], "-n") == 0){
+      numeric = 1;
+    } else if(strcmp(argv[3], "-r") == 0){
+      reversed = 1;
+    } else if(strcmp(argv[3], "-f") == 0){
+      fold = 1;
+    } else if(strcmp(argv[3], "-d") == 0){
+      directory = 1;
+    }
+  } 
+  if (argc > 4){
+    if(strcmp(argv[4], "-n") == 0){
+      numeric = 1;
+    } else if(strcmp(argv[4], "-r") == 0){
+      reversed = 1;
+    } else if(strcmp(argv[4], "-f") == 0){
+      fold = 1;
+    } else if(strcmp(argv[4], "-d") == 0){
+      directory = 1;
+    }
+  }
+
+  printf("\nSetup: Directory: %d, Numeric: %d, Fold:%d, Reverse: %d\n", directory, numeric, fold, reversed);
+
+    if((nlines = readlinesch5(linePointerch5_11, MAXLINESCH5_11)) >= 0){
+      writelinesch5(linePointerch5_11, nlines);
+      printf("\n");
+      qsortch5_11((void **) linePointerch5_11, 0, nlines-1, 
+           (int (*)(void *, void *))((numeric) ? (int) numcmpch5 : (int) strcmpch5r)); //function passing 
+      writelinesch5(linePointerch5_11, nlines);
+      printf("\n");
+      return 0;
+    }
+    else{
+      printf("\nerror: input too big to sort.\n");
+      return 1;
+    }
+
+  return 0;
+}
 
 int ex5_15(int argc, char *argv[]){
   //adds in -f fold option
@@ -63,6 +137,16 @@ int strcmpch5_15(char *s, char *t){
 
   char c1, c2;
 
+  //if directory is enabled then only process on alphanumeric and blanks
+  if(directory){
+    while(!isalnum(*s) && !isspace(*s) && *s){
+      s++;
+    }
+    while(!isalnum(*t) && !isspace(*t) && *t){
+      t++;
+    }
+  }
+
   do{
     if(fold){
       c1 = tolower(*s);
@@ -73,6 +157,15 @@ int strcmpch5_15(char *s, char *t){
     }
     s++;
     t++;
+    if(directory){
+      while(!isalnum(*s) && !isspace(*s) && *s){
+        s++;
+      }
+      while(!isalnum(*t) && !isspace(*t) && *t){
+        t++;
+      }
+    }
+
     if(c1 == '\0')
       return c1 - c2;
   } while( c1 == c2);
