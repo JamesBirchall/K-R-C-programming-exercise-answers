@@ -7,6 +7,115 @@ static int nlines;
 static int reversed;
 static int fold;
 static int directory;
+static int field;
+
+int ex5_17(int argc, char *argv[]){
+
+  //this function adds ability to sort by field e.g Line: FIELD1 FIELD2 FIELD 3
+  //have a second pointer array to point to field set, this is set after lines read in
+
+  int numeric = 0;
+  reversed = 0;
+  fold = 0;
+  directory = 0;
+  field = 0; 
+  char *fieldPointer;
+
+  //go through argv and pick out flags and set accordingly
+  if(argc > 1){
+    if(strcmp(argv[1], "-n") == 0){
+      numeric = 1;
+    } else if(strcmp(argv[1], "-r") == 0){
+      reversed = 1;
+    } else if(strcmp(argv[1], "-f") == 0){
+      fold = 1;
+    } else if(strcmp(argv[1], "-d") == 0){
+      directory = 1;
+    } else if(strncmp(argv[1], "-l", 2) == 0){
+      field = 1;
+      fieldPointer = argv[1]+2;
+    }
+  } 
+  if (argc > 2){
+    if(strcmp(argv[2], "-n") == 0){
+      numeric = 1;
+    } else if(strcmp(argv[2], "-r") == 0){
+      reversed = 1;
+    } else if(strcmp(argv[2], "-f") == 0){
+      fold = 1;
+    } else if(strcmp(argv[2], "-d") == 0){
+      directory = 1;
+    } else if(strncmp(argv[2], "-l", 2) == 0){
+      field = 1;
+      fieldPointer = argv[2]+2;
+    }
+  } 
+  if (argc > 3){
+    if(strcmp(argv[3], "-n") == 0){
+      numeric = 1;
+    } else if(strcmp(argv[3], "-r") == 0){
+      reversed = 1;
+    } else if(strcmp(argv[3], "-f") == 0){
+      fold = 1;
+    } else if(strcmp(argv[3], "-d") == 0){
+      directory = 1;
+    } else if(strncmp(argv[3], "-l",2) == 0){
+      field = 1;
+      fieldPointer = argv[3]+2;
+    }
+  } 
+  if (argc > 4){
+    if(strcmp(argv[4], "-n") == 0){
+      numeric = 1;
+    } else if(strcmp(argv[4], "-r") == 0){
+      reversed = 1;
+    } else if(strcmp(argv[4], "-f") == 0){
+      fold = 1;
+    } else if(strcmp(argv[4], "-d") == 0){
+      directory = 1;
+    } else if(strncmp(argv[4], "-l", 2) == 0){
+      field = 1;
+      fieldPointer = argv[4]+2;
+    }
+  }
+  if (argc > 5){
+    if(strcmp(argv[5], "-n") == 0){
+      numeric = 1;
+    } else if(strcmp(argv[5], "-r") == 0){
+      reversed = 1;
+    } else if(strcmp(argv[5], "-f") == 0){
+      fold = 1;
+    } else if(strcmp(argv[5], "-d") == 0){
+      directory = 1;
+    } else if(strncmp(argv[5], "-l", 2) == 0){
+      field = 1;
+      fieldPointer = argv[5]+2;
+    }
+  }
+
+  if(field){
+    int fieldValue = atoi(fieldPointer);
+    printf("\nField is set to: %d\n", fieldValue);
+  }
+
+  printf("\nSetup: Directory: %d, Numeric: %d, Fold:%d, Reverse: %d\n", directory, numeric, fold, reversed);
+
+    if((nlines = readlinesch5(linePointerch5_11, MAXLINESCH5_11)) >= 0){
+      writelinesch5(linePointerch5_11, nlines);
+      printf("\n");
+      qsortch5_11((void **) linePointerch5_11, 0, nlines-1, 
+           (int (*)(void *, void *))((numeric) ? (int) numcmpch5 : (int) strcmpch5r)); //function passing 
+      writelinesch5(linePointerch5_11, nlines);
+      printf("\n");
+      return 0;
+    }
+    else{
+      printf("\nerror: input too big to sort.\n");
+      return 1;
+    }
+
+  return 0;
+}
 
 int ex5_16(int argc, char *argv[]){
   //adds in -f fold option
