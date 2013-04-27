@@ -9,10 +9,18 @@ static int reversed;
 int ex5_14(int argc, char *argv[]){
   
   int numeric = 0;
-  reversed = 1;
+  reversed = 0;
 
   if(argc > 1 && strcmp(argv[1], "-n") == 0){
     numeric = 1;
+    if(argc > 2 && strcmp(argv[2], "-r") == 0){
+      reversed = 1;
+    }
+  } else if(argc > 1 && strcmp(argv[1], "-r") == 0){
+    reversed = 1;
+    if(argc > 2 && strcmp(argv[2], "-n") == 0){
+      numeric = 1;
+    }
   }
 
     if((nlines = readlinesch5(linePointerch5_11, MAXLINESCH5_11)) >= 0){
