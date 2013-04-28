@@ -8,42 +8,46 @@ static int reversed;
 static int fold;
 static int directory;
 static int field;
+static int lengthsOfPointers[MAXLINESCH5_11];
+static int startOfPointers[MAXLINESCH5_11];
 
 void setFields(int *start, int *end){
 
   int counter = field-1;  //correct as if 0 then we mean start part so go through to find end point
   int i;
-  char c;
-   
-  for(i = 0; i <= *end && counter > 0; i++){
-    c = linePointerch5_11[0][i];  //set character
-    printf("-%c-", c);
-    //if we find space then we need to decrement counter - we will leave a rule that sees only 1 space between each field fixed!
-    if(c == '\n' || c == ' ' ){
-      printf("\nFound a newspace\n");
-      counter--;
-      i++;  //to get to first character after
-      return;
+
+  //set the length of Points!
+  for( i = 0; i <= *end; i++){
+    //run through line i and seek out the end, then store in lengths of Pointers!
+    char c;
+    int j;
+    for(j = 0; (c = linePointerch5_11[i][j]) && c != '\0'; j++){
+      //printf("\nC is %c\n", c);
+    }
+    if(c == '\0'){
+        lengthsOfPointers[i] = j;
     }
   }
-  i++;
-  printf("\n");
 
-  int j;  //now we look for final part to compare against
-
-  printf("--End is %d", *end);
-
-  for(j = i; j <= *end; j++){
-     c = linePointerch5_11[0][j];  //set character
-     printf("--%c--", c);
-     if(c == '\n' || c == ' '){
-      printf("\nFound a newspace\n");
-      j--;
-      return;
-     }
+  //now we have the lengths held for each line, lets get the start of them, we can have variable length
+  for(i = 0; i <= *end; i++){
+    char c;
+    int j;
+    for(j = 0; (c = linePointerch5_11[i][j]) && j < lengthsOfPointers[i]; j++){
+      //start at beinning, if counter is 0, then return j
+      if(counter == 0){
+        //printf("\nAsked start is %d\n", j);
+        startOfPointers[i] = j;
+        counter = field-1;
+        break;
+      }
+      else{
+        if(c == ' '){
+          --counter;
+        }
+      }
+    }
   }
-  *start = i;
-  *end = j;
 }
 
 int ex5_17(int argc, char *argv[]){
@@ -142,26 +146,21 @@ int ex5_17(int argc, char *argv[]){
     if((nlines = readlinesch5(linePointerch5_11, MAXLINESCH5_11)) >= 0){
       //use function tp set start & end values
       startingField = 0;
+      endingField = nlines-1;
      
-      int decount = nlines-1;
-      char c;
-      int i = 0;
-
-      while((c = linePointerch5_11[decount][i]) && c != '\0'){
-        i++;
-      }
-      --i;
-      endingField = i;
-
       if(field > 0){
+        printf("GOt here..");
         setFields(&startingField, &endingField);
-        printf("\nStart is now: %d, End is now: %d\n", startingField, nlines-1);
+        printf("\nStart is now: %d, End is now: %d\n", startingField, endingField);
+        startingField = startOfPointers[0];
       }
-
+     
+      printf("\nPrinting before qsort:\n");
       writelinesch5(linePointerch5_11, nlines);
       printf("\n");
-      qsortch5_11((void **) linePointerch5_11, startingField, endingField, 
+      qsortch5_11((void **) linePointerch5_11, 0, nlines-1, 
            (int (*)(void *, void *))((numeric) ? (int) numcmpch5 : (int) strcmpch5r)); //function passing 
+      printf("\nPrinting after qsort:\n");
       writelinesch5(linePointerch5_11, nlines);
       printf("\n");
       return 0;
@@ -402,6 +401,11 @@ int strcmpch5r(char *first, char *second){
 
   int value;
 
+  if(field){
+    first = first+startOfPointers[0];
+    second = second+startOfPointers[0];
+  }
+
   if(reversed){
     value = strcmpch5_15(second, first);
     printf("\nComparing %c with %c", (char) second[0], (char) first[0]);
@@ -440,7 +444,9 @@ void qsortch5_11(void *v[], int left, int right, int (*passedCompareFunction)(vo
   if(left >= right){
     return;
   }
-
+  
+  //swapping 
+  printf("\nSwapping left: %d, right %d\n", left, (left+right)/2);
   swapch5void(v, left, (left + right) / 2);
   last = left;
 
@@ -464,6 +470,11 @@ void qsortch5_11(void *v[], int left, int right, int (*passedCompareFunction)(vo
 int numcmpch5(char *myString1, char *myString2){
 
   double v1, v2;
+
+  if(field){
+    myString1 = myString1+startOfPointers[0];
+    myString2 = myString2+startOfPointers[0];
+  }
   
   if(reversed){
     v2 = atof(myString1);
