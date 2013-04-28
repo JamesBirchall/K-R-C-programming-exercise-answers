@@ -1,6 +1,30 @@
 #include "kandrcchapter5answers.h"
 #include "polishcalc.h"
 
+void dlcch5(void){
+
+}
+
+void dirdclch5(void){
+
+}
+
+int gettokench5(void){
+
+  return 0;
+}
+
+int ch5declare(int argc, char *argv[]){
+
+  return 0;
+}
+
+int ch5undeclare(int argc,char *argv[]){
+
+  return 0;
+}
+
+
 #define MAXLINESCH5_11 5000
 static char *linePointerch5_11[MAXLINESCH5_11];
 static int nlines;

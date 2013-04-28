@@ -34,6 +34,12 @@ int numcmpch5(char *, char *);
 void swapch5void(void *[], int, int);
 int strcmpch5r(char *first, char *second);
 
+void dlcch5(void);
+void dirdclch5(void);
+int gettokench5(void);
+int ch5declare(int, char *[]);
+int ch5undeclare(int, char *[]);
+
 int getlines5_13(char*);
 void entabch5(char*, char*, int);
 void detabch5(char*, char*, int);

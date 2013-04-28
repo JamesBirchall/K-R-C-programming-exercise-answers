@@ -7,7 +7,7 @@
 
 int main(int argc, char *argv[]){
 
-  ex5_17(argc, argv);
+
 
   return 0;
 }
