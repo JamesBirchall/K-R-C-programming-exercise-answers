@@ -94,6 +94,29 @@ int ch5declare(int argc, char *argv[]){
 
 int ch5undeclare(int argc,char *argv[]){
 
+  int type;
+  char temp[MAXTOKENCH5];
+
+  while(gettokench5() != EOF){
+    strcpy(out, token);
+
+    while((type = gettokench5()) != '\n'){
+      if(type == PARENS || type == BRACKETS)
+        strcat(out, token);
+      else if(type == '*'){
+        sprintf(temp, "(*%s)", out);
+        strcpy(out, temp);
+      } else if(type == NAME){
+        sprintf(temp, "%s %s", token, out);
+        strcpy(out, temp);
+      } else{
+        printf("\nerror: invalid input at %s\n", token);
+      }
+
+    }
+    printf("\n%s\n", out);
+  }
+
   return 0;
 }
 
