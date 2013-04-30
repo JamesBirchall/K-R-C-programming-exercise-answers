@@ -35,7 +35,7 @@ void dirdclch5(void){
     printf("\nerror: expected name or (dcl)\n");
   }
 
-  while((type == gettokench5()) == PARENS || type == BRACKETS){
+  while((type = gettokench5()) == PARENS || type == BRACKETS){
     if(type == PARENS)
       strcat(out, " function returning");
     else{
@@ -66,9 +66,16 @@ int gettokench5(void){
 
     *p = '\0';
     return tokentype = BRACKETS;
-  }//add more here!
-
-  return 0;
+  } else if (isalpha(c)){
+    for(*p++ = c; isalnum(c = getch5()) ; ){
+      *p++ = c;
+    }
+    *p = '\0';
+    ungetch5(c);
+    return tokentype = NAME;
+  } else{
+    return tokentype = c;
+  }
 }
 
 int ch5declare(int argc, char *argv[]){
