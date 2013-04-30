@@ -1,20 +1,86 @@
 #include "kandrcchapter5answers.h"
 #include "polishcalc.h"
 
-void dlcch5(void){
+#define MAXTOKENCH5 100
 
+enum { NAME, PARENS, BRACKETS };
+
+int tokentype;
+char token[MAXTOKENCH5];
+char name[MAXTOKENCH5];
+char datatype[MAXTOKENCH5];
+char out[MAXTOKENCH5];
+
+void dlcch5(void){
+  int ns;
+
+  for(ns = 0; gettokench5() == '*'; )
+    ns++;
+
+  dirdclch5();
+  while(ns-- > 0)
+    strcat(out, " pointer to");
 }
 
 void dirdclch5(void){
+  int type;
 
+  if(tokentype == '('){
+    dlcch5();
+    if(tokentype != ')')
+      printf("\nerror: missing )\n");
+  } else if (tokentype == NAME){
+    strcpy(name, token);
+  } else{
+    printf("\nerror: expected name or (dcl)\n");
+  }
+
+  while((type == gettokench5()) == PARENS || type == BRACKETS){
+    if(type == PARENS)
+      strcat(out, " function returning");
+    else{
+      strcat(out, " array");
+      strcat(out, token);
+      strcat(out, " of");
+    }
+  }
 }
 
 int gettokench5(void){
+
+  int c;
+  char *p = token;
+
+  while((c = getch5()) == ' ' || c == '\t');
+
+  if(c == '('){
+    if((c = getch5()) == ')'){
+      strcpy(token, "()");
+      return tokentype = PARENS;
+    } else{
+      ungetch5(c);
+      return tokentype = '(';
+    }
+  } else if(c == '['){
+    for (*p++ = c; (*p++ = getch5()) != ']';);
+
+    *p = '\0';
+    return tokentype = BRACKETS;
+  }//add more here!
 
   return 0;
 }
 
 int ch5declare(int argc, char *argv[]){
+
+  while(gettokench5() != EOF){
+    strcpy(datatype, token);
+    out[0] = '\0';
+    dlcch5();
+    if(tokentype != '\n')
+      printf("\nsyntax error\n");
+    printf("\n%s: %s %s\n", name, out, datatype);
+  }
 
   return 0;
 }
