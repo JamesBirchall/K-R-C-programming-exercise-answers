@@ -274,12 +274,13 @@ int ex5_17(int argc, char *argv[]){
         printf("\nStart is now: %d, End is now: %d\n", startingField, endingField);
         startingField = startOfPointers[0];
       }
+
      
       printf("\nPrinting before qsort:\n");
       writelinesch5(linePointerch5_11, nlines);
       printf("\n");
       qsortch5_11((void **) linePointerch5_11, 0, nlines-1, 
-           (int (*)(void *, void *))((numeric) ? (int) numcmpch5 : (int) strcmpch5r)); //function passing 
+           (intptr_t (*)(void *, void *))((numeric) ? (intptr_t) numcmpch5 : (intptr_t) strcmpch5r)); //function passing 
       printf("\nPrinting after qsort:\n");
       writelinesch5(linePointerch5_11, nlines);
       printf("\n");
@@ -353,7 +354,7 @@ int ex5_16(int argc, char *argv[]){
       writelinesch5(linePointerch5_11, nlines);
       printf("\n");
       qsortch5_11((void **) linePointerch5_11, 0, nlines-1, 
-           (int (*)(void *, void *))((numeric) ? (int) numcmpch5 : (int) strcmpch5r)); //function passing 
+           (intptr_t (*)(void *, void *))((numeric) ? (intptr_t) numcmpch5 : (intptr_t) strcmpch5r)); //function passing 
       writelinesch5(linePointerch5_11, nlines);
       printf("\n");
       return 0;
@@ -405,7 +406,7 @@ int ex5_15(int argc, char *argv[]){
       writelinesch5(linePointerch5_11, nlines);
       printf("\n");
       qsortch5_11((void **) linePointerch5_11, 0, nlines-1, 
-           (int (*)(void *, void *))((numeric) ? (int) numcmpch5 : (int) strcmpch5r)); //function passing 
+           (intptr_t (*)(void *, void *))((numeric) ? (intptr_t) numcmpch5 : (intptr_t) strcmpch5r)); //function passing 
       writelinesch5(linePointerch5_11, nlines);
       printf("\n");
       return 0;
@@ -479,7 +480,7 @@ int ex5_14(int argc, char *argv[]){
       writelinesch5(linePointerch5_11, nlines);
       printf("\n");
       qsortch5_11((void **) linePointerch5_11, 0, nlines-1, 
-           (int (*)(void *, void *))((numeric) ? (int) numcmpch5 : (int) strcmpch5r)); //function passing 
+           (intptr_t (*)(void *, void *))((numeric) ? (intptr_t) numcmpch5 : (intptr_t) strcmpch5r)); //function passing 
       writelinesch5(linePointerch5_11, nlines);
       printf("\n");
       return 0;
@@ -504,7 +505,7 @@ int sortBasedOnInput(int argc, char *argv[]){
       writelinesch5(linePointerch5_11, nlines);
       printf("\n");
         qsortch5_11((void **) linePointerch5_11, 0, nlines-1, 
-             (int (*)(void *, void *))((numeric) ? (int) numcmpch5 : (int) strcmpch5r)); //function passing 
+             (intptr_t (*)(void *, void *))((numeric) ? (intptr_t) numcmpch5 : (intptr_t) strcmpch5r)); //function passing 
       writelinesch5(linePointerch5_11, nlines);
       printf("\n");
       return 0;
@@ -555,7 +556,7 @@ void swapch5void(void *v[], int i, int j){
 
 }
 
-void qsortch5_11(void *v[], int left, int right, int (*passedCompareFunction)(void *, void *)){
+void qsortch5_11(void *v[], int left, int right, intptr_t (*passedCompareFunction)(void *, void *)){
   
   int i, last;
 

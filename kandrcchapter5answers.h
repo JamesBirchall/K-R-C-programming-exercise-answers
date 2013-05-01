@@ -7,6 +7,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
+#include <stdint.h>
 
 int ex5_1();
 int ex5_2();
@@ -29,7 +30,7 @@ int ex5_17(int, char *[]);
 void setFields(int *start, int *end);
 int strcmpch5_15(char *s, char *t);
 int sortBasedOnInput(int, char *[]);
-void qsortch5_11(void *[], int, int, int (*)(void *, void *));
+void qsortch5_11(void *[], int, int, intptr_t (*)(void *, void *));
 int numcmpch5(char *, char *);
 void swapch5void(void *[], int, int);
 int strcmpch5r(char *first, char *second);
