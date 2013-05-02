@@ -35,7 +35,7 @@ void dirdclch5(void){
   } else if (tokentype == NAME){
     strcpy(name, token);
   } else{
-    printf("\nerror: expected name or (dcl)\n");
+    strcpy(name, "ABSTRACT DECLARATOR");
   }
 
   while((type = gettokench5()) == PARENS || type == BRACKETS){
