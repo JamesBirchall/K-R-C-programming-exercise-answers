@@ -27,6 +27,7 @@ int ex5_14(int, char *[]);
 int ex5_15(int, char *[]);
 int ex5_16(int, char *[]);
 int ex5_17(int, char *[]);
+int ex5_18(int, char *[]);
 void setFields(int *start, int *end);
 int strcmpch5_15(char *s, char *t);
 int sortBasedOnInput(int, char *[]);
@@ -34,6 +35,7 @@ void qsortch5_11(void *[], int, int, intptr_t (*)(void *, void *));
 int numcmpch5(char *, char *);
 void swapch5void(void *[], int, int);
 int strcmpch5r(char *first, char *second);
+int gettokench5_ex18(void);
 
 void dlcch5(void);
 void dirdclch5(void);

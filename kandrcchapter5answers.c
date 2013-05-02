@@ -10,6 +10,7 @@ char token[MAXTOKENCH5];
 char name[MAXTOKENCH5];
 char datatype[MAXTOKENCH5];
 char out[MAXTOKENCH5];
+int previoustoken;
 
 void dlcch5(void){
   int ns;
@@ -27,8 +28,10 @@ void dirdclch5(void){
 
   if(tokentype == '('){
     dlcch5();
-    if(tokentype != ')')
+    if(tokentype != ')'){
       printf("\nerror: missing )\n");
+      previoustoken = 1;
+    }
   } else if (tokentype == NAME){
     strcpy(name, token);
   } else{
@@ -43,6 +46,44 @@ void dirdclch5(void){
       strcat(out, token);
       strcat(out, " of");
     }
+  }
+}
+
+int gettokench5_ex18(void){
+
+  int c;
+  char *p = token;
+  previoustoken = 0;
+
+  if(previoustoken == 1){
+    previoustoken = 0;
+    return tokentype;
+  }
+
+  while((c = getch5()) == ' ' || c == '\t');
+
+  if(c == '('){
+    if((c = getch5()) == ')'){
+      strcpy(token, "()");
+      return tokentype = PARENS;
+    } else{
+      ungetch5(c);
+      return tokentype = '(';
+    }
+  } else if(c == '['){
+    for (*p++ = c; (*p++ = getch5()) != ']';);
+
+    *p = '\0';
+    return tokentype = BRACKETS;
+  } else if (isalpha(c)){
+    for(*p++ = c; isalnum(c = getch5()) ; ){
+      *p++ = c;
+    }
+    *p = '\0';
+    ungetch5(c);
+    return tokentype = NAME;
+  } else{
+    return tokentype = c;
   }
 }
 
@@ -76,6 +117,20 @@ int gettokench5(void){
   } else{
     return tokentype = c;
   }
+}
+
+int ex5_18(int argc, char *argv[]){
+
+  while(gettokench5() != EOF){
+    strcpy(datatype, token);
+    out[0] = '\0';
+    dlcch5();
+    if(tokentype != '\n')
+      printf("\nsyntax error\n");
+    printf("\n%s: %s %s\n", name, out, datatype);
+  }
+
+  return 0;
 }
 
 int ch5declare(int argc, char *argv[]){
