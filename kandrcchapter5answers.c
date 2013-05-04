@@ -12,10 +12,96 @@ char datatype[MAXTOKENCH5];
 char out[MAXTOKENCH5];
 int previoustoken;
 
+static char *inittypes[6] = {"char", "int", "void", "long", "double", "short"}; //by being static it only gets generated once so each invokation of this method uses same data as during first run
+static char *typequalifiers[3] = {"const", "volatile", "register"};
+
+void parameterdeclch5(void){
+  //parse a parameter declarator
+  do{
+    declspecificationch5();
+  } while(tokentype == ',');
+
+  if(tokentype != ')')
+    printf("\nerror: missing ) in parameter declaration\n");
+}
+
+void declspecificationch5(void){
+
+  char temp[MAXTOKENCH5];
+
+  temp[0] = '\0';
+
+  gettokench5_ex18();
+
+  do{
+    if(tokentype != NAME){
+      previoustoken = 1;
+      dlcch5();      
+    } else if(typespecification() == 1){
+      strcat(temp, " ");
+      strcat(temp, token);
+      gettokench5_ex18();
+    } else if( typequalch5() == 1){
+      strcat(temp, " ");
+      strcat(temp, token);
+      gettokench5_ex18();
+    } else{
+      printf("\nerror: unknown type in parameter list\n");
+    }
+  } while( tokentype != ',' && tokentype != ')' );
+  
+  strcat(out, temp);
+  if(tokentype == ',')
+    strcat(out, ",");
+}
+
+int typespecification(void){
+
+  int matchFound = 0;
+
+  //compare string to array of strings in init values
+  int i;
+  for( i = 0; i < 6; i++){
+    if(strcmp(token, inittypes[i]) != 0){
+      matchFound = 1;
+      break;
+    }
+  }
+  return matchFound;
+}
+
+int typequalch5(void){
+  int matchFound = 0;
+  
+  //compare string to array of strings in type qualifiers
+  int i;
+  for( i = 0; i < 3; i++){
+    if(strcmp(token, typequalifiers[i]) != 0){
+      matchFound = 1;
+      break;
+    }
+  }
+  return matchFound;
+}
+
+int ex5_20(int argc, char *argv[]){
+
+  while(gettokench5_ex18() != EOF){
+    strcpy(datatype, token);
+    out[0] = '\0';
+    dlcch5();
+    if(tokentype != '\n')
+      printf("\nsyntax error\n");
+    printf("\n%s: %s %s\n", name, out, datatype);
+  }
+
+  return 0;
+}
+
 int nexttokench5(void){
   int type;
   
-  type = gettokench5();
+  type = gettokench5_ex18();
   previoustoken = 1;
   return type;
 }
@@ -62,7 +148,7 @@ int ex5_19(int argc,char *argv[]){
 void dlcch5(void){
   int ns;
 
-  for(ns = 0; gettokench5() == '*'; )
+  for(ns = 0; gettokench5_ex18() == '*'; )
     ns++;
 
   dirdclch5();
@@ -77,18 +163,22 @@ void dirdclch5(void){
     dlcch5();
     if(tokentype != ')'){
       printf("\nerror: missing )\n");
-      previoustoken = 1;
     }
   } else if (tokentype == NAME){
-    strcpy(name, token);
+    if(name[0] == '\0')
+      strcpy(name, token);
   } else{
-    strcpy(name, "ABSTRACT DECLARATOR");
+    previoustoken = 1;
   }
 
-  while((type = gettokench5()) == PARENS || type == BRACKETS){
+  while((type = gettokench5_ex18()) == PARENS || type == BRACKETS || type == '('){
     if(type == PARENS)
       strcat(out, " function returning");
-    else{
+    else if(type == '('){
+      strcat(out, " function expecting");
+      parameterdeclch5();
+      strcat(out, " and returning");
+    }else{
       strcat(out, " array");
       strcat(out, token);
       strcat(out, " of");

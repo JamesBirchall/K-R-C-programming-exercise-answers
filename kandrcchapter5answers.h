@@ -29,6 +29,7 @@ int ex5_16(int, char *[]);
 int ex5_17(int, char *[]);
 int ex5_18(int, char *[]);
 int ex5_19(int, char *[]);
+int ex5_20(int, char *[]);
 int nexttokench5(void);
 void setFields(int *start, int *end);
 int strcmpch5_15(char *s, char *t);
@@ -38,6 +39,10 @@ int numcmpch5(char *, char *);
 void swapch5void(void *[], int, int);
 int strcmpch5r(char *first, char *second);
 int gettokench5_ex18(void);
+void parameterdeclch5(void);
+void declspecificationch5(void);
+int typespecification(void);
+int typequalch5(void);
 
 void dlcch5(void);
 void dirdclch5(void);
