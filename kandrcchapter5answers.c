@@ -12,6 +12,48 @@ char datatype[MAXTOKENCH5];
 char out[MAXTOKENCH5];
 int previoustoken;
 
+int nexttokench5(void){
+  int type;
+  
+  type = gettokench5();
+  previoustoken = 1;
+  return type;
+}
+
+int ex5_19(int argc,char *argv[]){
+
+  int type;
+  char temp[MAXTOKENCH5];
+
+  while(gettokench5() != EOF){
+    strcpy(out, token);
+
+    while((type = gettokench5()) != '\n'){
+      if(type == PARENS || type == BRACKETS){
+        strcat(out, token);
+      }
+      else if(type == '*'){
+        if((type = nexttokench5()) == PARENS || type == BRACKETS){
+          sprintf(temp, "(*%s)", out);
+        }
+        else{
+          sprintf(temp, "*%s", out);
+       }
+        strcpy(out, temp);
+      } else if(type == NAME){
+        sprintf(temp, "%s %s", token, out);
+        strcpy(out, temp);
+      } else{
+        printf("\nerror: invalid input at %s\n", token);
+      }
+
+    }
+    printf("\n%s\n", out);
+  }
+
+  return 0;
+}
+
 void dlcch5(void){
   int ns;
 
