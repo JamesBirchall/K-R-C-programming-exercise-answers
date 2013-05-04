@@ -23,23 +23,28 @@ int nexttokench5(void){
 int ex5_19(int argc,char *argv[]){
 
   int type;
+  int type2;
   char temp[MAXTOKENCH5];
+  
+  previoustoken = 0;
 
-  while(gettokench5() != EOF){
+  while(gettokench5_ex18() != EOF){
     strcpy(out, token);
 
-    while((type = gettokench5()) != '\n'){
-      if(type == PARENS || type == BRACKETS){
+    while((type = gettokench5_ex18()) != '\n'){
+      if(type == PARENS || type == BRACKETS)
         strcat(out, token);
-      }
       else if(type == '*'){
-        if((type = nexttokench5()) == PARENS || type == BRACKETS){
+        //get next token and check for brackets or parenthesis, if they are present print inside brackets
+        //otherwise print without brackets
+        //sprintf(temp, "(*%s)", out);
+        if((type2 = nexttokench5()) == PARENS || type2 == BRACKETS){
           sprintf(temp, "(*%s)", out);
-        }
-        else{
+          strcpy(out, temp);
+        } else{
           sprintf(temp, "*%s", out);
-       }
-        strcpy(out, temp);
+          strcpy(out, temp);
+        }
       } else if(type == NAME){
         sprintf(temp, "%s %s", token, out);
         strcpy(out, temp);
@@ -95,7 +100,6 @@ int gettokench5_ex18(void){
 
   int c;
   char *p = token;
-  previoustoken = 0;
 
   if(previoustoken == 1){
     previoustoken = 0;
