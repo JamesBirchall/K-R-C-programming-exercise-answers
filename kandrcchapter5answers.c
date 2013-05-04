@@ -61,6 +61,7 @@ int typespecification(void){
 
   //compare string to array of strings in init values
   int i;
+
   for( i = 0; i < 6; i++){
     if(strcmp(token, inittypes[i]) != 0){
       matchFound = 1;

@@ -4,10 +4,11 @@
 #include "kandrcchapter3answers.h"
 #include "kandrcchapter4answers.h"
 #include "kandrcchapter5answers.h"
+#include "kandrcchapter6answers.h"
 
 int main(int argc, char *argv[]){
 
-  ex5_20(argc, argv);
+  ch6_sec4();
 
   return 0;
 }
