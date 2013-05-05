@@ -79,7 +79,7 @@ int ex6_2(int argc, char *argv[]){
   char word[100];
   struct charkey2 *p;
   char tomatch[100];
-  int tomatchlength;
+  int tomatchlength = 0;
 
   //get string to match in words
   if(argc > 1){
@@ -99,14 +99,14 @@ int ex6_2(int argc, char *argv[]){
       if((p = binsearchch6pointer2(word, keytab2, NKEYS2)) != NULL){
         p->count++;
         if(strncmp(p->word, tomatch,tomatchlength) == 0)
-          p->matched = 0;
+          p->matched = 1;
       }
   }
 
   printf("\n");
 
   for(p = keytab2; p < keytab2 + NKEYS2; p++)
-    printf("Word: %s\t\t has been used:%4d time%s and %s match input string\n", p->word, p->count, (p->count == 1) ? "" : "s", (p->matched) ? "does " : "does not " );
+    printf("Word: %s\t\t has been used:%4d time%s and %s match input string\n", p->word, p->count, (p->count == 1) ? "" : "s", (p->matched) ? "does" : "does not" );
 
   return 0;
 }
