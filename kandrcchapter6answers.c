@@ -2,8 +2,6 @@
 #include "kandrcchapter5answers.h"
 
 struct charkey keytab[] = {
-  {"#define", 0},
-  {"_something", 0},
   {"auto", 0},
   {"break", 0},
   {"case", 0},
@@ -38,8 +36,140 @@ struct charkey keytab[] = {
   {"while", 0}
 };
 
-#define NKEYS (sizeof keytab / sizeof(struct charkey))
+struct charkey2 keytab2[] = {
+  {"auto", 0, 0},
+  {"break", 0, 0},
+  {"case", 0, 0},
+  {"char", 0, 0},
+  {"const", 0, 0},
+  {"continue", 0, 0},
+  {"default", 0, 0},
+  {"do", 0, 0},
+  {"double", 0, 0},
+  {"else", 0, 0},
+  {"enum", 0, 0},
+  {"extern", 0, 0},
+  {"float", 0, 0},
+  {"for", 0, 0},
+  {"goto", 0, 0},
+  {"if", 0, 0},
+  {"int", 0, 0},
+  {"long", 0, 0},
+  {"register", 0, 0},
+  {"return", 0, 0},
+  {"short", 0, 0},
+  {"signed", 0, 0},
+  {"sizeof", 0, 0},
+  {"static", 0, 0},
+  {"struct", 0, 0},
+  {"switch", 0, 0},
+  {"typedef", 0, 0},
+  {"union", 0, 0},
+  {"unsigned", 0, 0},
+  {"void", 0, 0},
+  {"volatile", 0, 0},
+  {"while", 0, 0}
+};
 
+#define NKEYS (sizeof keytab / sizeof(struct charkey))
+#define NKEYS2 (sizeof keytab2 / sizeof(struct charkey2))
+
+int ex6_2(int argc, char *argv[]){
+
+  char word[100];
+  struct charkey2 *p;
+  char tomatch[100];
+  int tomatchlength;
+
+  //get string to match in words
+  if(argc > 1){
+    int i = 0;
+    while(isalnum(argv[1][i])){
+      tomatch[i] = argv[1][i];
+      i++;
+    }
+    tomatch[i] = '\0';
+    tomatchlength = i;
+  }
+
+  printf("\n%s\n", tomatch);
+
+  while(getwordch6(word, 100) != EOF){
+    if(isalpha(word[0]))
+      if((p = binsearchch6pointer2(word, keytab2, NKEYS2)) != NULL){
+        p->count++;
+        if(strncmp(p->word, tomatch,tomatchlength) == 0)
+          p->matched = 0;
+      }
+  }
+
+  printf("\n");
+
+  for(p = keytab2; p < keytab2 + NKEYS2; p++)
+    printf("Word: %s\t\t has been used:%4d time%s and %s match input string\n", p->word, p->count, (p->count == 1) ? "" : "s", (p->matched) ? "does " : "does not " );
+
+  return 0;
+}
+
+int ch6_sec4_2(){
+  //pointer version of ch6_sec4_2()
+
+  char word[100];
+  struct charkey *p;
+
+  while(getwordch6(word, 100) != EOF){
+    if(isalpha(word[0]))
+      if((p = binsearchch6pointer(word, keytab, NKEYS)) != NULL)
+        p->count++;
+  }
+
+  printf("\n");
+
+  for(p = keytab; p < keytab + NKEYS; p++)
+    printf("Word: %s\t\t has been used:%4d time%s", p->word, p->count, (p->count == 1) ? "\n" : "s\n");
+
+  return 0;
+}
+
+struct charkey2 *binsearchch6pointer2(char *word, struct charkey2 *tab, int n){
+
+  int cond;
+  struct charkey2 *low = &tab[0];
+  struct charkey2 *high = &tab[n];
+  struct charkey2 *mid;
+
+  while(low < high){
+    mid = low + (high - low) / 2;
+    if((cond = strcmp(word, mid->word)) < 0)
+      high = mid;
+    else if (cond > 0)
+      low = mid + 1;
+    else
+      return mid;
+  }
+
+  return NULL;
+}
+
+struct charkey *binsearchch6pointer(char *word, struct charkey *tab, int n){
+
+  int cond;
+  struct charkey *low = &tab[0];
+  struct charkey *high = &tab[n];
+  struct charkey *mid;
+
+  while(low < high){
+    mid = low + (high - low) / 2;
+    if((cond = strcmp(word, mid->word)) < 0)
+      high = mid;
+    else if (cond > 0)
+      low = mid + 1;
+    else
+      return mid;
+  }
+
+  return NULL;
+}
 
 int ex6_1(){
   //handle underscores, string constants, comments and preprocessor control lines
