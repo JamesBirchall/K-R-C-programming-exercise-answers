@@ -11,3 +11,6 @@ set showcmd
 set nocompatible
 set foldmethod=marker
 set mouse=a
+set t_Co=256
+colorscheme desert
+set guifont=Monaco:h12

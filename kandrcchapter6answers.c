@@ -1,6 +1,26 @@
 #include "kandrcchapter6answers.h"
 #include "kandrcchapter5answers.h"
 
+
+int ex6_3(int argc, char *argv[]){
+  //prints all words in document plus their line numbers
+  //add ability to remove noise words like "the"
+
+  //so one way to do this?
+  //have a struct which holds a pointer to char, and a pointer to char, the first pointer is to the word, the second is to a list of numbers, seperated by a space
+  //also add a variable for max limit reach - to signify it already has max value
+  //the the first pointer can be max 50 characters, but is also null terminated after entering so might not use whole of memory
+  //the second pointer has a max 100 chars for line numbers
+  //run through each line, seperated by a newlines, keep a counter of line number starting from 1
+  //take each word as a token, check struct for word, add if not found, don't keep alphabetical
+  //also for word move to end of string, get \0 part and append line found
+  //do for all of document
+  //printf final structure, print each word followed by line numbers found on
+
+
+  return 0;
+}
+
 struct charkey keytab[] = {
   {"auto", 0},
   {"break", 0},

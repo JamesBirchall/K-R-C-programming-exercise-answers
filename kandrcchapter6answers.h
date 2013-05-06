@@ -21,6 +21,7 @@ struct charkey *binsearchch6pointer(char *, struct charkey *, int);
 struct charkey2 *binsearchch6pointer2(char *, struct charkey2 *, int);
 int ch6_sec4();
 int ch6_sec4_2();
+int ex6_3(int, char **);
 int ex6_2(int, char **);
 int ex6_1();
 int getwordch6ex1(char *, int);
