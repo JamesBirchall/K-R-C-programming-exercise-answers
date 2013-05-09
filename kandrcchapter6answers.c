@@ -31,9 +31,7 @@ int ex6_3(int argc, char *argv[]){
     }
   }
 
-  //treeprint2(root);
-
-  printf("%s, line number started: %d", root->word, root->startinglinelist->linenumbervalue);
+  treeprint2(root);
 
   return 0;
 }
@@ -70,9 +68,11 @@ struct treenode *addtree2(struct treenode *node, char *word, int linenumber){
     //alloc gets heap which is there till we remove it
     node->count = 1;
     node->left = node->right = NULL;  //set pointers left & right to NULL
-   
+    node->startinglinelist = NULL;
+    linenode(node, linenumber);         
   } else if((condition = strcmp(word, node->word)) == 0){
     node->count++;
+    linenode(node, linenumber);
     //node->startinglinelist = (struct lines *) malloc(sizeof(struct lines));
     //node->startinglinelist->linenumbervalue = linenumber;
   }else if(condition < 0)
@@ -83,10 +83,17 @@ struct treenode *addtree2(struct treenode *node, char *word, int linenumber){
   return node;
 }
 
-struct lines *linenode(struct lines *node, int linenumber){
+void linenode(struct treenode *node, int linenumber){
+  //basically find the first NULL line struct next val and set line number and alloc memory
+  if(node->startinglinelist == NULL){
+    //alloc for this word
+    node->startinglinelist = (struct lines *) malloc(sizeof(struct lines));
+    node->startinglinelist->linenumbervalue = linenumber;
+  } else{
+    //call another method which traverses the linked list
 
+  }
 }
-
 
 struct treenode *addtree(struct treenode *node, char *word){
 

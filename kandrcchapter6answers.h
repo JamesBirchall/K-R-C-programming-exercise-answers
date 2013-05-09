@@ -37,7 +37,7 @@ void treeprint(struct treenode *);
 void treeprint2(struct treenode *);
 void lineprint(struct lines *);
 struct treenode *talloc(void);
-struct lines *linenode(struct lines *, int);
+void linenode(struct treenode *, int);
 char *stringduplicate(char *);
 int getwordch6(char *, int);
 int binsearchch6(char *, struct charkey *, int);
