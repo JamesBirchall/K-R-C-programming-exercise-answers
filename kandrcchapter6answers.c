@@ -1,6 +1,81 @@
 #include "kandrcchapter6answers.h"
 #include "kandrcchapter5answers.h"
 
+int ch6_5(){
+
+  struct treenode *root;
+
+  char word[100];
+
+  root = NULL;
+
+  while(getwordch6(word, 100) != EOF){
+    if(isalpha(word[0]))
+      root = addtree(root, word);
+  }
+
+  treeprint(root);
+
+  return 0;
+}
+
+struct treenode *addtree(struct treenode *node, char *word){
+
+  int condition;
+
+  if(node == NULL){
+    //new word arrived so setup new struct and allocate memory
+    node = talloc();
+    node->word = stringduplicate(word);  //so we use strdup to get memory for string
+    //had we not bothered and pointed to the string parameter (word), the memory
+    //will be cleaned up after the function call allow the memory to be re-used
+    //as it is from the stack
+    //alloc gets heap which is there till we remove it
+    node->count = 1;
+    node->left = node->right = NULL;  //set pointers left & right to NULL
+  } else if((condition = strcmp(word, node->word)) == 0)
+    node->count++;
+  else if(condition < 0)
+    node->left = addtree(node->left, word);
+  else
+    node->right = addtree(node->right, word);
+
+  return node;
+}
+
+void treeprint(struct treenode *node){
+  
+  static int done = 0;
+  if(done == 0){
+    printf("\n%s\n", node->word);
+    done = 1;
+  }
+
+  if(node != NULL){
+    treeprint(node->left);
+    printf("%4d %s\n", node->count, node->word);
+    treeprint(node->right);
+  }
+}
+
+struct treenode *talloc(void){
+  //get memory size of 1 treenode and return pointer as
+  //a treenode pointer
+  return (struct treenode *) malloc(sizeof(struct treenode));
+}
+
+char *stringduplicate(char *s){
+  char *p;
+
+  //get memory for string duplicate +1 for null terminated
+  //as strlen doesn't include that but we need it to 
+  //treat the copied string as a string :-)
+  p = (char*) malloc(strlen(s)+1);
+  if(p != NULL)
+    strcpy(p, s);
+
+  return p;
+}
 
 int ex6_3(int argc, char *argv[]){
   //prints all words in document plus their line numbers
@@ -17,6 +92,8 @@ int ex6_3(int argc, char *argv[]){
   //do for all of document
   //printf final structure, print each word followed by line numbers found on
 
+  //possibly keep a second pointer array which points to each struct, that way we can order those pointers to keep
+  //the performance better optimized... if start of word is low half start from beginning, else start from other end
 
   return 0;
 }

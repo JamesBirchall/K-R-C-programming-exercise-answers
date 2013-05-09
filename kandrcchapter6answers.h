@@ -12,9 +12,21 @@ struct charkey2{
   int matched;
 }; 
 
+struct treenode{
+  char *word;
+  int count;
+  struct treenode *left;
+  struct treenode *right;
+};
+
 //#define NKEYS (sizeof keytabs / sizeof (struct charkey))
 //#define NKEYS2 (sizeof keytabs2 / sizeof (struct charkey2))
 
+int ch6_5();
+struct treenode *addtree(struct treenode *, char *);
+void treeprint(struct treenode *);
+struct treenode *talloc(void);
+char *stringduplicate(char *);
 int getwordch6(char *, int);
 int binsearchch6(char *, struct charkey *, int);
 struct charkey *binsearchch6pointer(char *, struct charkey *, int);
@@ -26,5 +38,7 @@ int ex6_2(int, char **);
 int ex6_1();
 int getwordch6ex1(char *, int);
 int commentch6(void);
+
+
 
 #endif
