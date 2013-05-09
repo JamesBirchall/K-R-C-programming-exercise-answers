@@ -1,6 +1,43 @@
 #include "kandrcchapter6answers.h"
 #include "kandrcchapter5answers.h"
 
+int ex6_3(int argc, char *argv[]){
+  //prints all words in document plus their line numbers
+  //add ability to remove noise words like "the"
+
+  struct treenode *root;
+  char word[100];
+  int linenumber = 1;
+
+  root = NULL;
+
+  while(getwordch6(word, 100) != EOF){
+    //in here we now need to deal with words returned with a \n in them, basically setting the \n to \0
+    int len = strlen(word);
+    int foundnewline = 0;
+
+    if(word[len-1] == '\n'){
+      foundnewline = 1;
+      word[len-1] = '\0';
+    }
+
+    if(isalpha(word[0])){
+      root = addtree2(root, word, linenumber);
+    }
+
+    if(foundnewline == 1){
+      linenumber++;
+      foundnewline = 0;
+    }
+  }
+
+  //treeprint2(root);
+
+  printf("%s, line number started: %d", root->word, root->startinglinelist->linenumbervalue);
+
+  return 0;
+}
+
 int ch6_5(){
 
   struct treenode *root;
@@ -19,6 +56,38 @@ int ch6_5(){
   return 0;
 }
 
+struct treenode *addtree2(struct treenode *node, char *word, int linenumber){
+
+  int condition;
+
+  if(node == NULL){
+    //new word arrived so setup new struct and allocate memory
+    node = talloc();
+    node->word = stringduplicate(word);  //so we use strdup to get memory for string
+    //had we not bothered and pointed to the string parameter (word), the memory
+    //will be cleaned up after the function call allow the memory to be re-used
+    //as it is from the stack
+    //alloc gets heap which is there till we remove it
+    node->count = 1;
+    node->left = node->right = NULL;  //set pointers left & right to NULL
+   
+  } else if((condition = strcmp(word, node->word)) == 0){
+    node->count++;
+    //node->startinglinelist = (struct lines *) malloc(sizeof(struct lines));
+    //node->startinglinelist->linenumbervalue = linenumber;
+  }else if(condition < 0)
+    node->left = addtree2(node->left, word, linenumber);
+  else
+    node->right = addtree2(node->right, word, linenumber);
+
+  return node;
+}
+
+struct lines *linenode(struct lines *node, int linenumber){
+
+}
+
+
 struct treenode *addtree(struct treenode *node, char *word){
 
   int condition;
@@ -33,6 +102,7 @@ struct treenode *addtree(struct treenode *node, char *word){
     //alloc gets heap which is there till we remove it
     node->count = 1;
     node->left = node->right = NULL;  //set pointers left & right to NULL
+
   } else if((condition = strcmp(word, node->word)) == 0)
     node->count++;
   else if(condition < 0)
@@ -43,14 +113,25 @@ struct treenode *addtree(struct treenode *node, char *word){
   return node;
 }
 
+void treeprint2(struct treenode *node){
+  
+  if(node != NULL){
+    treeprint(node->left);
+    printf("%4d %s", node->count, node->word);
+    lineprint(node->startinglinelist);
+    treeprint(node->right);
+  }
+}
+
+void lineprint(struct lines *line){
+  if(line != NULL){
+    printf("\tLine:%d\n", line->linenumbervalue);
+    lineprint(line->next);
+  }
+}
+
 void treeprint(struct treenode *node){
   
-  static int done = 0;
-  if(done == 0){
-    printf("\n%s\n", node->word);
-    done = 1;
-  }
-
   if(node != NULL){
     treeprint(node->left);
     printf("%4d %s\n", node->count, node->word);
@@ -75,27 +156,6 @@ char *stringduplicate(char *s){
     strcpy(p, s);
 
   return p;
-}
-
-int ex6_3(int argc, char *argv[]){
-  //prints all words in document plus their line numbers
-  //add ability to remove noise words like "the"
-
-  //so one way to do this?
-  //have a struct which holds a pointer to char, and a pointer to char, the first pointer is to the word, the second is to a list of numbers, seperated by a space
-  //also add a variable for max limit reach - to signify it already has max value
-  //the the first pointer can be max 50 characters, but is also null terminated after entering so might not use whole of memory
-  //the second pointer has a max 100 chars for line numbers
-  //run through each line, seperated by a newlines, keep a counter of line number starting from 1
-  //take each word as a token, check struct for word, add if not found, don't keep alphabetical
-  //also for word move to end of string, get \0 part and append line found
-  //do for all of document
-  //printf final structure, print each word followed by line numbers found on
-
-  //possibly keep a second pointer array which points to each struct, that way we can order those pointers to keep
-  //the performance better optimized... if start of word is low half start from beginning, else start from other end
-
-  return 0;
 }
 
 struct charkey keytab[] = {
@@ -357,12 +417,19 @@ int getwordch6(char *word, int limit){
   if(c != EOF)
     *w++ = c;
 
-  if(!isalpha(c)){
+  if(!isalpha(c) && c != '\n'){
     *w = '\0';
     return c;
   }
+
   for(; --limit > 0; w++){
-    if(!isalpha(*w = getch5())){
+    //need to amend this to add in '\n'
+    *w = getch5();
+    if(*w == '\n'){
+      w++;
+      break;
+    }
+    if(!isalpha(*w)){
       ungetch5(*w);
       break;
     }
