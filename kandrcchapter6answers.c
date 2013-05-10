@@ -68,13 +68,12 @@ struct treenode *addtree2(struct treenode *node, char *word, int linenumber){
     //alloc gets heap which is there till we remove it
     node->count = 1;
     node->left = node->right = NULL;  //set pointers left & right to NULL
-    node->startinglinelist = NULL;
-    linenode(node, linenumber);         
+    node->startinglinelist = lalloc();
+    node->startinglinelist->linenumbervalue = linenumber;
+    node->startinglinelist->next = NULL;  
   } else if((condition = strcmp(word, node->word)) == 0){
     node->count++;
     linenode(node, linenumber);
-    //node->startinglinelist = (struct lines *) malloc(sizeof(struct lines));
-    //node->startinglinelist->linenumbervalue = linenumber;
   }else if(condition < 0)
     node->left = addtree2(node->left, word, linenumber);
   else
@@ -84,15 +83,23 @@ struct treenode *addtree2(struct treenode *node, char *word, int linenumber){
 }
 
 void linenode(struct treenode *node, int linenumber){
-  //basically find the first NULL line struct next val and set line number and alloc memory
-  if(node->startinglinelist == NULL){
-    //alloc for this word
-    node->startinglinelist = (struct lines *) malloc(sizeof(struct lines));
-    node->startinglinelist->linenumbervalue = linenumber;
-  } else{
-    //call another method which traverses the linked list
+  struct lines *tempnode;
 
+  tempnode = node->startinglinelist;
+  //traverse linked list
+  while(tempnode->next != NULL && tempnode->linenumbervalue != linenumber){
+    tempnode = tempnode->next;
   }
+
+  if(tempnode->linenumbervalue != linenumber){
+    tempnode->next = lalloc();
+    tempnode->next->linenumbervalue = linenumber;
+    tempnode->next->next = NULL;
+  }
+}
+
+struct lines *lalloc(void){
+  return (struct lines *) malloc(sizeof(struct lines));
 }
 
 struct treenode *addtree(struct treenode *node, char *word){
@@ -121,19 +128,17 @@ struct treenode *addtree(struct treenode *node, char *word){
 }
 
 void treeprint2(struct treenode *node){
+
+  struct lines *temp;
   
   if(node != NULL){
-    treeprint(node->left);
-    printf("%4d %s", node->count, node->word);
-    lineprint(node->startinglinelist);
-    treeprint(node->right);
-  }
-}
-
-void lineprint(struct lines *line){
-  if(line != NULL){
-    printf("\tLine:%d\n", line->linenumbervalue);
-    lineprint(line->next);
+    treeprint2(node->left);
+    printf("Count:%4d::\tWord: %s ::\tLines: ", node->count, node->word);
+    for(temp = node->startinglinelist; temp != NULL; temp = temp->next){
+      printf("%4d ", temp->linenumbervalue);
+    }
+    printf("\n");
+    treeprint2(node->right);
   }
 }
 
