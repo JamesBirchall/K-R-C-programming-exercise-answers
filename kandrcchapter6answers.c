@@ -1,6 +1,81 @@
 #include "kandrcchapter6answers.h"
 #include "kandrcchapter5answers.h"
 
+struct treenode *nodelist[1000];  //set max nodes in list to 1000
+int nodecount = 0;  //used to hold how many nodelist nodes there are
+
+int ex6_4(int argc, char *argv[]){
+
+  struct treenode *root;
+  char word[100];
+  int linenumber = 1;
+
+  root = NULL;
+
+  while(getwordch6(word, 100) != EOF){
+    int len = strlen(word);
+    int foundnewline = 0;
+
+    if(word[len-1] == '\n'){
+      foundnewline = 1;
+      word[len-1] = '\0';
+    }
+
+    if(isalpha(word[0]) && !checkfornoisewords(word)){
+      root = addtree2(root, word, linenumber);
+    }
+
+    if(foundnewline == 1){
+      linenumber++;
+      foundnewline = 0;
+    }
+  }
+
+  int i;
+  //store nodes into the list above
+  storenodes(root);
+  for (i = 0; i < nodecount; i++){
+    printf("\nCount: %d\tWord: %s\n", nodelist[i]->count, nodelist[i]->word);
+  }
+  sortnodelist();
+
+  for (i = 0; i < nodecount; i++){
+    printf("\nCount: %d\tWord: %s\n", nodelist[i]->count, nodelist[i]->word);
+  }
+
+  return 0;
+}
+
+void storenodes(struct treenode *node){
+  //loop through in same way as print and store each node and increment counter
+
+  if(node != NULL){
+    storenodes(node->left);
+    //do work
+    if(nodecount < 1000){
+      nodelist[nodecount++] = node;
+    }
+    storenodes(node->right);
+  }
+  
+}
+
+void sortnodelist(void){
+  //sort nodelist by count value
+  qsort((void*) &nodelist[0], nodecount, sizeof(nodelist[0]), (__compar_fn_t) comparenodeex6_4);
+}
+
+int comparenodeex6_4(const void *c, const void *d){
+
+  const struct treenode *a = ((struct treenode *)c);
+  const struct treenode *b = ((struct treenode *)d);
+
+
+  printf("\nNode a is: %d: %s Node b is: %d: %s\n", (int)a->count, (char *)a->word, (int)b->count, (char *)b->word);
+  //printf("\nNode a is: %d: %s Node b is: %d: %s\n", (int)a.count, (char *)a.word, (int)b.count, (char *)b.word);
+  return ((a->count) >= (b->count)) ? (1) : (-1);
+}
+
 int checkfornoisewords(char *s){
   //check for noise words and return 1 if match is made, 0 if not
 
@@ -25,8 +100,6 @@ int checkfornoisewords(char *s){
 }
 
 int ex6_3(int argc, char *argv[]){
-  //prints all words in document plus their line numbers
-  //add ability to remove noise words like "the"
 
   struct treenode *root;
   char word[100];

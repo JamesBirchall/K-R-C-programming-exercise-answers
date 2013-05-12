@@ -30,7 +30,10 @@ struct treenode{
 //#define NKEYS (sizeof keytabs / sizeof (struct charkey))
 //#define NKEYS2 (sizeof keytabs2 / sizeof (struct charkey2))
 
+int comparenodeex6_4(const void *, const void *);
 int ch6_5();
+void storenodes(struct treenode *);
+void sortnodelist(void);
 struct treenode *addtree2(struct treenode *, char *, int linenumber);
 struct treenode *addtree(struct treenode *, char *);
 void treeprint(struct treenode *);
@@ -46,6 +49,7 @@ struct charkey *binsearchch6pointer(char *, struct charkey *, int);
 struct charkey2 *binsearchch6pointer2(char *, struct charkey2 *, int);
 int ch6_sec4();
 int ch6_sec4_2();
+int ex6_4(int, char **);
 int ex6_3(int, char **);
 int ex6_2(int, char **);
 int ex6_1();
