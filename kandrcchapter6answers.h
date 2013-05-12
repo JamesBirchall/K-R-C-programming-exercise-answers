@@ -39,6 +39,7 @@ struct treenode *talloc(void);
 struct lines *lalloc(void);
 void linenode(struct treenode *, int);
 char *stringduplicate(char *);
+int checkfornoisewords(char *);
 int getwordch6(char *, int);
 int binsearchch6(char *, struct charkey *, int);
 struct charkey *binsearchch6pointer(char *, struct charkey *, int);

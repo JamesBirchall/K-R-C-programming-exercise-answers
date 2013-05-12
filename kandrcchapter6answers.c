@@ -1,6 +1,29 @@
 #include "kandrcchapter6answers.h"
 #include "kandrcchapter5answers.h"
 
+int checkfornoisewords(char *s){
+  //check for noise words and return 1 if match is made, 0 if not
+
+  char *noisewords[] = {
+  "and",
+  "the",
+  "a",
+  "that"
+  };
+
+  int count = 0;
+
+  while(count < 4){
+  
+    if(strcmp(s, noisewords[count]) == 0)
+      return 1;
+
+    count++;
+  }
+  
+  return 0;
+}
+
 int ex6_3(int argc, char *argv[]){
   //prints all words in document plus their line numbers
   //add ability to remove noise words like "the"
@@ -21,7 +44,7 @@ int ex6_3(int argc, char *argv[]){
       word[len-1] = '\0';
     }
 
-    if(isalpha(word[0])){
+    if(isalpha(word[0]) && !checkfornoisewords(word)){
       root = addtree2(root, word, linenumber);
     }
 
