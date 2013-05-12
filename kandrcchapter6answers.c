@@ -1,7 +1,7 @@
 #include "kandrcchapter6answers.h"
 #include "kandrcchapter5answers.h"
 
-struct treenode *nodelist[1000];  //set max nodes in list to 1000
+struct treenode nodelist[1000];  //set max nodes in list to 1000
 int nodecount = 0;  //used to hold how many nodelist nodes there are
 
 int ex6_4(int argc, char *argv[]){
@@ -34,13 +34,14 @@ int ex6_4(int argc, char *argv[]){
   int i;
   //store nodes into the list above
   storenodes(root);
+  printf("\n::Before sort::");
   for (i = 0; i < nodecount; i++){
-    printf("\nCount: %d\tWord: %s\n", nodelist[i]->count, nodelist[i]->word);
+    printf("\nCount: %d\tWord: %s\n", nodelist[i].count, nodelist[i].word);
   }
   sortnodelist();
-
+  printf("\n::After sort::");
   for (i = 0; i < nodecount; i++){
-    printf("\nCount: %d\tWord: %s\n", nodelist[i]->count, nodelist[i]->word);
+    printf("\nCount: %d\tWord: %s\n", nodelist[i].count, nodelist[i].word);
   }
 
   return 0;
@@ -49,11 +50,12 @@ int ex6_4(int argc, char *argv[]){
 void storenodes(struct treenode *node){
   //loop through in same way as print and store each node and increment counter
 
+
   if(node != NULL){
     storenodes(node->left);
     //do work
     if(nodecount < 1000){
-      nodelist[nodecount++] = node;
+      nodelist[nodecount++] = *node;
     }
     storenodes(node->right);
   }
@@ -67,13 +69,16 @@ void sortnodelist(void){
 
 int comparenodeex6_4(const void *c, const void *d){
 
-  const struct treenode *a = ((struct treenode *)c);
-  const struct treenode *b = ((struct treenode *)d);
+  int firstNumber, secondNumber = 0;
 
+  firstNumber = ((struct treenode *)c)->count;
+  secondNumber = ((struct treenode *)d)->count;
 
-  printf("\nNode a is: %d: %s Node b is: %d: %s\n", (int)a->count, (char *)a->word, (int)b->count, (char *)b->word);
-  //printf("\nNode a is: %d: %s Node b is: %d: %s\n", (int)a.count, (char *)a.word, (int)b.count, (char *)b.word);
-  return ((a->count) >= (b->count)) ? (1) : (-1);
+  if(firstNumber == secondNumber)
+    return 0;
+  else
+    return (firstNumber < secondNumber) ? 1 : -1;
+
 }
 
 int checkfornoisewords(char *s){
