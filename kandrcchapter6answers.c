@@ -2,6 +2,11 @@
 #include "kandrcchapter5answers.h"
 
 static struct nlist *hashtab[HASHSIZE];
+int ch6_6(){
+
+
+  return 0;
+}
 
 unsigned int hashch6(char *s){
   unsigned int hashval;

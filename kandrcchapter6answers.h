@@ -41,6 +41,7 @@ struct nlist{
 unsigned int hashch6(char *);
 struct nlist *lookupch6(char *);
 struct nlist *installch6(char *, char *);
+int ch6_6();
 
 int comparenodeex6_4(const void *, const void *);
 int ch6_5();
