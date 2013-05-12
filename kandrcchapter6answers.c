@@ -1,6 +1,50 @@
 #include "kandrcchapter6answers.h"
 #include "kandrcchapter5answers.h"
 
+static struct nlist *hashtab[HASHSIZE];
+
+unsigned int hashch6(char *s){
+  unsigned int hashval;
+
+  for(hashval = 0; *s != '\0'; s++)
+    hashval = *s +31 * hashval;
+
+  return hashval % HASHSIZE;
+}
+
+struct nlist *lookupch6(char *s){
+  struct nlist *np;
+
+  for(np = hashtab[hashch6(s)]; np != NULL; np = np->next)
+    if(!strcmp(s, np->name))
+      return np;
+    return NULL;
+}
+
+struct nlist *installch6(char *name, char *defn){
+  struct nlist *np;
+
+  unsigned int hashval;
+
+  if((np = lookupch6(name)) == NULL){
+    //not found in lookup
+    np = (struct nlist *) malloc(sizeof(*np));
+    if(np == NULL || ((np->name = stringduplicate(name))) == NULL)
+      return NULL;
+    hashval = hashch6(name);
+    np->next = hashtab[hashval];
+    hashtab[hashval] = np;
+  } else{
+    free((void *) np->defn);  //free previous definition
+  }
+
+  if(((np->defn = stringduplicate(defn))) == NULL)
+    return NULL;
+
+  return np;
+}
+
+
 struct treenode nodelist[1000];  //set max nodes in list to 1000
 int nodecount = 0;  //used to hold how many nodelist nodes there are
 

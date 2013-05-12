@@ -30,6 +30,18 @@ struct treenode{
 //#define NKEYS (sizeof keytabs / sizeof (struct charkey))
 //#define NKEYS2 (sizeof keytabs2 / sizeof (struct charkey2))
 
+struct nlist{
+  struct nlist *next;
+  char *name;
+  char *defn;
+};
+
+#define HASHSIZE 101
+
+unsigned int hashch6(char *);
+struct nlist *lookupch6(char *);
+struct nlist *installch6(char *, char *);
+
 int comparenodeex6_4(const void *, const void *);
 int ch6_5();
 void storenodes(struct treenode *);
