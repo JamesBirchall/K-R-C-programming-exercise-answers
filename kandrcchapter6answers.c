@@ -4,6 +4,21 @@
 static struct nlist *hashtab[HASHSIZE];
 int ch6_6(){
 
+  installch6("James", "Person");
+  installch6("Somewhere", "Else");
+  installch6("Yes", "No");
+
+  struct nlist *currentref;
+
+
+  currentref = lookupch6("James");
+  printf("\n%s is now %s\n", currentref->name, currentref->defn);
+
+  currentref = lookupch6("Somewhere");
+  printf("\n%s is now %s\n", currentref->name, currentref->defn);
+
+  currentref = lookupch6("Yes");
+  printf("\n%s is now %s\n", currentref->name, currentref->defn);
 
   return 0;
 }
