@@ -8,17 +8,14 @@ int ch6_6(){
   installch6("Somewhere", "Else");
   installch6("Yes", "No");
 
-  struct nlist *currentref;
-
-
-  currentref = lookupch6("James");
-  printf("\n%s is now %s\n", currentref->name, currentref->defn);
-
-  currentref = lookupch6("Somewhere");
-  printf("\n%s is now %s\n", currentref->name, currentref->defn);
-
-  currentref = lookupch6("Yes");
-  printf("\n%s is now %s\n", currentref->name, currentref->defn);
+  int counter = 0;
+  while(counter < HASHSIZE){
+    if(hashtab[counter] != NULL){
+      
+      printf("\n%s is now %s, held at %d\n", hashtab[counter]->name, hashtab[counter]->defn, counter);
+    }
+    counter++;
+  }
 
   return 0;
 }
