@@ -42,6 +42,8 @@ unsigned int hashch6(char *);
 struct nlist *lookupch6(char *);
 struct nlist *installch6(char *, char *);
 int ch6_6();
+void undefinech6(char *);
+int ex6_5();
 
 int comparenodeex6_4(const void *, const void *);
 int ch6_5();

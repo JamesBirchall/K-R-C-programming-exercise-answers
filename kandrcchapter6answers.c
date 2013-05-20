@@ -2,6 +2,72 @@
 #include "kandrcchapter5answers.h"
 
 static struct nlist *hashtab[HASHSIZE];
+
+void undefinech6(char *name){
+
+  int hashvalue = -1;
+
+  struct nlist *previous, *current;
+
+  previous = NULL; 
+
+  hashvalue = hashch6(name);
+
+  for(current = hashtab[hashvalue]; current != NULL; current = current->next){
+    if(strcmp(name, current->name) == 0){
+      break;  //match found so break with current being match
+    }
+    previous = current; //save previous value incase there are nodes before it
+  }
+
+  if(current != NULL){
+    if(previous == NULL){
+      if(hashvalue != -1){
+        hashtab[hashvalue] = current->next; //current pointer points to node after match, removing ti from list
+      }
+    } else{
+      previous->next = current->next; //if there was a node before, make it point to node after current
+    }
+
+    //de allocate memory used from reference
+    free((void*) current->name);
+    free((void*) current->defn);
+    free((void*) current);
+  }
+}
+
+int ex6_5(){
+
+  installch6("James", "Person");
+  installch6("Jim", "Taken");
+  installch6("Somewhere", "Else");
+  installch6("Yes", "No");
+
+
+  int counter = 0;
+  while(counter < HASHSIZE){
+    if(hashtab[counter] != NULL){
+      
+      printf("\n%s : %s, held at %d\n", hashtab[counter]->name, hashtab[counter]->defn, counter);
+    }
+    counter++;
+  }
+
+  undefinech6("James");
+  printf("\nJames has been undefined\n");
+  
+  counter = 0;
+  while(counter < HASHSIZE){
+    if(hashtab[counter] != NULL){
+      
+      printf("\n%s : %s, held at %d\n", hashtab[counter]->name, hashtab[counter]->defn, counter);
+    }
+    counter++;
+  }
+  
+  return 0;
+}
+
 int ch6_6(){
 
   installch6("James", "Person");
