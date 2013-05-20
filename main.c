@@ -8,7 +8,7 @@
 
 int main(int argc, char *argv[]){
 
-  ex6_5();
+  ex6_6();
 
   return 0;
 }

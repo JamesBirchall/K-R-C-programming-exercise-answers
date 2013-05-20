@@ -3,6 +3,31 @@
 
 static struct nlist *hashtab[HASHSIZE];
 
+#define MAXWORDSIZE 1000
+
+int ex6_6(){
+
+  //simple version of the #define/#undef replacement system
+  //will read in words and simply replace those who match in the system
+  //can undefine as well removing the ability to be replaced
+
+  char word[MAXWORDSIZE]; //holds returned word
+  struct nlist *definedWords;  //hols pointer to defined words list
+
+  while((getwordch6(word, MAXWORDSIZE)) != EOF){
+    //now we have word
+
+    //check for hash in first value - if found then its either define statement or undefine statement
+    if((strcmp(word, "#")) == 0){
+      //because its a special character will have come back on its own with a \0
+      //get define statement
+    }
+
+  }
+
+  return 0;
+}
+
 void undefinech6(char *name){
 
   int hashvalue = -1;
