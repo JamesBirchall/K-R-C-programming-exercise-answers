@@ -5,46 +5,49 @@ static struct nlist *hashtab[HASHSIZE];
 
 #define MAXWORDSIZE 1000
 
+char linech6[1000];
+
+int quitch6 = 0;
+
 int ex6_6(){
 
-  //simple version of the #define/#undef replacement system
-  //will read in words and simply replace those who match in the system
-  //can undefine as well removing the ability to be replaced
+  printf("\nType END followed by the enter key to quit\n");
 
-  char word[MAXWORDSIZE]; //holds returned word
-  struct nlist *definedWords;  //hols pointer to defined words list
+  while(!quitch6){
+    int linelength = 0;
+    fgets(linech6, 1000, stdin);
 
-  while((getwordch6(word, MAXWORDSIZE)) != EOF){
-    //now we have word
+    while(linech6[linelength++] != '\n');
 
-    //check for hash in first value - if found then its either define statement or undefine statement
-    if((strcmp(word, "#")) == 0){
-      //because its a special character will have come back on its own with a \0
-      //get define statement
-    }else if(!isalpha(word[0])){
-      printf("%s", word); //not part of define so print it
-    }else if((definedWords = lookupch6(word)) == NULL){
-      printf("%s", word); //not in defined words library
-    }else{
-      //its defined so push the replacement word back to inpdut
-      printf("%s", definedWords->defn);
+    if(!strncmp(linech6, "END", 3)){
+      quitch6 = 1;
     }
+
+    if(!strncmp(linech6, "#define", 7)){
+      printf("\nDefine found...");
+      if(linelength > 6){
+        char installWord[100];
+        int i = 7;
+        int j = 0;
+        while(linech6[i] != '\n' || linech6[i] != ' '){
+          installWord[j++] = linech6[i++];
+        }
+        printf("J is %d", j);
+
+        if(j > 0)        
+          printf("\nInstall word = %s\n", installWord);
+       
+      }
+    }
+
+
   }
+
+  printf("\nFinished, bye.\n");
 
   return 0;
 }
 
-void getdefinition(void){
-  //aims of this section:
-  //get to first character
-  //get next word from input
-  //check against define
-  //if found, get next word and one after then install it
-  //check against undefine
-  //if found get next word and undefine
-
-
-}
 
 void skipblanks(void){
   int c;

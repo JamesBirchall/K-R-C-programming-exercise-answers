@@ -1,6 +1,8 @@
 #if !defined(_KANDREX_H6)
 #define _KANDREX_H6
 
+#include <stdio.h>
+
 struct charkey{
   char *word;
   int count;
@@ -47,6 +49,7 @@ int ex6_5();
 int ex6_6();
 void getdefinition(void);
 void skipblanks(void);
+int getlinech6(char *);
 
 int comparenodeex6_4(const void *, const void *);
 int ch6_5();
