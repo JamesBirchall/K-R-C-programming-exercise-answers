@@ -45,6 +45,8 @@ int ch6_6();
 void undefinech6(char *);
 int ex6_5();
 int ex6_6();
+void getdefinition(void);
+void skipblanks(void);
 
 int comparenodeex6_4(const void *, const void *);
 int ch6_5();

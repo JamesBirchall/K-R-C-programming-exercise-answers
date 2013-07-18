@@ -21,11 +21,36 @@ int ex6_6(){
     if((strcmp(word, "#")) == 0){
       //because its a special character will have come back on its own with a \0
       //get define statement
+    }else if(!isalpha(word[0])){
+      printf("%s", word); //not part of define so print it
+    }else if((definedWords = lookupch6(word)) == NULL){
+      printf("%s", word); //not in defined words library
+    }else{
+      //its defined so push the replacement word back to inpdut
+      printf("%s", definedWords->defn);
     }
-
   }
 
   return 0;
+}
+
+void getdefinition(void){
+  //aims of this section:
+  //get to first character
+  //get next word from input
+  //check against define
+  //if found, get next word and one after then install it
+  //check against undefine
+  //if found get next word and undefine
+
+
+}
+
+void skipblanks(void){
+  int c;
+  while((c = getchar()) == ' ' || c == '\t');
+
+  ungetch5(c);
 }
 
 void undefinech6(char *name){
