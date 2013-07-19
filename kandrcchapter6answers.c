@@ -29,14 +29,27 @@ int ex6_6(){
         char installWord[100];
         int i = 7;
         int j = 0;
-        while(linech6[i] != '\n' || linech6[i] != ' '){
+        while((linech6[i] != '\n' || linech6[i] != ' ') || i <= linelength){
           installWord[j++] = linech6[i++];
         }
-        printf("J is %d", j);
 
         if(j > 0)        
           printf("\nInstall word = %s\n", installWord);
+
+        while(linech6[i] == ' '){
+          i++;
+        }
        
+        char replaceWord[100];
+        //now look for definition and save in another character string
+        if(linelength > i){
+          j = 0;
+          while((linech6[i] != '\n' || linech6[i] != ' ') || i <= linelength){
+            replaceWord[j++] = linech6[i++];
+          }
+        }
+        if(j > 0)
+          printf("\nReplace word = %s\n", replaceWord);
       }
     }
 
