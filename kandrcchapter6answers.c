@@ -18,42 +18,66 @@ int ex6_6(){
     fgets(linech6, 1000, stdin);
 
     while(linech6[linelength++] != '\n');
+       
 
     if(!strncmp(linech6, "END", 3)){
       quitch6 = 1;
     }
 
     if(!strncmp(linech6, "#define", 7)){
-      printf("\nDefine found...");
-      if(linelength > 6){
-        char installWord[100];
-        int i = 7;
-        int j = 0;
-        while((linech6[i] != '\n' || linech6[i] != ' ') || i <= linelength){
-          installWord[j++] = linech6[i++];
-        }
+      printf("\nDefine found\n");
 
-        if(j > 0)        
-          printf("\nInstall word = %s\n", installWord);
+      printf("Next word starts with: %c\n", linech6[8]);
 
-        while(linech6[i] == ' '){
-          i++;
-        }
-       
-        char replaceWord[100];
-        //now look for definition and save in another character string
-        if(linelength > i){
-          j = 0;
-          while((linech6[i] != '\n' || linech6[i] != ' ') || i <= linelength){
-            replaceWord[j++] = linech6[i++];
-          }
-        }
-        if(j > 0)
-          printf("\nReplace word = %s\n", replaceWord);
+      int i = 0;
+      int j = 0;
+
+      char installWord[100];
+      char replaceWord[100];
+
+      for(i = 8; i < linelength; i++){
+        printf("%c", linech6[i]);
+        char c = linech6[i];
+        if(c == ' ' || c == '\n')
+          break;
+        
+        installWord[j] = c;
+        j++;
       }
+      installWord[j] = '\0';
+
+      printf("\nInstallWord = %s\n", installWord);
+
+      while(linech6[i] == ' '){
+        i++;
+      }
+
+      j = 0;
+
+      for( ; i < linelength; i++){
+        printf("%c", linech6[i]);
+        char c = linech6[i];
+        if(c == ' ' || c == '\n')
+          break;
+
+        replaceWord[j] = c;
+        j++;
+      }
+      replaceWord[j] = '\0';
+
+      printf("\nReplaceWord = %s\n", replaceWord);
+
+      //now install word plus replacement
+      installch6(installWord, replaceWord);
     }
 
+    printf("\n Now time to lookup words for replace...\n");
+    struct nlist *temp;
+    temp = lookupch6("Jimbo");
 
+    if(temp)
+      printf("\nMatch found, Jimbo = %s\n", temp->defn);
+        
   }
 
   printf("\nFinished, bye.\n");
@@ -783,3 +807,4 @@ int ch6_sec4(){
 
   return 0;
 }
+
