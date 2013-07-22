@@ -6,6 +6,7 @@
 #include <ctype.h>
 
 void ex7_1(int argc, char *argv[]);
+void ex7_2(int argc, char *argv[]);
 
 
 #endif
