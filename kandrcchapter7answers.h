@@ -10,5 +10,7 @@ void ex7_1(int argc, char *argv[]);
 void ex7_2(int argc, char *argv[]);
 void part7_3(int argc, char *argv[]);
 void minprintfch7(char *, ...);
+void ex7_3();
+void minprintfch7ex3(char *, ...);
 
 #endif
