@@ -4,9 +4,11 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include <stdarg.h>
 
 void ex7_1(int argc, char *argv[]);
 void ex7_2(int argc, char *argv[]);
-
+void part7_3(int argc, char *argv[]);
+void minprintfch7(char *, ...);
 
 #endif

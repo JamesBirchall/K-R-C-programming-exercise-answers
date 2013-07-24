@@ -1,5 +1,49 @@
 #include "kandrcchapter7answers.h"
 
+void part7_3(int argc, char *argv[]){
+
+  minprintfch7("Hello %s, you are too old, by exactly %d years, thats so %f\n", "Jimbo", 101, 20.54);
+
+}
+
+void minprintfch7(char *format, ...){
+  va_list argumentpointer;
+  char *p, *stringvalue;
+  int integervalue;
+  double doublevalue;
+
+  va_start(argumentpointer, format);
+
+  for(p = format; *p; p++){
+    //if we don't have a modifier just print character to screen
+    if( *p != '%'){
+      putchar(*p);
+      continue;
+    }
+
+    switch(*++p){
+    case 'd':
+      integervalue = va_arg(argumentpointer, int);
+      printf("%d", integervalue);
+      break;
+    case 'f':
+      doublevalue = va_arg(argumentpointer, double);
+      printf("%f", doublevalue);
+      break;
+    case 's':
+      for(stringvalue = va_arg(argumentpointer, char*); *stringvalue; stringvalue++){
+        putchar(*stringvalue);
+      }
+      break;
+    default:
+      putchar(*p);
+      break;
+    }
+  }
+
+  va_end(argumentpointer);
+}
+
 void ex7_2(int argc, char *argv[]){
 
   int limit = 100;
