@@ -4,47 +4,63 @@ void ex7_3(){
 
   minprintfch7ex3("Hello %s, you are too old, by exactly %d years, thats so %f\n", "Jimbo", 101, 20.54);
 
-  minprintfch7ex3("This is a %u and %i, also %o, %X and %x...", 127, 123, 123, 123, 123);
+  minprintfch7ex3("This is a is %u and %i, also %o, %X and %x...%s\n", 127, 123, 123, 123, 123, "James");
 }
 
 void minprintfch7ex3(char *format, ...){
 
-  va_list argumentpointer;
+  va_list ap;
   char *p, *stringvalue;
-  int integervalue;
+  char localformat[100];
+  int i, integervalue;
+  unsigned unsignedvalue;
   double doublevalue;
 
-  va_start(argumentpointer, format);
+  va_start(ap, format);
 
   for(p = format; *p; p++){
-    //if we don't have a modifier just print character to screen
-    if( *p != '%'){
+    if(*p != '%'){
       putchar(*p);
       continue;
     }
+    i = 0;
 
-    switch(*++p){
-    case 'd':
-      integervalue = va_arg(argumentpointer, int);
-      printf("%d", integervalue);
-      break;
-    case 'f':
-      doublevalue = va_arg(argumentpointer, double);
-      printf("%f", doublevalue);
-      break;
-    case 's':
-      for(stringvalue = va_arg(argumentpointer, char*); *stringvalue; stringvalue++){
-        putchar(*stringvalue);
-      }
-      break;
-    default:
-      putchar(*p);
-      break;
+    localformat[i++] = '%';
+    while( *(p+1) && !isalpha(*(p+1))){
+      localformat[i++] = *++p;
     }
 
+    localformat[i++] = *(p+1);
+    localformat[i] = '\0';
+
+    switch(*++p){
+      case 'd':
+      case 'i':
+        integervalue = va_arg(ap, int);
+        printf(localformat, integervalue);
+        break;
+      case 'x':
+      case 'X':
+      case 'u':
+      case 'o':
+        unsignedvalue = va_arg(ap, unsigned);
+        printf(localformat, unsignedvalue);
+        break;
+      case 'f':
+        doublevalue = va_arg(ap, double);
+        printf(localformat, doublevalue);
+        break;
+      case 's':
+        stringvalue = va_arg(ap, char*);
+        printf(localformat, stringvalue);
+        break;
+      default:
+        printf("%s", localformat); 
+        break;
+    }
   }
 
-  va_end(argumentpointer);
+  va_end(ap);
 
 }
 
