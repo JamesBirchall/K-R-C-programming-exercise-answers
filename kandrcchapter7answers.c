@@ -1,5 +1,82 @@
 #include "kandrcchapter7answers.h"
 
+struct file{
+  FILE *file;
+  char *name;
+};
+
+void ex7_7(int argc, char **argv){
+
+  //usage: -x -n FILES... pattern
+
+  struct file files[1000];
+  struct file *filespointer = files;
+  char line[1000];
+  int c;
+  int except = 0;
+  int number = 0;
+  int linenumber = 0;
+
+  if(argc < 2){
+    printf("\nusage: -x -n FILES... pattern\n");
+    exit(0);
+  }
+
+  char *pattern =  argv[argc-1];
+  printf("\nLooking for pattern: %s\n", pattern);
+
+  // loop through aruments and deal as they come in  
+  // while 
+  char **argumentpointer;
+  for(argumentpointer =  ++argv; (argumentpointer - argv) < argc-1; ++argumentpointer){
+    if(*argumentpointer[0] == '-'){
+      while((c = *++argumentpointer[0])){
+        switch(c){
+          case 'x':
+            except = 1;
+            break;
+          case 'n':
+            number = 1;
+            break;
+          default:
+            printf("\nerror: unknown command\n");
+            exit(0);
+        }
+      }
+    } else{
+      filespointer->file = fopen(*argumentpointer, "r");
+      if(filespointer->file == NULL){
+        printf("\nerror: opening file %s\n", *argumentpointer);
+      } else{
+        filespointer++->name = *argumentpointer;
+      }
+    }
+  }
+
+  for(filespointer = files; filespointer->file != NULL; ++filespointer){
+    linenumber = 0;
+    while(fgets(line, 1000, filespointer->file) != NULL){
+      ++linenumber;
+      if((strstr(line, pattern) != NULL) != except){
+        if(filespointer->file != stdin){
+          printf("%s", filespointer->name);
+        }
+        if(number){
+          printf("%d", linenumber);
+        }
+        if(number || filespointer->file != stdin){
+          printf(":%s", line);   
+        }
+      }
+    }
+  }
+
+  for(filespointer = files; filespointer->file != NULL; ++filespointer){
+    fclose(filespointer->file);
+  }
+
+}
+
 void ex7_6(int argc, char **argv){
 
   FILE *file1 = NULL, *file2 = NULL;

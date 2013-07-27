@@ -21,5 +21,6 @@ double popex7_5();
 void ex7_6(int, char **);
 int differentline(char *, char *, int);
 int differentlineFaster(char *, char *, int);
+void ex7_7(int, char **);
 
 #endif
