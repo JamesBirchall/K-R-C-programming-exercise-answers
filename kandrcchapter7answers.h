@@ -5,6 +5,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <stdarg.h>
+#include <stdlib.h>
 
 void ex7_1(int argc, char *argv[]);
 void ex7_2(int argc, char *argv[]);
@@ -14,10 +15,11 @@ void ex7_3();
 void minprintfch7ex3(char *, ...);
 void ex7_4();
 void minscanfch7ex4(char *, ...);
-
-
 void ex7_5();
 void pushex7_5(double);
 double popex7_5();
+void ex7_6(int, char **);
+int differentline(char *, char *, int);
+int differentlineFaster(char *, char *, int);
 
 #endif

@@ -1,5 +1,51 @@
 #include "kandrcchapter7answers.h"
 
+void ex7_6(int argc, char **argv){
+
+  FILE *file1 = NULL, *file2 = NULL;
+  char file1line[1000], file2line[1000];
+
+  if(argc < 3){
+    printf("\nusage: ./%s file1 file2\n", argv[0]);
+    exit(0);
+  }
+
+  
+  file1 = fopen(argv[1], "r");
+  if(file1 == NULL){
+    fprintf(stderr, "\nerror: %s can't open %s\n  ", argv[0], argv[1]);
+    exit(0);
+  }
+  file2 = fopen(argv[2], "r");
+  if(file2 == NULL){
+    fprintf(stderr, "\nerror: %s can't open %s\n  ", argv[0], argv[2]);
+    exit(0);
+  }
+
+  int linenumber = 0;
+  while(
+        (fgets(file1line, 1000, file1) != NULL) &&
+        (fgets(file2line, 1000, file2) != NULL)){
+    if(differentline(file1line, file2line, ++linenumber)){ 
+        exit(0);
+    }
+  }
+
+  fclose(file1);
+  fclose(file2);
+  
+  printf("\nReached the end of files\n");
+}
+
+int differentline(char *line1, char *line2, int linenumber){
+  if(strcmp(line1, line2) != 0){
+    printf("\n%d %s != %s\n", linenumber, line1, line2);
+    return 1;
+  } else{
+    return 0;
+  }
+}
+
 void ex7_5(){
 
   char *c;
