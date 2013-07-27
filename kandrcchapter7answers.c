@@ -1,5 +1,87 @@
 #include "kandrcchapter7answers.h"
 
+void ex7_4(){
+
+  int integervalue = 0;
+  char stringvalue[50];
+
+  minscanfch7ex4("%d", &integervalue);
+  minprintfch7ex3("Scanned value = %d\n", integervalue);
+}
+
+void minscanfch7ex4(char *format, ...){
+
+  //this function will scan in characters based
+  //function use = minscanf("%d %u %X", integervalue, unsignedvalue, hexuppervalue);
+  //those variables will then contain the appropriate values read in from keyboard or file
+
+  va_list arguments;
+  char *p, *stringvalue;
+  char *charactervalue;
+  char localformat[100];
+  int i, *integervalue;
+  unsigned *unsignedvalue;
+  double *doublevalue;
+
+  i = 0;
+
+  va_start(arguments, format);
+
+  for(p = format; *p; p++){
+    if(*p != '%'){
+      localformat[i++] = *++p;
+      continue;
+    }
+
+    localformat[i++] = '%';
+
+    while(*(p+1) && !isalpha(*(p+1))){
+      localformat[i++] = *++p;
+    }
+
+    localformat[i++] = *(p+1);
+    localformat[i] = '\0';
+
+    switch(*++p){
+      case 'd':
+      case 'i':
+        integervalue = va_arg(arguments, int *);
+        printf("\nPlease enter an int: ");
+        scanf(localformat, integervalue);
+        break;
+      case 'x':
+      case 'X':
+      case 'u':
+      case 'o':
+        unsignedvalue = va_arg(arguments, unsigned *);
+        printf("\nPlease enter a unsigned: ");
+        scanf(localformat, &unsignedvalue);
+        break;
+      case 'f':
+        doublevalue = va_arg(arguments, double *);
+        printf("\nPlease enter a double: ");
+        scanf(localformat, &doublevalue);
+        break;
+      case 's':
+        stringvalue = va_arg(arguments, char *);
+        printf("\nPlease enter a string: ");
+        scanf(localformat, &stringvalue);
+        break;
+      case 'c':
+        charactervalue = va_arg(arguments, char *);
+        printf("\nPlease enter a character: ");
+        scanf(localformat, &charactervalue);
+        break;
+      default:
+        //scanf("%s", localformat);
+        break;
+    }
+    i = 0;
+  }
+
+  va_end(arguments);
+}
+
 void ex7_3(){
 
   minprintfch7ex3("Hello %s, you are too old, by exactly %d years, thats so %f\n", "Jimbo", 101, 20.54);
