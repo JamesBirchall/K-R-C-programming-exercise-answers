@@ -24,5 +24,8 @@ int differentlineFaster(char *, char *, int);
 void ex7_7(int, char **);
 void ex7_8(int, char **);
 void printfileex7_8(char *);
+void ex7_9();
+int isupperex7_9one(int c);
+int isupperex7_9two(int c);
 
 #endif

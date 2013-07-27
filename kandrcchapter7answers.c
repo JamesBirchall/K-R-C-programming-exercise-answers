@@ -1,5 +1,25 @@
 #include "kandrcchapter7answers.h"
 
+#define isupperex7_9(c) (c) >= 'A' && (c) <= 'Z' ? 1 : 0
+
+void ex7_9(){
+
+  if(isupperex7_9('g'))
+    printf("\nYes\n");
+  else
+    printf("\nNo\n");
+
+}
+
+int isupperex7_9one(int c){
+  return (c >= 'A' && c <= 'Z');
+}
+
+int isupperex7_9two(int c){
+  return (strchr("ABCDEFGHIJKLMNOPQRSTUVWXYZ", c) != NULL);
+}
+
+
 #define LINES_PER_PAGE 10
 #define TRUE           1
 #define FALSE          0
