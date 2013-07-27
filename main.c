@@ -6,10 +6,11 @@
 #include "kandrcchapter5answers.h"
 #include "kandrcchapter6answers.h"
 #include "kandrcchapter7answers.h"
+#include "kandrcchapter8answers.h"
 
 int main(int argc, char *argv[]){
 
-  ex7_9();
+  inputtooutput();
 
   return 0;
 }
