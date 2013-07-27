@@ -1,9 +1,75 @@
 #include "kandrcchapter7answers.h"
 
+void ex7_5(){
+
+  char *c;
+  char stringvalue[100], buffer[100];
+  double value = 0, operand2;
+  char e = 0;
+
+  while(scanf("%s%c", stringvalue, &e) == 2){
+    if(sscanf(stringvalue, " %lf", &value) == 1){
+      pushex7_5(value);
+    }
+    else if(sscanf(stringvalue, "%s", buffer)){
+      for(c = buffer; *c; c++){
+        switch (*c){
+          case '+':
+            pushex7_5(popex7_5() + popex7_5());
+            break;
+          case '-':
+            operand2 = popex7_5();
+            pushex7_5(popex7_5() - operand2);
+            break;
+          case '*':
+            pushex7_5(popex7_5() * popex7_5());
+            break;
+          case '/':
+            operand2 = popex7_5();
+            if(operand2 != 0.0){
+              pushex7_5(popex7_5() / operand2);
+            } else{
+              printf("\nerror: divide by 0\n");
+              break;
+            }
+          case '\n':
+            break;
+          default:
+            printf("\nerror: unknown command\n");
+            break;
+        }
+      }
+      if(e == '\n')
+        printf("\n%.8g\n", popex7_5());
+    }
+  }
+}
+
+//variables required for stack
+static int stackpointer = 0;
+static double stackvalue[100];
+
+void pushex7_5(double value){
+  if(stackpointer < 100){
+    stackvalue[stackpointer++] = value;
+  } else {
+    printf("\nerror: stack full, cannot push %f\n", value);
+  }
+}
+
+double popex7_5(){
+  if(stackpointer > 0){
+    return stackvalue[--stackpointer];
+  } else{
+    printf("\nerror: stack is empty\n");
+    return 0.0;
+  }
+
+}
+
 void ex7_4(){
 
   int integervalue = 0;
-  char stringvalue[50];
 
   minscanfch7ex4("%d", &integervalue);
   minprintfch7ex3("Scanned value = %d\n", integervalue);

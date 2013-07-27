@@ -15,4 +15,9 @@ void minprintfch7ex3(char *, ...);
 void ex7_4();
 void minscanfch7ex4(char *, ...);
 
+
+void ex7_5();
+void pushex7_5(double);
+double popex7_5();
+
 #endif
