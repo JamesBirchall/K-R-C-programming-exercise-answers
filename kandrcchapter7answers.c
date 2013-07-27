@@ -1,5 +1,47 @@
 #include "kandrcchapter7answers.h"
 
+#define LINES_PER_PAGE 10
+#define TRUE           1
+#define FALSE          0
+
+void ex7_8(int argc, char **argv){
+  printfileex7_8(argv[1]);
+}
+
+void printfileex7_8(char *file_name)
+{
+  FILE *f;
+  int page_number = 1;
+  int line_count;    
+  int c;        
+  int new_page = TRUE;
+ 
+
+  f = fopen(file_name, "r");
+  if (f != NULL) {
+    while ((c = fgetc(f)) != EOF) {
+      if (new_page) {  
+        printf("[%s] page %d starts\n", file_name, page_number);
+        new_page = FALSE;
+        line_count = 1;
+      }                
+      putchar(c);
+      if (c == '\n' && ++line_count > LINES_PER_PAGE) {
+        printf("[%s] page %d ends\n", file_name, page_number);
+        putchar('\n');
+        new_page = TRUE;
+        page_number++;
+      }              
+    } 
+    if (!new_page) {
+      printf("[%s] page %d ends\n", file_name, page_number);
+    }
+    
+    putchar('\n');    
+    fclose(f);
+  } 
+}
+
 struct file{
   FILE *file;
   char *name;

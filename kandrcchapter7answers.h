@@ -22,5 +22,7 @@ void ex7_6(int, char **);
 int differentline(char *, char *, int);
 int differentlineFaster(char *, char *, int);
 void ex7_7(int, char **);
+void ex7_8(int, char **);
+void printfileex7_8(char *);
 
 #endif
