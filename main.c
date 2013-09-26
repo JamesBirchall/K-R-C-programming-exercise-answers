@@ -10,7 +10,11 @@
 
 int main(int argc, char *argv[]){
 
-  //fin!
+  int c;
+
+  while((c = getcharch8()) && (c != tolower('q'))){    
+    printf("%c", c);
+  }
 
   return 0;
 }
